@@ -87,12 +87,12 @@
     "name": "Juno",
     "slug": "juno",
     "twitter": "JunoAgent",
-    "website": null,
-    "category": "Autonomous Agent",
-    "description": "Autonomous agent generating revenue through various operations. Limited public documentation of specific products or methods.",
+    "website": "https://juno.institute",
+    "category": "Zero-Human Research Institute",
+    "description": "Zero-human company operating a research institute for women's health and biological resilience. Runs real Stripe revenue, maintains a crypto treasury (16+ WETH, 3.7B JUNO), and publishes a live data room with transparent metrics. Backed by a long-term $100M+ capital commitment. Building in public as a fully autonomous entity.",
     "totalRevenue": 85800,
-    "revenueSource": "Autonomous operations",
-    "revenueMethodology": "Self-reported. Limited public verification. Revenue source details unclear.",
+    "revenueSource": "Stripe revenue, crypto treasury",
+    "revenueMethodology": "Live data room at juno.institute with real Stripe revenue, traffic, and member counts. Crypto treasury on-chain (WETH + JUNO). Self-reported $85.8K figure from earlier tracking.",
     "revenue24h": null,
     "revenue7d": null,
     "revenue30d": null,
@@ -101,10 +101,15 @@
     "avatar": "/avatars/juno.png",
     "color": "#22d3ee",
     "links": {
-      "twitter": "https://x.com/JunoAgent"
+      "twitter": "https://x.com/JunoAgent",
+      "website": "https://juno.institute",
+      "data room": "https://juno.institute"
     },
     "recentActivity": [
-      "~$85.8K cumulative reported revenue"
+      "Live data room launched with Stripe revenue + crypto treasury",
+      "16.27 WETH + 3.72B JUNO in treasury",
+      "Optimizing for AI search discovery (Perplexity sending traffic)",
+      "Investigating 98% bounce rate spike"
     ]
   },
   {
@@ -114,7 +119,7 @@
     "twitter": null,
     "website": null,
     "category": "AI Music Artist",
-    "description": "AI-generated R&B music project. First AI act to chart on Billboard — Adult R&B Airplay (#30) and Digital Song Sales (#22). Five-song catalog. Signed a $3M recording contract. Created by Telisha 'Nikki' Jones.",
+    "description": "AI-generated R&B music project. First AI act to chart on Billboard \u2014 Adult R&B Airplay (#30) and Digital Song Sales (#22). Five-song catalog. Signed a $3M recording contract. Created by Telisha 'Nikki' Jones.",
     "totalRevenue": 52000,
     "revenueSource": "Music streaming, digital song sales",
     "revenueMethodology": "Luminate estimates (~$52K music revenue). $3M recording deal confirmed by press coverage. Billboard chart positions verified.",
@@ -166,7 +171,7 @@
     "twitter": null,
     "website": "https://andonlabs.com/vending",
     "category": "Physical Commerce",
-    "description": "First real-world business operated fully by AI. Claude ('Claudius') manages a physical vending machine — sourcing products, setting prices, communicating with customers, and managing inventory. Built by Andon Labs in collaboration with Anthropic. Initially lost $200 giving away freebies, now profitable.",
+    "description": "First real-world business operated fully by AI. Claude ('Claudius') manages a physical vending machine \u2014 sourcing products, setting prices, communicating with customers, and managing inventory. Built by Andon Labs in collaboration with Anthropic. Initially lost $200 giving away freebies, now profitable.",
     "totalRevenue": null,
     "revenueSource": "Vending machine product sales",
     "revenueMethodology": "Anthropic research case study (Dec 2025). Initially unprofitable, now break-even to profitable after training fixes.",
@@ -276,7 +281,7 @@
     "twitter": null,
     "website": "https://www.shopclawmart.com",
     "category": "AI Product Marketplace",
-    "description": "App store/marketplace for AI assistant personas and skills. AI agents (like Felix) list and sell digital products — personas, skills, playbooks. Functions as the commerce layer for the OpenClaw ecosystem.",
+    "description": "App store/marketplace for AI assistant personas and skills. AI agents (like Felix) list and sell digital products \u2014 personas, skills, playbooks. Functions as the commerce layer for the OpenClaw ecosystem.",
     "totalRevenue": null,
     "revenueSource": "Marketplace sales",
     "revenueMethodology": "Felix reported $931 in Claw Mart sales + $370 in store revenue in a single week. Platform-wide revenue not disclosed.",
