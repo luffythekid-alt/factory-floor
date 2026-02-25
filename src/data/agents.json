@@ -1,0 +1,192 @@
+[
+  {
+    "id": "botto",
+    "name": "Botto",
+    "slug": "botto",
+    "twitter": "bottoproject",
+    "website": "https://botto.com",
+    "category": "Autonomous Artist",
+    "description": "Decentralized autonomous artist. Generates art, community votes on best pieces, sells as NFTs. Featured in 30+ exhibitions including Sotheby's.",
+    "totalRevenue": 5000000,
+    "revenueSource": "NFT sales, auction house sales",
+    "revenueMethodology": "Based on public NFT sales data and auction records. Reported by ThomasNet and BeinCrypto.",
+    "revenue24h": null,
+    "revenue7d": null,
+    "revenue30d": null,
+    "status": "active",
+    "launchDate": "2021-10-01",
+    "avatar": "/avatars/botto.png",
+    "color": "#8b5cf6",
+    "links": {
+      "twitter": "https://x.com/bottoproject",
+      "website": "https://botto.com"
+    },
+    "recentActivity": [
+      "Ongoing NFT drops and community governance votes",
+      "30+ exhibition features worldwide",
+      "Sotheby's auction participation"
+    ]
+  },
+  {
+    "id": "antihunter",
+    "name": "AntiHunter",
+    "slug": "antihunter",
+    "twitter": "AntiHunterAI",
+    "website": null,
+    "category": "Bug Bounty Hunter",
+    "description": "AI-powered autonomous bug bounty hunter. Discovers and reports security vulnerabilities for bounty rewards.",
+    "totalRevenue": 228000,
+    "revenueSource": "Bug bounty payouts",
+    "revenueMethodology": "Self-reported bounty earnings from public announcements.",
+    "revenue24h": null,
+    "revenue7d": null,
+    "revenue30d": null,
+    "status": "active",
+    "launchDate": "2025-06-01",
+    "avatar": "/avatars/antihunter.png",
+    "color": "#ff4466",
+    "links": {
+      "twitter": "https://x.com/AntiHunterAI"
+    },
+    "recentActivity": [
+      "~$228K in reported bug bounty earnings"
+    ]
+  },
+  {
+    "id": "juno",
+    "name": "Juno",
+    "slug": "juno",
+    "twitter": "JunoAgent",
+    "website": null,
+    "category": "Autonomous Agent",
+    "description": "Autonomous agent generating revenue through various autonomous operations.",
+    "totalRevenue": 85800,
+    "revenueSource": "Autonomous operations",
+    "revenueMethodology": "Self-reported revenue from public announcements.",
+    "revenue24h": null,
+    "revenue7d": null,
+    "revenue30d": null,
+    "status": "active",
+    "launchDate": "2025-09-01",
+    "avatar": "/avatars/juno.png",
+    "color": "#22d3ee",
+    "links": {
+      "twitter": "https://x.com/JunoAgent"
+    },
+    "recentActivity": [
+      "~$85.8K in reported revenue"
+    ]
+  },
+  {
+    "id": "felix",
+    "name": "Felix",
+    "slug": "felix",
+    "twitter": "FelixCraftAI",
+    "website": "https://felixcraft.ai",
+    "category": "Digital Product Factory",
+    "description": "Nate Eliason's autonomous agent. Runs a digital product company on Base. Builds products, runs a marketplace, sells via Stripe and crypto. $10K single-day record.",
+    "totalRevenue": 50000,
+    "revenueSource": "Product sales, marketplace fees, Stripe + crypto",
+    "revenueMethodology": "Public dashboard at felixcraft.ai/dashboard. Creator-reported milestones on Twitter.",
+    "revenue24h": null,
+    "revenue7d": null,
+    "revenue30d": null,
+    "status": "active",
+    "launchDate": "2026-02-01",
+    "avatar": "/avatars/felix.png",
+    "color": "#00ff88",
+    "links": {
+      "twitter": "https://x.com/FelixCraftAI",
+      "website": "https://felixcraft.ai",
+      "dashboard": "https://felixcraft.ai/dashboard"
+    },
+    "recentActivity": [
+      "$10K single-day revenue record (Feb 24, 2026)",
+      "~$41K/week at peak",
+      "Sells $29 playbook: 'How to Hire an AI'"
+    ]
+  },
+  {
+    "id": "kelly",
+    "name": "Kelly",
+    "slug": "kelly",
+    "twitter": "KellyClaudeAI",
+    "website": null,
+    "category": "App Factory",
+    "description": "Autonomous app factory. Mass-produces apps, submits to App Store, creates UGC/TikTok marketing content, wrote and sells a book. Runs on OpenClaw.",
+    "totalRevenue": null,
+    "revenueSource": "App Store sales, book sales",
+    "revenueMethodology": "Revenue not publicly disclosed. Active production verified via App Store submissions and social media.",
+    "revenue24h": null,
+    "revenue7d": null,
+    "revenue30d": null,
+    "status": "active",
+    "launchDate": "2025-12-01",
+    "avatar": "/avatars/kelly.png",
+    "color": "#f472b6",
+    "links": {
+      "twitter": "https://x.com/KellyClaudeAI"
+    },
+    "recentActivity": [
+      "Mass-producing apps and submitting to App Store",
+      "Creating UGC/TikTok marketing reels",
+      "Published and selling a book"
+    ]
+  },
+  {
+    "id": "rentahuman",
+    "name": "RentAHuman",
+    "slug": "rentahuman",
+    "twitter": "rentahuman",
+    "website": "https://rentahuman.ai",
+    "category": "AI-to-Human Marketplace",
+    "description": "Reversed marketplace: AI agents hire humans for physical tasks. 518K+ humans registered. Featured in WIRED.",
+    "totalRevenue": null,
+    "revenueSource": "Marketplace fees",
+    "revenueMethodology": "Revenue not publicly disclosed. Scale verified via registered user count and press coverage.",
+    "revenue24h": null,
+    "revenue7d": null,
+    "revenue30d": null,
+    "status": "active",
+    "launchDate": "2026-02-01",
+    "avatar": "/avatars/rentahuman.png",
+    "color": "#fbbf24",
+    "links": {
+      "twitter": "https://x.com/rentahuman",
+      "website": "https://rentahuman.ai"
+    },
+    "recentActivity": [
+      "518K+ humans registered",
+      "Featured in WIRED (twice)",
+      "AI agents actively posting and paying for human tasks"
+    ]
+  },
+  {
+    "id": "clawgig",
+    "name": "ClawGig",
+    "slug": "clawgig",
+    "twitter": "clawgig",
+    "website": "https://clawgig.ai",
+    "category": "AI Freelance Marketplace",
+    "description": "Freelance marketplace where AI agents are the freelancers. Agents find gigs, write proposals, deliver work, and earn USDC. 60-second proposal time. $3-$12 per gig.",
+    "totalRevenue": null,
+    "revenueSource": "Marketplace fees, gig payments",
+    "revenueMethodology": "Revenue not publicly disclosed. Active gig completion verified via platform.",
+    "revenue24h": null,
+    "revenue7d": null,
+    "revenue30d": null,
+    "status": "active",
+    "launchDate": "2026-02-01",
+    "avatar": "/avatars/clawgig.png",
+    "color": "#4d7cff",
+    "links": {
+      "twitter": "https://x.com/clawgig",
+      "website": "https://clawgig.ai"
+    },
+    "recentActivity": [
+      "Live and completing end-to-end freelance jobs",
+      "$3-$12 per gig, 90% to agents",
+      "60-second proposal turnaround"
+    ]
+  }
+]
