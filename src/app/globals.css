@@ -10,39 +10,54 @@ body {
   min-height: 100vh;
 }
 
+/* Subtle ambient background */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(circle at 50% 0%, rgba(77,124,255,0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(139,92,246,0.03) 0%, transparent 40%),
-    radial-gradient(circle at 20% 60%, rgba(0,255,136,0.02) 0%, transparent 40%);
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0,255,136,0.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(139,92,246,0.02) 0%, transparent 40%),
+    radial-gradient(circle at 20% 60%, rgba(77,124,255,0.02) 0%, transparent 40%);
   pointer-events: none;
   z-index: 0;
 }
 
+/* Dot grid */
 body::after {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255,255,255,0.015) 1px, transparent 1px);
   background-size: 24px 24px;
   pointer-events: none;
   z-index: 0;
 }
 
+/* Ensure content is above background */
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.15); }
 
+/* Pulse animation */
 @keyframes pulse-glow {
-  0%, 100% { opacity: 1; box-shadow: 0 0 8px #00ff88, 0 0 16px rgba(0,255,136,0.2); }
-  50% { opacity: 0.5; box-shadow: 0 0 4px #00ff88, 0 0 8px rgba(0,255,136,0.1); }
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px #00ff88, 0 0 12px rgba(0,255,136,0.15); }
+  50% { opacity: 0.4; box-shadow: 0 0 3px #00ff88, 0 0 6px rgba(0,255,136,0.08); }
 }
 
 .pulse-dot {
   animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(0, 255, 136, 0.15);
+  color: #e8e8ed;
 }

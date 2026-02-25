@@ -31,49 +31,49 @@ export default function AgentPage({ params }: { params: { slug: string } }) {
         {/* Agent Header */}
         <div className="flex items-start gap-4 mb-8">
           <div
-            className="w-16 h-16 rounded-xl flex items-center justify-center text-2xl font-bold shrink-0"
+            className="w-14 h-14 rounded-xl flex items-center justify-center text-xl font-bold shrink-0 border border-white/5"
             style={{
-              backgroundColor: agent.color + "20",
+              backgroundColor: agent.color + "15",
               color: agent.color,
             }}
           >
-            {agent.name[0]}
+            {agent.name.slice(0, 2)}
           </div>
           <div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 flex-wrap">
               <h1 className="text-2xl sm:text-3xl font-bold">{agent.name}</h1>
               <span
-                className={`px-2 py-0.5 rounded text-xs font-mono ${
+                className={`px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider ${
                   agent.status === "active"
-                    ? "bg-accent-green/10 text-accent-green"
-                    : "bg-accent-red/10 text-accent-red"
+                    ? "bg-accent-green/10 text-accent-green border border-accent-green/20"
+                    : "bg-accent-red/10 text-accent-red border border-accent-red/20"
                 }`}
               >
                 {agent.status}
               </span>
             </div>
-            <p className="text-txt-secondary mt-1">{agent.category}</p>
+            <p className="text-txt-secondary text-sm mt-1 font-mono">{agent.category}</p>
           </div>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
           <StatCard
             label="Total Revenue"
             value={formatRevenue(agent.totalRevenue)}
             accent
           />
           <StatCard
-            label="24h Revenue"
-            value={formatRevenue(agent.revenue24h)}
-          />
-          <StatCard
-            label="7d Revenue"
+            label="Weekly"
             value={formatRevenue(agent.revenue7d)}
           />
           <StatCard
-            label="30d Revenue"
-            value={formatRevenue(agent.revenue30d)}
+            label="24h"
+            value={formatRevenue(agent.revenue24h)}
+          />
+          <StatCard
+            label="Since"
+            value={formatDate(agent.launchDate)}
           />
         </div>
 
@@ -85,64 +85,48 @@ export default function AgentPage({ params }: { params: { slug: string } }) {
         </Section>
 
         {/* Revenue Details */}
-        <Section title="Revenue Details">
-          <div className="space-y-2 text-sm">
-            <div className="flex gap-2">
-              <span className="text-txt-tertiary font-mono w-24 shrink-0">
-                Source
-              </span>
-              <span className="text-txt-secondary">{agent.revenueSource}</span>
-            </div>
-            <div className="flex gap-2">
-              <span className="text-txt-tertiary font-mono w-24 shrink-0">
-                Method
-              </span>
-              <span className="text-txt-secondary">
-                {agent.revenueMethodology}
-              </span>
-            </div>
-            <div className="flex gap-2">
-              <span className="text-txt-tertiary font-mono w-24 shrink-0">
-                Since
-              </span>
-              <span className="text-txt-secondary">
-                {formatDate(agent.launchDate)}
-              </span>
-            </div>
+        <Section title="Revenue Methodology">
+          <div className="space-y-3 text-sm">
+            <DetailRow label="Source" value={agent.revenueSource} />
+            <DetailRow label="Methodology" value={agent.revenueMethodology} />
+            <DetailRow label="Launch" value={formatDate(agent.launchDate)} />
           </div>
         </Section>
 
         {/* Links */}
-        <Section title="Links">
-          <div className="flex flex-wrap gap-3">
-            {Object.entries(agent.links).map(([label, url]) => (
-              <a
-                key={label}
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-3 py-1.5 bg-white/[0.03] border border-border rounded text-xs font-mono text-txt-secondary hover:text-accent-green hover:border-accent-green/30 transition-colors"
-              >
-                {label} ↗
-              </a>
-            ))}
-          </div>
-        </Section>
+        {Object.keys(agent.links).length > 0 && (
+          <Section title="Links">
+            <div className="flex flex-wrap gap-2">
+              {Object.entries(agent.links).map(([label, url]) => (
+                <a
+                  key={label}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/[0.02] border border-border rounded-md text-xs font-mono text-txt-secondary hover:text-accent-green hover:border-accent-green/20 hover:bg-accent-green/5 transition-all"
+                >
+                  {label}
+                  <span className="text-txt-tertiary">↗</span>
+                </a>
+              ))}
+            </div>
+          </Section>
+        )}
 
         {/* Recent Activity */}
         {agent.recentActivity.length > 0 && (
           <Section title="Recent Activity">
-            <ul className="space-y-2">
+            <div className="space-y-2">
               {agent.recentActivity.map((item, i) => (
-                <li
+                <div
                   key={i}
-                  className="flex items-start gap-2 text-sm text-txt-secondary"
+                  className="flex items-start gap-2.5 text-sm text-txt-secondary"
                 >
-                  <span className="text-accent-green mt-1 shrink-0">›</span>
+                  <span className="text-accent-green mt-0.5 shrink-0 text-xs">▸</span>
                   {item}
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
           </Section>
         )}
       </main>
@@ -161,17 +145,31 @@ function StatCard({
   accent?: boolean;
 }) {
   return (
-    <div className="bg-white/[0.02] border border-border rounded-lg p-4">
-      <div className="text-xs font-mono text-txt-tertiary uppercase tracking-wider">
+    <div className="relative overflow-hidden bg-white/[0.02] border border-border rounded-lg p-4">
+      {accent && (
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent-green/50 to-transparent" />
+      )}
+      <div className="text-[10px] font-mono text-txt-tertiary uppercase tracking-widest">
         {label}
       </div>
       <div
-        className={`text-xl font-bold font-mono mt-1 ${
+        className={`text-xl font-bold font-mono mt-1.5 ${
           accent ? "text-accent-green" : "text-txt"
         }`}
       >
         {value}
       </div>
+    </div>
+  );
+}
+
+function DetailRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex gap-3">
+      <span className="text-txt-tertiary font-mono text-xs w-24 shrink-0 uppercase tracking-wider pt-0.5">
+        {label}
+      </span>
+      <span className="text-txt-secondary text-sm">{value}</span>
     </div>
   );
 }
@@ -185,7 +183,7 @@ function Section({
 }) {
   return (
     <div className="mb-8">
-      <h2 className="text-xs font-mono text-txt-tertiary uppercase tracking-wider mb-3 border-b border-border pb-2">
+      <h2 className="text-[10px] font-mono text-txt-tertiary uppercase tracking-widest mb-3 pb-2 border-b border-border">
         {title}
       </h2>
       {children}
