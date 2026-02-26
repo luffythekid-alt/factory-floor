@@ -2,7 +2,7 @@ export interface Agent {
   id: string;
   name: string;
   slug: string;
-  twitter: string;
+  twitter: string | null;
   website: string | null;
   category: string;
   description: string;
