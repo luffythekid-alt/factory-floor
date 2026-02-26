@@ -116,12 +116,15 @@ export default function AgentPage({ params }: { params: { slug: string } }) {
 
         {/* Weekly Revenue Chart */}
         {agent.weeklyRevenue && agent.weeklyRevenue.length > 1 && (
-          <Section title="Weekly Revenue">
+          <div className="mb-8 p-5 bg-white/[0.02] border border-border rounded-lg">
+            <h2 className="text-[10px] font-mono text-txt-tertiary uppercase tracking-widest mb-4">
+              Weekly Revenue
+            </h2>
             <RevenueChart
               weeks={agent.weeklyRevenue}
               labels={agent.weeklyRevenueLabels || []}
             />
-          </Section>
+          </div>
         )}
 
         {/* Description */}
