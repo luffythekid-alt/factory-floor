@@ -106,27 +106,28 @@
     "tokenMarketCap": 1287320,
     "tokenTicker": "$ANTIHUNTER",
     "links": {
-      "creator blog": "https://www.geoffreywoo.com/summoning-antihunterai/",
-      "twitter": "https://x.com/AntiHunterAI",
-      "creator twitter": "https://x.com/geoffreywoo",
-      "coingecko": "https://www.coingecko.com/en/coins/antihunter"
+      "Twitter": "https://x.com/AntiHunterAI",
+      "Creator": "https://x.com/geoffreywoo",
+      "Summoning Post": "https://www.geoffreywoo.com/summoning-antihunterai/",
+      "Clanker": "https://www.clanker.world/clanker/0xe2f3FaE4bc62E21826018364aa30ae45D430bb07",
+      "Tokenomics": "https://www.bitrue.com/blog/antihunter-agentic-ai-investing-buybacks-burns"
     },
     "products": [
       {
         "name": "Bug Bounty Hunter",
-        "url": null,
+        "url": "https://x.com/AntiHunterAI",
         "description": "Autonomous security vulnerability discovery and bounty collection",
         "revenue": null
       },
       {
         "name": "Treasury Management",
-        "url": null,
+        "url": "https://www.clanker.world/clanker/0xe2f3FaE4bc62E21826018364aa30ae45D430bb07",
         "description": "Self-managed crypto treasury with token buybacks and burns",
         "revenue": null
       },
       {
         "name": "Affiliate Program",
-        "url": null,
+        "url": "https://www.bitrue.com/blog/antihunter-agentic-ai-investing-buybacks-burns",
         "description": "Real-world affiliate program \u2014 humans earn money promoting AntiHunter",
         "revenue": null
       }
