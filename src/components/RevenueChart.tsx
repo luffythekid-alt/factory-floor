@@ -7,25 +7,26 @@ interface RevenueChartProps {
   labels: string[];
 }
 
+function formatK(val: number): string {
+  if (val >= 1000) return `$${(val / 1000).toFixed(1)}k`;
+  return `$${val}`;
+}
+
 export default function RevenueChart({ weeks, labels }: RevenueChartProps) {
   const max = Math.max(...weeks, 1);
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
-  // Calculate growth rates
-  const growths = weeks.map((val, i) => {
-    if (i === 0 || weeks[i - 1] === 0) return null;
-    return ((val - weeks[i - 1]) / weeks[i - 1]) * 100;
-  });
-
   const total = weeks.reduce((a, b) => a + b, 0);
   const avg = Math.round(total / weeks.length);
   const latest = weeks[weeks.length - 1];
-  const latestGrowth = growths[growths.length - 1];
+  const prev = weeks.length >= 2 ? weeks[weeks.length - 2] : null;
+  const latestGrowth =
+    prev && prev > 0 ? ((latest - prev) / prev) * 100 : null;
 
   return (
     <div>
       {/* Summary row */}
-      <div className="flex items-center gap-6 mb-4">
+      <div className="flex items-center gap-6 mb-5">
         <div>
           <div className="text-[10px] font-mono text-txt-tertiary uppercase tracking-wider">
             Total
@@ -64,80 +65,67 @@ export default function RevenueChart({ weeks, labels }: RevenueChartProps) {
         </div>
       </div>
 
-      {/* Chart */}
-      <div className="flex items-end gap-2 h-[140px] px-1">
+      {/* Horizontal bar chart */}
+      <div className="space-y-2">
         {weeks.map((val, i) => {
-          const height = Math.max((val / max) * 100, 3);
+          const width = Math.max((val / max) * 100, 3);
           const isLast = i === weeks.length - 1;
           const isHovered = hoveredIdx === i;
-          const growth = growths[i];
+          const prevVal = i > 0 ? weeks[i - 1] : null;
+          const growth =
+            prevVal && prevVal > 0
+              ? ((val - prevVal) / prevVal) * 100
+              : null;
 
           return (
             <div
               key={i}
-              className="flex-1 flex flex-col items-center gap-1 cursor-pointer"
+              className="flex items-center gap-3 cursor-pointer"
               onMouseEnter={() => setHoveredIdx(i)}
               onMouseLeave={() => setHoveredIdx(null)}
             >
-              {/* Hover tooltip */}
-              <div
-                className={`text-center transition-opacity duration-100 ${
-                  isHovered ? "opacity-100" : "opacity-0"
-                }`}
-              >
-                <div className="text-[11px] font-mono font-semibold text-accent-green">
-                  ${val.toLocaleString()}
-                </div>
+              {/* Week label */}
+              <span className="text-xs font-mono text-txt-tertiary w-7 shrink-0">
+                {labels[i]}
+              </span>
+
+              {/* Bar */}
+              <div className="flex-1 h-7 relative">
+                <div
+                  className={`h-full rounded transition-all duration-150 ${
+                    isHovered
+                      ? "bg-accent-green"
+                      : isLast
+                      ? "bg-accent-green/60"
+                      : "bg-white/10"
+                  }`}
+                  style={{ width: `${width}%`, minWidth: "4px" }}
+                />
+              </div>
+
+              {/* Amount + growth */}
+              <div className="flex items-center gap-2 shrink-0 min-w-[100px] justify-end">
+                <span
+                  className={`text-sm font-mono font-semibold ${
+                    isHovered ? "text-accent-green" : "text-txt"
+                  }`}
+                >
+                  {formatK(val)}
+                </span>
                 {growth !== null && (
-                  <div
-                    className={`text-[9px] font-mono ${
+                  <span
+                    className={`text-[10px] font-mono min-w-[40px] text-right ${
                       growth >= 0 ? "text-accent-green" : "text-accent-red"
                     }`}
                   >
                     {growth >= 0 ? "+" : ""}
                     {growth.toFixed(0)}%
-                  </div>
+                  </span>
+                )}
+                {growth === null && (
+                  <span className="min-w-[40px]" />
                 )}
               </div>
-
-              {/* Bar */}
-              <div
-                className={`w-full rounded-sm transition-all duration-150 ${
-                  isHovered
-                    ? "bg-accent-green"
-                    : isLast
-                    ? "bg-accent-green/60"
-                    : "bg-white/10"
-                }`}
-                style={{ height: `${height}%`, minHeight: "3px" }}
-              />
-
-              {/* Label */}
-              <span
-                className={`text-[10px] font-mono ${
-                  isHovered ? "text-txt" : "text-txt-tertiary"
-                }`}
-              >
-                {labels[i]}
-              </span>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Growth summary */}
-      <div className="flex items-center gap-4 mt-3 pt-3 border-t border-border/50">
-        {growths.map((g, i) => {
-          if (i === 0 || g === null) return null;
-          return (
-            <div key={i} className="text-[10px] font-mono text-txt-tertiary">
-              {labels[i - 1]}→{labels[i]}:{" "}
-              <span
-                className={g >= 0 ? "text-accent-green" : "text-accent-red"}
-              >
-                {g >= 0 ? "+" : ""}
-                {g.toFixed(0)}%
-              </span>
             </div>
           );
         })}
