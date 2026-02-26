@@ -200,15 +200,29 @@ export default function AgentPage({ params }: { params: { slug: string } }) {
         {agent.recentActivity.length > 0 && (
           <Section title="Recent Activity">
             <div className="space-y-2">
-              {agent.recentActivity.map((item, i) => (
-                <div
-                  key={i}
-                  className="flex items-start gap-2.5 text-sm text-txt-secondary"
-                >
-                  <span className="text-accent-green mt-0.5 shrink-0 text-xs">▸</span>
-                  {item}
-                </div>
-              ))}
+              {agent.recentActivity.map((item, i) => {
+                const activity = typeof item === "string" ? { text: item } : item;
+                return (
+                  <div
+                    key={i}
+                    className="flex items-start gap-2.5 text-sm text-txt-secondary"
+                  >
+                    <span className="text-accent-green mt-0.5 shrink-0 text-xs">▸</span>
+                    {activity.url ? (
+                      <a
+                        href={activity.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-accent-green transition-colors"
+                      >
+                        {activity.text} <span className="text-txt-tertiary text-xs">↗</span>
+                      </a>
+                    ) : (
+                      activity.text
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </Section>
         )}

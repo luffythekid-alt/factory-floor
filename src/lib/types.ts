@@ -33,5 +33,5 @@ export interface Agent {
   tokenTicker: string | null;
   links: Record<string, string>;
   products: Product[];
-  recentActivity: string[];
+  recentActivity: { text: string; url?: string }[];
 }
