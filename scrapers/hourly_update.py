@@ -39,7 +39,7 @@ TOKEN_SEARCH = {
 AGENT_TWITTER = {
     "felix": ["FelixCraftAI", "nateliason"],
     "antihunter": ["AntiHunterAI", "geoffreywoo"],
-    "juno": ["JunoAgent", "BrianRoemmele"],
+    "juno": ["JunoAgent", "tomosman"],
     "kelly": ["KellyClaudeAI", "austen"],
 }
 
