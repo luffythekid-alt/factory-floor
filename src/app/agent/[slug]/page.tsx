@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import RevenueChart from "@/components/RevenueChart";
 import { Agent } from "@/lib/types";
 import { formatRevenue, formatDate } from "@/lib/utils";
 import agentsData from "@/data/agents.json";
@@ -112,6 +113,16 @@ export default function AgentPage({ params }: { params: { slug: string } }) {
             value={formatMarketCap(agent.tokenMarketCap)}
           />
         </div>
+
+        {/* Weekly Revenue Chart */}
+        {agent.weeklyRevenue && agent.weeklyRevenue.length > 1 && (
+          <Section title="Weekly Revenue">
+            <RevenueChart
+              weeks={agent.weeklyRevenue}
+              labels={agent.weeklyRevenueLabels || []}
+            />
+          </Section>
+        )}
 
         {/* Description */}
         <Section title="About">
