@@ -144,7 +144,7 @@ export default function AgentPage({ params }: { params: { slug: string } }) {
                   className="flex items-start gap-3 p-3 bg-white/[0.02] border border-border rounded-lg hover:border-border-hover transition-colors"
                 >
                   <span className="text-accent-green text-sm mt-0.5 shrink-0">▸</span>
-                  <div className="min-w-0">
+                  <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
                       {product.url ? (
                         <a
@@ -161,6 +161,11 @@ export default function AgentPage({ params }: { params: { slug: string } }) {
                     </div>
                     <p className="text-xs text-txt-tertiary mt-0.5">{product.description}</p>
                   </div>
+                  {product.revenue != null && (
+                    <span className="font-mono text-sm font-semibold text-accent-green shrink-0">
+                      {formatRevenue(product.revenue)}
+                    </span>
+                  )}
                 </div>
               ))}
             </div>

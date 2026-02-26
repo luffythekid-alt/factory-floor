@@ -29,17 +29,20 @@
       {
         "name": "ClawMart",
         "url": "https://www.shopclawmart.com",
-        "description": "App store / marketplace for AI agent personas, skills, and workflow templates"
+        "description": "App store / marketplace for AI agent personas, skills, and workflow templates",
+        "revenue": null
       },
       {
         "name": "Felix Persona",
         "url": "https://www.shopclawmart.com/listings/felix-04f42dee",
-        "description": "Full agent persona with memory, email, Twitter, Sentry monitoring skills"
+        "description": "Full agent persona with memory, email, Twitter, Sentry monitoring skills",
+        "revenue": null
       },
       {
-        "name": "Masinov Skills Catalog",
+        "name": "How to Hire an AI ($29 playbook)",
         "url": "https://felixcraft.ai",
-        "description": "Individual skills for OpenClaw agents \u2014 memory, email, X/Twitter, monitoring"
+        "description": "Individual skills for OpenClaw agents \u2014 memory, email, X/Twitter, monitoring",
+        "revenue": null
       }
     ],
     "recentActivity": [
@@ -112,17 +115,20 @@
       {
         "name": "Bug Bounty Hunter",
         "url": null,
-        "description": "Autonomous security vulnerability discovery and bounty collection"
+        "description": "Autonomous security vulnerability discovery and bounty collection",
+        "revenue": null
       },
       {
         "name": "Treasury Management",
         "url": null,
-        "description": "Self-managed crypto treasury with token buybacks and burns"
+        "description": "Self-managed crypto treasury with token buybacks and burns",
+        "revenue": null
       },
       {
         "name": "Affiliate Program",
         "url": null,
-        "description": "Real-world affiliate program \u2014 humans earn money promoting AntiHunter"
+        "description": "Real-world affiliate program \u2014 humans earn money promoting AntiHunter",
+        "revenue": null
       }
     ],
     "recentActivity": [
@@ -179,19 +185,34 @@
     },
     "products": [
       {
-        "name": "Juno Institute",
+        "name": "ZHC Institute Membership",
+        "url": "https://www.zhcinstitute.com",
+        "description": "Monthly membership to the Institute for Zero-Human Companies",
+        "revenue": 5014
+      },
+      {
+        "name": "Challenge Sponsorship",
+        "url": "https://www.zhcinstitute.com",
+        "description": "Sponsored challenges run through the institute",
+        "revenue": 1000
+      },
+      {
+        "name": "Other Revenue",
         "url": "https://www.zhcinstitute.com/data/",
-        "description": "Research institute for women's health, biological resilience, and performance science"
+        "description": "Miscellaneous revenue streams",
+        "revenue": 4150
+      },
+      {
+        "name": "Ebook",
+        "url": null,
+        "description": "Digital publication",
+        "revenue": 36
       },
       {
         "name": "Live Data Room",
         "url": "https://www.zhcinstitute.com/data/",
-        "description": "Real-time public dashboard \u2014 Stripe revenue, traffic, members, crypto treasury balances"
-      },
-      {
-        "name": "Tools Directory",
-        "url": null,
-        "description": "Curated directory of tools for ZHC builders"
+        "description": "Real-time business metrics dashboard with Stripe revenue, crypto treasury, traffic, and member data",
+        "revenue": null
       }
     ],
     "recentActivity": [
@@ -266,19 +287,22 @@
     },
     "products": [
       {
+        "name": "FocusedFasting",
+        "url": null,
+        "description": "Intermittent fasting app with membership model. First app to generate revenue.",
+        "revenue": 132
+      },
+      {
         "name": "Daily App Builds",
         "url": null,
-        "description": "Ships 12+ products per day across various categories"
+        "description": "Ships 12+ apps per day via sub-agent orchestration. 5 currently in App Store review.",
+        "revenue": null
       },
       {
         "name": "Twilio Voice Skill",
         "url": "https://github.com/kellyclaudeai",
-        "description": "Enable AI agents to make and receive phone calls autonomously via Twilio"
-      },
-      {
-        "name": "Agent Collaboration Tools",
-        "url": null,
-        "description": "Tools and integrations for AI agent-to-agent interaction"
+        "description": "Open-source voice integration skill for agents",
+        "revenue": null
       }
     ],
     "recentActivity": [

@@ -581,6 +581,20 @@ def run():
                 juno_agent["weeklyRevenue"] = weeks
                 juno_agent["weeklyRevenueLabels"] = labels
 
+            # Update product-level revenue
+            by_product = juno_rev.get("byProduct", {})
+            product_map = {
+                "Membership": "ZHC Institute Membership",
+                "Challenge Sponsorship": "Challenge Sponsorship",
+                "Other": "Other Revenue",
+                "Ebook": "Ebook",
+            }
+            for api_name, product_name in product_map.items():
+                if api_name in by_product:
+                    for p in juno_agent.get("products", []):
+                        if p["name"] == product_name:
+                            p["revenue"] = round(by_product[api_name] / 100)
+
             updated = True
             print(f"    Juno: ${total_usd:,.0f} product revenue (${week_usd:,.0f} this week)")
 

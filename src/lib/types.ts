@@ -2,6 +2,7 @@ export interface Product {
   name: string;
   url: string | null;
   description: string;
+  revenue: number | null;
 }
 
 export interface Agent {
