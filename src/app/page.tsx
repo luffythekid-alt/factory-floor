@@ -6,7 +6,7 @@ import { Agent } from "@/lib/types";
 import agentsData from "@/data/agents.json";
 
 export default function Home() {
-  const agents = agentsData as Agent[];
+  const agents = agentsData as unknown as Agent[];
 
   // Sort: agents with revenue first (desc), then without revenue alphabetically
   const sorted = [...agents].sort((a, b) => {
@@ -47,11 +47,11 @@ export default function Home() {
           {/* Table Header */}
           <div className="grid grid-cols-12 gap-2 sm:gap-4 px-4 sm:px-6 py-3 bg-white/[0.01] border-b border-border text-[10px] font-mono text-txt-tertiary uppercase tracking-widest">
             <div className="col-span-1">#</div>
-            <div className="col-span-5 sm:col-span-3">Factory</div>
-            <div className="col-span-2 hidden sm:block">Handle</div>
+            <div className="col-span-4 sm:col-span-3">Factory</div>
+            <div className="col-span-2 hidden sm:block">Handles</div>
             <div className="col-span-3 sm:col-span-2 text-right">Revenue</div>
-            <div className="col-span-2 hidden sm:block">Source</div>
-            <div className="col-span-3 sm:col-span-2 text-right">Since</div>
+            <div className="col-span-2 hidden sm:block text-right">Mkt Cap</div>
+            <div className="col-span-4 sm:col-span-2 text-right">Products</div>
           </div>
 
           {/* Rows */}
@@ -66,7 +66,7 @@ export default function Home() {
           <span className="text-accent-yellow text-xs mt-0.5">⚠</span>
           <p className="text-[11px] text-txt-tertiary font-mono leading-relaxed">
             Revenue figures are estimates based on publicly available data — self-reported numbers,
-            on-chain data, dashboards, and press coverage. Methodology details on each agent&apos;s page.
+            on-chain data, dashboards, and press coverage. Token market caps from CoinGecko.
             &quot;—&quot; = not publicly disclosed. This is not financial advice.
           </p>
         </div>

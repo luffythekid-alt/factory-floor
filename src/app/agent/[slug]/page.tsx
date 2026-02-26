@@ -6,12 +6,19 @@ import { Agent } from "@/lib/types";
 import { formatRevenue, formatDate } from "@/lib/utils";
 import agentsData from "@/data/agents.json";
 
+function formatMarketCap(val: number | null): string {
+  if (val === null) return "—";
+  if (val >= 1_000_000) return `$${(val / 1_000_000).toFixed(1)}M`;
+  if (val >= 1_000) return `$${(val / 1_000).toFixed(0)}K`;
+  return `$${val}`;
+}
+
 export function generateStaticParams() {
-  return (agentsData as Agent[]).map((a) => ({ slug: a.slug }));
+  return (agentsData as unknown as Agent[]).map((a) => ({ slug: a.slug }));
 }
 
 export default function AgentPage({ params }: { params: { slug: string } }) {
-  const agent = (agentsData as Agent[]).find((a) => a.slug === params.slug);
+  const agent = (agentsData as unknown as Agent[]).find((a) => a.slug === params.slug);
   if (!agent) notFound();
 
   return (
@@ -51,8 +58,25 @@ export default function AgentPage({ params }: { params: { slug: string } }) {
               >
                 {agent.status}
               </span>
+              {agent.tokenTicker && (
+                <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-white/[0.03] text-txt-secondary border border-border">
+                  {agent.tokenTicker}
+                </span>
+              )}
             </div>
             <p className="text-txt-secondary text-sm mt-1 font-mono">{agent.category}</p>
+            <div className="flex items-center gap-3 mt-1.5">
+              {agent.agentTwitter && (
+                <span className="text-xs font-mono text-txt-tertiary">
+                  Agent: <span className="text-txt-secondary">{agent.agentTwitter}</span>
+                </span>
+              )}
+              {agent.creatorTwitter && (
+                <span className="text-xs font-mono text-txt-tertiary">
+                  Creator: <span className="text-txt-secondary">{agent.creatorTwitter}</span>
+                </span>
+              )}
+            </div>
           </div>
         </div>
 
@@ -68,8 +92,8 @@ export default function AgentPage({ params }: { params: { slug: string } }) {
             value={formatRevenue(agent.revenue7d)}
           />
           <StatCard
-            label="24h"
-            value={formatRevenue(agent.revenue24h)}
+            label="Token Mkt Cap"
+            value={formatMarketCap(agent.tokenMarketCap)}
           />
           <StatCard
             label="Since"
@@ -83,6 +107,39 @@ export default function AgentPage({ params }: { params: { slug: string } }) {
             {agent.description}
           </p>
         </Section>
+
+        {/* Products */}
+        {agent.products.length > 0 && (
+          <Section title="Products Shipped">
+            <div className="space-y-3">
+              {agent.products.map((product, i) => (
+                <div
+                  key={i}
+                  className="flex items-start gap-3 p-3 bg-white/[0.02] border border-border rounded-lg hover:border-border-hover transition-colors"
+                >
+                  <span className="text-accent-green text-sm mt-0.5 shrink-0">▸</span>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      {product.url ? (
+                        <a
+                          href={product.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm font-semibold text-txt hover:text-accent-green transition-colors"
+                        >
+                          {product.name} <span className="text-txt-tertiary text-xs">↗</span>
+                        </a>
+                      ) : (
+                        <span className="text-sm font-semibold text-txt">{product.name}</span>
+                      )}
+                    </div>
+                    <p className="text-xs text-txt-tertiary mt-0.5">{product.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Section>
+        )}
 
         {/* Revenue Details */}
         <Section title="Revenue Methodology">

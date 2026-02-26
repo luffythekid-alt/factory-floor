@@ -1,8 +1,15 @@
+export interface Product {
+  name: string;
+  url: string | null;
+  description: string;
+}
+
 export interface Agent {
   id: string;
   name: string;
   slug: string;
-  twitter: string | null;
+  agentTwitter: string | null;
+  creatorTwitter: string | null;
   website: string | null;
   category: string;
   description: string;
@@ -16,6 +23,9 @@ export interface Agent {
   launchDate: string;
   avatar: string;
   color: string;
+  tokenMarketCap: number | null;
+  tokenTicker: string | null;
   links: Record<string, string>;
+  products: Product[];
   recentActivity: string[];
 }

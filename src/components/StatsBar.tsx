@@ -6,14 +6,20 @@ export default function StatsBar({ agents }: { agents: Agent[] }) {
     (sum, a) => sum + (a.totalRevenue ?? 0),
     0
   );
-  const activeCount = agents.filter((a) => a.status === "active").length;
-  const categories = new Set(agents.map((a) => a.category)).size;
+  const totalMarketCap = agents.reduce(
+    (sum, a) => sum + (a.tokenMarketCap ?? 0),
+    0
+  );
+  const totalProducts = agents.reduce(
+    (sum, a) => sum + a.products.length,
+    0
+  );
 
   const stats = [
     { label: "Total Revenue", value: formatRevenue(totalRevenue), accent: true },
+    { label: "Combined Mkt Cap", value: formatRevenue(totalMarketCap), accent: false },
     { label: "Factories Tracked", value: agents.length.toString(), accent: false },
-    { label: "Active", value: activeCount.toString(), accent: false },
-    { label: "Categories", value: categories.toString(), accent: false },
+    { label: "Products Shipped", value: totalProducts.toString(), accent: false },
   ];
 
   return (

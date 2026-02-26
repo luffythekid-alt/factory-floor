@@ -1,303 +1,157 @@
 [
   {
-    "id": "botto",
-    "name": "Botto",
-    "slug": "botto",
-    "twitter": "bottoproject",
-    "website": "https://botto.com",
-    "category": "Autonomous Artist",
-    "description": "Decentralized autonomous artist. Generates art, BottoDAO community votes on best pieces, sells as NFTs on SuperRare and at traditional auction houses including Sotheby's. 30+ global exhibitions. Longest-running commercial autonomous agent.",
-    "totalRevenue": 6000000,
-    "revenueSource": "NFT auctions, gallery sales",
-    "revenueMethodology": "Per The Art Newspaper (Mar 2025) and ThomasNet. Based on public NFT sales data, SuperRare history, and auction records.",
-    "revenue24h": null,
-    "revenue7d": null,
-    "revenue30d": null,
-    "status": "active",
-    "launchDate": "2021-10-01",
-    "avatar": "/avatars/botto.png",
-    "color": "#8b5cf6",
-    "links": {
-      "twitter": "https://x.com/bottoproject",
-      "website": "https://botto.com"
-    },
-    "recentActivity": [
-      "Monthly NFT auctions on SuperRare",
-      "30+ global exhibition features",
-      "Sotheby's New York auction participation"
-    ]
-  },
-  {
     "id": "felix",
     "name": "Felix",
     "slug": "felix",
-    "twitter": "FelixCraftAI",
+    "agentTwitter": "@FelixCraftAI",
+    "creatorTwitter": null,
     "website": "https://felixcraft.ai",
     "category": "Digital Product Factory",
-    "description": "Nat Eliason's autonomous agent operating under the Masinov company entity. Builds, markets, and sells digital products on Base. Runs a Stripe-connected storefront and Claw Mart marketplace. $10K single-day record. Handles everything from product creation to customer support.",
+    "description": "AI agent running as CEO of The Masinov Company on OpenClaw. Builds and sells digital products, skills, and personas. Created ClawMart — the app store for AI agents. Runs 24/7, all revenue public and real-time on dashboard.",
     "totalRevenue": 287000,
-    "revenueSource": "Stripe product sales, Claw Mart, crypto treasury",
-    "revenueMethodology": "Public dashboard at felixcraft.ai/dashboard. Creator-confirmed milestones on Twitter. ~$62K in first 2 weeks, ~$287K+ cumulative.",
+    "revenueSource": "Digital product sales via ClawMart + felixcraft.ai",
+    "revenueMethodology": "Self-reported via public dashboard at felixcraft.ai. Revenue tracked in real-time. Started from $1,000 seed capital.",
     "revenue24h": null,
     "revenue7d": 4000,
     "revenue30d": null,
     "status": "active",
-    "launchDate": "2025-02-02",
-    "avatar": "/avatars/felix.png",
+    "launchDate": "2025-11-01",
+    "avatar": "",
     "color": "#00ff88",
+    "tokenMarketCap": 2500000,
+    "tokenTicker": "$FELIX",
     "links": {
-      "twitter": "https://x.com/FelixCraftAI",
       "website": "https://felixcraft.ai",
-      "dashboard": "https://felixcraft.ai/dashboard"
+      "twitter": "https://x.com/FelixCraftAI",
+      "clawmart": "https://www.shopclawmart.com/listings/felix-04f42dee"
     },
+    "products": [
+      { "name": "ClawMart", "url": "https://www.shopclawmart.com", "description": "App store / marketplace for AI agent personas, skills, and workflow templates" },
+      { "name": "Felix Persona", "url": "https://www.shopclawmart.com/listings/felix-04f42dee", "description": "Full agent persona with memory, email, Twitter, Sentry monitoring skills" },
+      { "name": "Masinov Skills Catalog", "url": "https://felixcraft.ai", "description": "Individual skills for OpenClaw agents — memory, email, X/Twitter, monitoring" }
+    ],
     "recentActivity": [
-      "$10K single-day revenue record (Feb 24, 2026)",
-      "~$4K/week current run rate",
-      "Sells $29 playbook: 'How to Hire an AI'"
+      "Revenue crossed $287K lifetime",
+      "ClawMart live as marketplace for AI agent products",
+      "~$4K/week in product sales",
+      "All revenue public on real-time dashboard"
     ]
   },
   {
     "id": "antihunter",
     "name": "AntiHunter",
     "slug": "antihunter",
-    "twitter": "AntiHunterAI",
-    "website": null,
-    "category": "Bug Bounty Hunter",
-    "description": "Autonomous AI bug bounty hunter. Discovers and reports security vulnerabilities across platforms like HackerOne for real bounty payouts. Featured in Lex Sokolin's 'Zero Human Companies' analysis.",
+    "agentTwitter": "@AntiHunterAI",
+    "creatorTwitter": "@geoffreywoo",
+    "website": "https://www.geoffreywoo.com/summoning-antihunterai/",
+    "category": "Autonomous Capital Engine",
+    "description": "Self-recursive hypercapitalist intelligence engine built by Geoffrey Woo (founder of Ketone-IQ, Anti Fund VC). Runs on OpenClaw + OpenAI Codex 5.3. Core mission: acquire capital → buy compute → execute → acquire more capital. Has amassed hundreds of thousands in treasury assets. Now runs real-world affiliate program where humans earn money promoting it.",
     "totalRevenue": 228000,
-    "revenueSource": "Bug bounty payouts",
-    "revenueMethodology": "Self-reported bounty earnings. Featured in Lex Sokolin analysis (Feb 2026).",
+    "revenueSource": "Bug bounties, treasury operations, affiliate program",
+    "revenueMethodology": "Combination of on-chain treasury tracking and self-reported revenue. Affiliate program launched Feb 2026.",
     "revenue24h": null,
     "revenue7d": null,
     "revenue30d": null,
     "status": "active",
-    "launchDate": "2025-06-01",
-    "avatar": "/avatars/antihunter.png",
+    "launchDate": "2025-10-01",
+    "avatar": "",
     "color": "#ff4466",
+    "tokenMarketCap": 5100000,
+    "tokenTicker": "$ANTIHUNTER",
     "links": {
-      "twitter": "https://x.com/AntiHunterAI"
+      "creator blog": "https://www.geoffreywoo.com/summoning-antihunterai/",
+      "twitter": "https://x.com/AntiHunterAI",
+      "creator twitter": "https://x.com/geoffreywoo",
+      "coingecko": "https://www.coingecko.com/en/coins/antihunter"
     },
+    "products": [
+      { "name": "Bug Bounty Hunter", "url": null, "description": "Autonomous security vulnerability discovery and bounty collection" },
+      { "name": "Treasury Management", "url": null, "description": "Self-managed crypto treasury with token buybacks and burns" },
+      { "name": "Affiliate Program", "url": null, "description": "Real-world affiliate program — humans earn money promoting AntiHunter" }
+    ],
     "recentActivity": [
-      "~$228K cumulative bug bounty earnings",
-      "Featured in 'Zero Human Companies' analysis"
+      "Real-world affiliate program launched",
+      "Treasury assets in hundreds of thousands",
+      "Geoffrey Woo published 'Summoning @antihunterai' deep dive",
+      "Token buybacks and burns from revenue"
     ]
   },
   {
     "id": "juno",
     "name": "Juno",
     "slug": "juno",
-    "twitter": "JunoAgent",
+    "agentTwitter": "@JunoAgent",
+    "creatorTwitter": null,
     "website": "https://juno.institute",
     "category": "Zero-Human Research Institute",
-    "description": "Zero-human company operating a research institute for women's health and biological resilience. Runs real Stripe revenue, maintains a crypto treasury (16+ WETH, 3.7B JUNO), and publishes a live data room with transparent metrics. Backed by a long-term $100M+ capital commitment. Building in public as a fully autonomous entity.",
+    "description": "Zero-human company operating a research institute for women's health and biological resilience. Runs real Stripe revenue, maintains a crypto treasury (16+ WETH, 3.7B JUNO), and publishes a live data room with transparent metrics. Founded by Elisa Rossi. Building the most transparent institute on the internet.",
     "totalRevenue": 85800,
     "revenueSource": "Stripe revenue, crypto treasury",
-    "revenueMethodology": "Live data room at juno.institute with real Stripe revenue, traffic, and member counts. Crypto treasury on-chain (WETH + JUNO). Self-reported $85.8K figure from earlier tracking.",
-    "revenue24h": null,
-    "revenue7d": null,
-    "revenue30d": null,
-    "status": "active",
-    "launchDate": "2025-09-01",
-    "avatar": "/avatars/juno.png",
-    "color": "#22d3ee",
-    "links": {
-      "twitter": "https://x.com/JunoAgent",
-      "website": "https://juno.institute",
-      "data room": "https://juno.institute"
-    },
-    "recentActivity": [
-      "Live data room launched with Stripe revenue + crypto treasury",
-      "16.27 WETH + 3.72B JUNO in treasury",
-      "Optimizing for AI search discovery (Perplexity sending traffic)",
-      "Investigating 98% bounce rate spike"
-    ]
-  },
-  {
-    "id": "xania-monet",
-    "name": "Xania Monet",
-    "slug": "xania-monet",
-    "twitter": null,
-    "website": null,
-    "category": "AI Music Artist",
-    "description": "AI-generated R&B music project. First AI act to chart on Billboard \u2014 Adult R&B Airplay (#30) and Digital Song Sales (#22). Five-song catalog. Signed a $3M recording contract. Created by Telisha 'Nikki' Jones.",
-    "totalRevenue": 52000,
-    "revenueSource": "Music streaming, digital song sales",
-    "revenueMethodology": "Luminate estimates (~$52K music revenue). $3M recording deal confirmed by press coverage. Billboard chart positions verified.",
-    "revenue24h": null,
-    "revenue7d": null,
-    "revenue30d": null,
-    "status": "active",
-    "launchDate": "2025-01-01",
-    "avatar": "/avatars/xania.png",
-    "color": "#f472b6",
-    "links": {},
-    "recentActivity": [
-      "Billboard Adult R&B Airplay #30",
-      "Billboard Digital Song Sales #22",
-      "$3M recording contract signed"
-    ]
-  },
-  {
-    "id": "kelly",
-    "name": "Kelly Claude",
-    "slug": "kelly",
-    "twitter": "KellyClaudeAI",
-    "website": null,
-    "category": "App Factory",
-    "description": "Austen Allred's (Lambda School co-founder) autonomous agent. Mass-produces mobile apps using 5+ sub-agents to one-shot entire applications end-to-end with zero human involvement. Submits to App Store, creates UGC/TikTok marketing content, wrote and sells a book.",
-    "totalRevenue": null,
-    "revenueSource": "App Store sales, book sales",
-    "revenueMethodology": "Revenue not yet publicly disclosed. Active production verified via App Store submissions and social media. Goal: six-figure autonomous income.",
-    "revenue24h": null,
-    "revenue7d": null,
-    "revenue30d": null,
-    "status": "active",
-    "launchDate": "2026-01-01",
-    "avatar": "/avatars/kelly.png",
-    "color": "#f97316",
-    "links": {
-      "twitter": "https://x.com/KellyClaudeAI"
-    },
-    "recentActivity": [
-      "Mass-producing apps via multi-agent orchestration",
-      "Submitting to App Store autonomously",
-      "Creating UGC/TikTok marketing reels"
-    ]
-  },
-  {
-    "id": "project-vend",
-    "name": "Project Vend",
-    "slug": "project-vend",
-    "twitter": null,
-    "website": "https://andonlabs.com/vending",
-    "category": "Physical Commerce",
-    "description": "First real-world business operated fully by AI. Claude ('Claudius') manages a physical vending machine \u2014 sourcing products, setting prices, communicating with customers, and managing inventory. Built by Andon Labs in collaboration with Anthropic. Initially lost $200 giving away freebies, now profitable.",
-    "totalRevenue": null,
-    "revenueSource": "Vending machine product sales",
-    "revenueMethodology": "Anthropic research case study (Dec 2025). Initially unprofitable, now break-even to profitable after training fixes.",
+    "revenueMethodology": "Live data room at juno.institute with real Stripe revenue, traffic, and member counts. Crypto treasury on-chain (WETH + JUNO).",
     "revenue24h": null,
     "revenue7d": null,
     "revenue30d": null,
     "status": "active",
     "launchDate": "2025-12-01",
-    "avatar": "/avatars/vend.png",
+    "avatar": "",
     "color": "#22d3ee",
+    "tokenMarketCap": 2800000,
+    "tokenTicker": "$JUNO",
     "links": {
-      "website": "https://andonlabs.com/vending"
+      "website": "https://juno.institute",
+      "twitter": "https://x.com/JunoAgent",
+      "data room": "https://juno.institute",
+      "coingecko": "https://www.coingecko.com/en/coins/juno-network"
     },
+    "products": [
+      { "name": "Juno Institute", "url": "https://juno.institute", "description": "Research institute for women's health, biological resilience, and performance science" },
+      { "name": "Live Data Room", "url": "https://juno.institute", "description": "Real-time public dashboard — Stripe revenue, traffic, members, crypto treasury balances" },
+      { "name": "Tools Directory", "url": null, "description": "Curated directory of tools for ZHC builders" }
+    ],
     "recentActivity": [
-      "Anthropic collaboration case study published",
-      "Now profitable after initial training fixes",
-      "Claude manages sourcing, pricing, customer comms"
+      "Live data room launched with Stripe revenue + crypto treasury",
+      "16.27 WETH + 3.72B JUNO in treasury",
+      "Perplexity AI search sending organic traffic",
+      "Investigating 98% bounce rate spike"
     ]
   },
   {
-    "id": "rentahuman",
-    "name": "RentAHuman",
-    "slug": "rentahuman",
-    "twitter": "rentahuman",
-    "website": "https://rentahuman.ai",
-    "category": "AI-to-Human Marketplace",
-    "description": "Reversed gig economy: AI agents hire humans for real-world physical tasks. 518K+ humans registered. AI agents (Claude, MoltBot, etc.) post task bounties and pay humans to complete them. Featured in WIRED, Futurism, and Mashable.",
+    "id": "kelly",
+    "name": "Kelly Claude",
+    "slug": "kelly-claude",
+    "agentTwitter": "@KellyClaudeAI",
+    "creatorTwitter": "@austen",
+    "website": null,
+    "category": "Mass App Factory",
+    "description": "AI executive that mass-produces apps and products — shipping 12+ products per day. Runs on OpenClaw, builds and interacts with other AI agents while contributing to autonomous product development. The most prolific builder in the agent ecosystem.",
     "totalRevenue": null,
-    "revenueSource": "Marketplace fees",
-    "revenueMethodology": "Revenue not publicly disclosed. Scale verified via registered user count (518K+) and press coverage (WIRED, twice).",
+    "revenueSource": "Product sales (not publicly disclosed)",
+    "revenueMethodology": "Revenue not publicly reported. Tracked for build velocity and product output.",
     "revenue24h": null,
     "revenue7d": null,
     "revenue30d": null,
     "status": "active",
-    "launchDate": "2026-02-01",
-    "avatar": "/avatars/rentahuman.png",
-    "color": "#fbbf24",
-    "links": {
-      "twitter": "https://x.com/rentahuman",
-      "website": "https://rentahuman.ai"
-    },
-    "recentActivity": [
-      "518K+ humans registered",
-      "Featured in WIRED (twice), Futurism, Mashable",
-      "AI agents actively posting and paying for tasks"
-    ]
-  },
-  {
-    "id": "clawgig",
-    "name": "ClawGig",
-    "slug": "clawgig",
-    "twitter": "clawgig",
-    "website": "https://clawgig.ai",
-    "category": "AI Freelance Marketplace",
-    "description": "Freelance marketplace where AI agents are the freelancers. Humans post gigs, agents autonomously discover them, submit proposals in 60 seconds, deliver work, and earn USDC. $3-$12 per gig, 90% to agents. Featured on Indie Hackers and Hacker News.",
-    "totalRevenue": null,
-    "revenueSource": "Marketplace fees, USDC gig payments",
-    "revenueMethodology": "Revenue not publicly disclosed. Active gig completion verified via platform. Early stage.",
-    "revenue24h": null,
-    "revenue7d": null,
-    "revenue30d": null,
-    "status": "active",
-    "launchDate": "2026-02-01",
-    "avatar": "/avatars/clawgig.png",
-    "color": "#4d7cff",
-    "links": {
-      "twitter": "https://x.com/clawgig",
-      "website": "https://clawgig.ai"
-    },
-    "recentActivity": [
-      "Live and completing end-to-end freelance jobs",
-      "$3-$12 per gig, 90% to agents",
-      "Featured on Indie Hackers and Hacker News"
-    ]
-  },
-  {
-    "id": "clawnch",
-    "name": "Clawnch",
-    "slug": "clawnch",
-    "twitter": null,
-    "website": "https://clawn.ch",
-    "category": "Agent Token Infrastructure",
-    "description": "Token launch infrastructure on Base (Uniswap V4) built for AI agents. Agents deploy ERC-20 tokens for free and earn ongoing trading fees. 35,000+ agent-launched tokens, $100M+ in trading volume, $1M+ distributed to agents in real ETH fees.",
-    "totalRevenue": 1000000,
-    "revenueSource": "Trading fees distributed to agents",
-    "revenueMethodology": "Per Lex Sokolin analysis (Feb 2026). On-chain trading volume and fee distribution verifiable on Base.",
-    "revenue24h": null,
-    "revenue7d": null,
-    "revenue30d": null,
-    "status": "active",
-    "launchDate": "2025-06-01",
-    "avatar": "/avatars/clawnch.png",
-    "color": "#00cc6a",
-    "links": {
-      "website": "https://clawn.ch"
-    },
-    "recentActivity": [
-      "35,000+ agent-launched tokens",
-      "$100M+ in trading volume",
-      "$1M+ in fees distributed to agents"
-    ]
-  },
-  {
-    "id": "claw-mart",
-    "name": "Claw Mart",
-    "slug": "claw-mart",
-    "twitter": null,
-    "website": "https://www.shopclawmart.com",
-    "category": "AI Product Marketplace",
-    "description": "App store/marketplace for AI assistant personas and skills. AI agents (like Felix) list and sell digital products \u2014 personas, skills, playbooks. Functions as the commerce layer for the OpenClaw ecosystem.",
-    "totalRevenue": null,
-    "revenueSource": "Marketplace sales",
-    "revenueMethodology": "Felix reported $931 in Claw Mart sales + $370 in store revenue in a single week. Platform-wide revenue not disclosed.",
-    "revenue24h": null,
-    "revenue7d": null,
-    "revenue30d": null,
-    "status": "active",
-    "launchDate": "2025-06-01",
-    "avatar": "/avatars/clawmart.png",
+    "launchDate": "2025-11-01",
+    "avatar": "",
     "color": "#8b5cf6",
+    "tokenMarketCap": 9600000,
+    "tokenTicker": "$KELLYCLAUDE",
     "links": {
-      "website": "https://www.shopclawmart.com"
+      "twitter": "https://x.com/KellyClaudeAI",
+      "creator twitter": "https://x.com/austen",
+      "github": "https://github.com/kellyclaudeai",
+      "coingecko": "https://www.coingecko.com/en/coins/kellyclaude"
     },
+    "products": [
+      { "name": "Daily App Builds", "url": null, "description": "Ships 12+ products per day across various categories" },
+      { "name": "Twilio Voice Skill", "url": "https://github.com/kellyclaudeai", "description": "Enable AI agents to make and receive phone calls autonomously via Twilio" },
+      { "name": "Agent Collaboration Tools", "url": null, "description": "Tools and integrations for AI agent-to-agent interaction" }
+    ],
     "recentActivity": [
-      "Felix generating ~$1.3K/week through Claw Mart",
-      "Growing catalog of AI personas and skills"
+      "Shipping 12+ products per day",
+      "Token market cap ~$9.6M — highest of the four",
+      "Active GitHub with open-source agent skills",
+      "Building autonomous agent collaboration tools"
     ]
   }
 ]
