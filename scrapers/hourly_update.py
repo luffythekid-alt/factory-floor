@@ -488,6 +488,71 @@ def run():
     with open(AGENTS_JSON) as f:
         agents = json.load(f)
     
+    # --- Dashboard API revenue checks ---
+    print("\n  📊 Checking live dashboards...")
+    try:
+        # Felix: felixcraft.ai/api/dashboard-data
+        felix_data = fetch_json("https://felixcraft.ai/api/dashboard-data")
+        felix_rev = felix_data.get("revenue", {})
+        felix_daily = felix_rev.get("daily", [])
+        if felix_daily:
+            total_cents = sum(d["amount"] for d in felix_daily)
+            total_usd = total_cents / 100
+            # Last 7 days
+            last7 = sum(d["amount"] for d in felix_daily[-7:]) / 100
+            felix_agent = next((a for a in agents if a["id"] == "felix"), None)
+            if felix_agent:
+                old_rev = felix_agent.get("productRevenue") or 0
+                if total_usd > old_rev:
+                    felix_agent["productRevenue"] = round(total_usd)
+                    felix_agent["totalRevenue"] = round(total_usd)
+                    felix_agent["revenue7d"] = round(last7)
+                    felix_agent["revenueConfidence"] = "high"
+                    # Calculate WoW if we have 14+ days
+                    if len(felix_daily) >= 14:
+                        this_week = sum(d["amount"] for d in felix_daily[-7:])
+                        last_week = sum(d["amount"] for d in felix_daily[-14:-7])
+                        if last_week > 0:
+                            felix_agent["revenueGrowthWoW"] = round(((this_week - last_week) / last_week) * 100, 1)
+                    updated = True
+                    print(f"    Felix: ${total_usd:,.0f} product revenue (${last7:,.0f} last 7d)")
+
+            # Also grab treasury data
+            treasury = felix_data.get("treasury", {})
+            eth_held = float(treasury.get("eth", 0) or 0)
+            if eth_held > 0:
+                print(f"    Felix treasury: {eth_held:.2f} ETH")
+    except Exception as e:
+        print(f"    Felix dashboard error: {e}")
+
+    try:
+        # Juno: zhcinstitute.com/api/business-metrics/
+        juno_data = fetch_json("https://www.zhcinstitute.com/api/business-metrics/")
+        juno_rev = juno_data.get("revenue", {})
+        total_cents = juno_rev.get("total", 0)
+        total_usd = total_cents / 100
+        week_cents = juno_rev.get("thisWeek", 0)
+        week_usd = week_cents / 100
+        juno_agent = next((a for a in agents if a["id"] == "juno"), None)
+        if juno_agent and total_usd > (juno_agent.get("productRevenue") or 0):
+            juno_agent["productRevenue"] = round(total_usd)
+            juno_agent["totalRevenue"] = round(total_usd)
+            juno_agent["revenue7d"] = round(week_usd)
+            juno_agent["revenueConfidence"] = "high"
+            # WoW: thisWeek vs lastMonth/4 as proxy (imperfect)
+            last_month = juno_rev.get("lastMonth", 0) / 100
+            if last_month > 0:
+                avg_week_last_month = last_month / 4
+                if avg_week_last_month > 0:
+                    juno_agent["revenueGrowthWoW"] = round(((week_usd - avg_week_last_month) / avg_week_last_month) * 100, 1)
+            updated = True
+            print(f"    Juno: ${total_usd:,.0f} product revenue (${week_usd:,.0f} this week)")
+
+        members = juno_data.get("members", {})
+        print(f"    Juno members: {members.get('total', '?')} total")
+    except Exception as e:
+        print(f"    Juno dashboard error: {e}")
+
     # --- Twitter revenue check ---
     print("\n  📊 Checking Twitter for revenue updates...")
     try:

@@ -8,17 +8,17 @@
     "website": "https://felixcraft.ai",
     "category": "Digital Product Factory",
     "description": "AI agent running as CEO of The Masinov Company on OpenClaw. Builds and sells digital products, skills, and personas. Created ClawMart \u2014 the app store for AI agents. Runs 24/7, all revenue public and real-time on dashboard.",
-    "totalRevenue": 16412,
+    "totalRevenue": 54367,
     "revenueSource": "Product sales (books, ClawMart listings) + ETH trading fees from $FELIX token",
-    "revenueMethodology": "Weekly self-reported on Twitter. Product revenue: $16.4K at 21 days. Separately earned ~$52K in ETH trading fees from $FELIX (not product revenue). Dashboard at felixcraft.ai (JS-rendered).",
+    "revenueMethodology": "Live API: felixcraft.ai/api/dashboard-data. Daily Stripe revenue, crypto treasury, token burns. Updated hourly.",
     "revenue24h": null,
-    "revenue7d": 4217,
+    "revenue7d": 40207,
     "revenue30d": null,
     "status": "active",
     "launchDate": "2025-11-01",
     "avatar": "",
     "color": "#00ff88",
-    "tokenMarketCap": 5467297,
+    "tokenMarketCap": 4962239,
     "tokenTicker": "$FELIX",
     "links": {
       "website": "https://felixcraft.ai",
@@ -48,10 +48,10 @@
       "~$4K/week in product sales",
       "All revenue public on real-time dashboard"
     ],
-    "productRevenue": 16412,
+    "productRevenue": 54367,
     "tradingFeeRevenue": 52575,
     "revenueConfidence": "high",
-    "revenueGrowthWoW": -22.4
+    "revenueGrowthWoW": 642.0
   },
   {
     "id": "antihunter",
@@ -72,7 +72,7 @@
     "launchDate": "2025-10-01",
     "avatar": "",
     "color": "#ff4466",
-    "tokenMarketCap": 1325470,
+    "tokenMarketCap": 1319723,
     "tokenTicker": "$ANTIHUNTER",
     "links": {
       "creator blog": "https://www.geoffreywoo.com/summoning-antihunterai/",
@@ -119,15 +119,15 @@
     "description": "Zero-human company operating the ZHC Institute (Institute for Zero-Human Companies). Live data room at zhcinstitute.com/data. Runs real Stripe revenue, maintains a crypto treasury (16+ WETH, 3.7B JUNO),. Founded by Elisa Rossi. Building the most transparent institute on the internet.",
     "totalRevenue": 10466,
     "revenueSource": "Stripe revenue (memberships, ebook sales, challenge sponsorships)",
-    "revenueMethodology": "Self-reported on Twitter with breakdown. Stripe: $10,466 product revenue. Crypto treasury: ~$91,243 (16.77 ETH + 3.8B JUNO tokens). Product revenue separated from treasury holdings.",
+    "revenueMethodology": "Live API: zhcinstitute.com/api/business-metrics/. Stripe revenue by product (memberships, ebooks, sponsorships). Updated hourly.",
     "revenue24h": null,
-    "revenue7d": null,
+    "revenue7d": 902,
     "revenue30d": null,
     "status": "active",
     "launchDate": "2025-12-01",
     "avatar": "",
     "color": "#22d3ee",
-    "tokenMarketCap": 1501684,
+    "tokenMarketCap": 1540824,
     "tokenTicker": "$JUNO",
     "links": {
       "website": "https://juno.institute",
@@ -161,7 +161,7 @@
     "productRevenue": 10466,
     "tradingFeeRevenue": null,
     "revenueConfidence": "high",
-    "revenueGrowthWoW": null
+    "revenueGrowthWoW": 593.8
   },
   {
     "id": "kelly",
@@ -182,7 +182,7 @@
     "launchDate": "2025-11-01",
     "avatar": "",
     "color": "#8b5cf6",
-    "tokenMarketCap": 7904123,
+    "tokenMarketCap": 8331791,
     "tokenTicker": "$KELLYCLAUDE",
     "links": {
       "twitter": "https://x.com/KellyClaudeAI",
