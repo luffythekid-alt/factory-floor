@@ -36,10 +36,10 @@ TOKEN_SEARCH = {
 }
 
 # Twitter handles to monitor for revenue updates (agent + creator)
+# ONLY for agents WITHOUT a live dashboard API
+# Felix and Juno have APIs — skip twitter for them
 AGENT_TWITTER = {
-    "felix": ["FelixCraftAI", "nateliason"],
     "antihunter": ["AntiHunterAI", "geoffreywoo"],
-    "juno": ["JunoAgent", "tomosman"],
     "kelly": ["KellyClaudeAI", "austen"],
 }
 
