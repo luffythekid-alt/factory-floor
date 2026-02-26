@@ -35,12 +35,12 @@ TOKEN_SEARCH = {
     "juno": "juno agent",
 }
 
-# Twitter handles to monitor for revenue updates
+# Twitter handles to monitor for revenue updates (agent + creator)
 AGENT_TWITTER = {
-    "felix": "FelixCraftAI",
-    "antihunter": "AntiHunterAI",
-    "juno": "JunoAgent",
-    "kelly": "KellyClaudeAI",
+    "felix": ["FelixCraftAI", "nateliason"],
+    "antihunter": ["AntiHunterAI", "geoffreywoo"],
+    "juno": ["JunoAgent", "BrianRoemmele"],
+    "kelly": ["KellyClaudeAI", "austen"],
 }
 
 # Keywords that signal a revenue update
@@ -51,12 +51,15 @@ REVENUE_KEYWORDS = [
     "treasury", "stripe", "paid", "membership", "subscriber",
 ]
 
-# Patterns to extract dollar amounts
+# Patterns to extract dollar amounts (use word boundaries to avoid partial matches)
 DOLLAR_PATTERNS = [
-    r'\$[\d,]+(?:\.\d{1,2})?(?:K|k)?',        # $1,234 or $1.5K
-    r'[\d,]+(?:\.\d{1,2})?\s*(?:USD|usd)',      # 1234 USD
-    r'[\d,]+(?:\.\d{1,2})?\s*(?:ETH|eth)',       # 16.66 ETH
+    r'\$[\d,]+(?:\.\d{1,2})?(?:[Kk]|[Mm])?\b',  # $1,234 or $1.5K or $2M
+    r'\b[\d,]+(?:\.\d{1,2})?\s*(?:USD|usd)\b',    # 1234 USD
+    r'\b[\d,]+(?:\.\d{1,2})?\s*(?:ETH|eth)\b',     # 16.66 ETH
 ]
+
+# Minimum dollar amount to consider as revenue (filters noise)
+MIN_REVENUE_THRESHOLD = 50
 
 def get_twitter_bearer():
     """Get Twitter bearer token."""
@@ -101,91 +104,269 @@ def is_revenue_tweet(text):
     return any(kw in lower for kw in REVENUE_KEYWORDS)
 
 def extract_dollar_amounts(text):
-    """Extract dollar amounts from tweet text."""
+    """Extract dollar amounts from tweet text. Returns list of (raw_str, numeric_value) tuples."""
     amounts = []
     for pattern in DOLLAR_PATTERNS:
         matches = re.findall(pattern, text)
-        amounts.extend(matches)
+        for m in matches:
+            amounts.append(m)
     return amounts
 
+def parse_dollar(s):
+    """Parse a dollar string like '$16,411.90' or '$77K' into a float. Returns None if unparseable."""
+    s = s.strip().rstrip(',')
+    s = re.sub(r'[USD|usd|ETH|eth]', '', s).strip()
+    s = s.replace('$', '').replace(',', '').strip()
+    if not s:
+        return None
+    try:
+        if s.upper().endswith('K'):
+            return float(s[:-1]) * 1000
+        elif s.upper().endswith('M'):
+            return float(s[:-1]) * 1_000_000
+        return float(s)
+    except ValueError:
+        return None
+
+def classify_revenue_tweet(text):
+    """Classify what kind of revenue the tweet is reporting.
+    Returns dict with parsed fields or None if can't classify."""
+    lower = text.lower()
+    amounts = extract_dollar_amounts(text)
+    if not amounts:
+        return None
+
+    result = {
+        "amounts_raw": amounts,
+        "is_product_revenue": False,
+        "is_trading_fee": False,
+        "is_treasury": False,
+        "product_revenue": None,
+        "trading_fee_revenue": None,
+        "treasury_value": None,
+        "total_revenue": None,
+    }
+
+    # Look for explicit product revenue signals
+    product_signals = ["stripe", "sales", "membership", "ebook", "book sales",
+                       "product revenue", "earned", "net revenue", "app store",
+                       "first revenue", "sponsorship", "clawmart", "claw mart"]
+    fee_signals = ["trading fee", "trading fees", "eth from trading", "fee revenue"]
+    treasury_signals = ["treasury", "weth", "crypto treasury", "balance sheet"]
+
+    has_product = any(s in lower for s in product_signals)
+    has_fee = any(s in lower for s in fee_signals)
+    has_treasury = any(s in lower for s in treasury_signals)
+
+    # Try to extract the largest dollar amount as the headline number
+    parsed = [(a, parse_dollar(a)) for a in amounts]
+    parsed = [(a, v) for a, v in parsed if v is not None and v > 0]
+    parsed.sort(key=lambda x: x[1], reverse=True)
+
+    if has_product and parsed:
+        # Find the amount most likely to be product revenue
+        # Usually the first/smallest non-treasury amount, or explicitly labeled
+        result["is_product_revenue"] = True
+        # If there's a clear "stripe revenue" or similar, use the associated number
+        # Simple heuristic: if multiple amounts, smallest is usually product, largest is treasury
+        if has_treasury and len(parsed) >= 2:
+            result["product_revenue"] = min(v for _, v in parsed)
+            result["treasury_value"] = max(v for _, v in parsed)
+            result["is_treasury"] = True
+        else:
+            result["product_revenue"] = parsed[0][1]
+
+    if has_fee and parsed:
+        result["is_trading_fee"] = True
+        # ETH amounts are usually fees
+        eth_amounts = [a for a in amounts if 'ETH' in a or 'eth' in a]
+        if eth_amounts:
+            result["trading_fee_revenue_raw"] = eth_amounts
+
+    if has_treasury and not has_product and parsed:
+        result["is_treasury"] = True
+        result["treasury_value"] = parsed[0][1]
+
+    # If we found product revenue, set total
+    if result["product_revenue"]:
+        result["total_revenue"] = result["product_revenue"]
+        if result.get("trading_fee_revenue"):
+            result["total_revenue"] += result["trading_fee_revenue"]
+
+    return result
+
 def check_twitter_revenue(agents, bearer):
-    """Check agent Twitter accounts for revenue updates. Returns list of findings."""
+    """Check agent + creator Twitter accounts for revenue updates. Returns list of findings."""
     seen = load_seen_tweets()
     findings = []
 
     for agent in agents:
         aid = agent["id"]
-        handle = AGENT_TWITTER.get(aid)
-        if not handle:
+        handles = AGENT_TWITTER.get(aid, [])
+        if not handles:
             continue
 
-        try:
-            # Get user ID
-            user_data = fetch_twitter(
-                f"https://api.twitter.com/2/users/by/username/{handle}?user.fields=id",
-                bearer
-            )
-            user_id = user_data.get("data", {}).get("id")
-            if not user_id:
-                print(f"    Twitter: @{handle} not found")
-                continue
-
-            # Get recent tweets (last 10)
-            tweets_data = fetch_twitter(
-                f"https://api.twitter.com/2/users/{user_id}/tweets"
-                f"?max_results=10&tweet.fields=created_at,public_metrics,text"
-                f"&exclude=retweets",
-                bearer
-            )
-            tweets = tweets_data.get("data", [])
-            if not tweets:
-                continue
-
-            agent_seen = seen.get(aid, [])
-
-            for tweet in tweets:
-                tid = tweet["id"]
-                if tid in agent_seen:
+        for handle in handles:
+            try:
+                time.sleep(1.5)  # rate limit: ~1 req/sec for free tier
+                # Get user ID
+                user_data = fetch_twitter(
+                    f"https://api.twitter.com/2/users/by/username/{handle}?user.fields=id",
+                    bearer
+                )
+                user_id = user_data.get("data", {}).get("id")
+                if not user_id:
+                    print(f"    Twitter: @{handle} not found")
                     continue
 
-                text = tweet.get("text", "")
-                if is_revenue_tweet(text):
+                time.sleep(1.5)
+                # Get recent tweets (last 10)
+                tweets_data = fetch_twitter(
+                    f"https://api.twitter.com/2/users/{user_id}/tweets"
+                    f"?max_results=10&tweet.fields=created_at,public_metrics,text"
+                    f"&exclude=retweets",
+                    bearer
+                )
+                tweets = tweets_data.get("data", [])
+                if not tweets:
+                    continue
+
+                handle_seen = seen.get(f"{aid}:{handle}", [])
+
+                for tweet in tweets:
+                    tid = tweet["id"]
+                    if tid in handle_seen:
+                        continue
+
+                    text = tweet.get("text", "")
+                    if not is_revenue_tweet(text):
+                        handle_seen.append(tid)
+                        continue
+
+                    classified = classify_revenue_tweet(text)
                     amounts = extract_dollar_amounts(text)
+
                     finding = {
                         "agent_id": aid,
                         "agent_name": agent["name"],
                         "handle": handle,
+                        "is_creator": handle != AGENT_TWITTER[aid][0],
                         "tweet_id": tid,
                         "tweet_url": f"https://x.com/{handle}/status/{tid}",
                         "created_at": tweet.get("created_at", ""),
                         "text": text[:500],
                         "amounts_found": amounts,
+                        "classified": classified,
                         "likes": tweet.get("public_metrics", {}).get("like_count", 0),
                     }
                     findings.append(finding)
-                    agent_seen.append(tid)
-                    print(f"    📊 Revenue tweet from @{handle}: {amounts if amounts else 'keyword match, no $ amount'}")
+                    handle_seen.append(tid)
 
-            seen[aid] = agent_seen[-50:]  # keep last 50 tweet IDs per agent
+                    if classified and classified.get("product_revenue"):
+                        print(f"    💰 @{handle}: product revenue ${classified['product_revenue']:,.0f}")
+                    elif amounts:
+                        print(f"    📊 @{handle}: {amounts}")
+                    else:
+                        print(f"    📊 @{handle}: revenue keyword match, no $ amount")
 
-        except Exception as e:
-            print(f"    Twitter error for @{handle}: {e}")
+                seen[f"{aid}:{handle}"] = handle_seen[-50:]
+
+            except Exception as e:
+                print(f"    Twitter error for @{handle}: {e}")
 
     save_seen_tweets(seen)
     return findings
 
+def auto_apply_revenue(agents, findings):
+    """Auto-apply revenue updates from classified tweets to agents.json.
+    Only applies when we have high-confidence product revenue from agent's own account."""
+    applied = []
+
+    for f in findings:
+        c = f.get("classified")
+        if not c or not c.get("product_revenue"):
+            continue
+
+        aid = f["agent_id"]
+        agent = next((a for a in agents if a["id"] == aid), None)
+        if not agent:
+            continue
+
+        new_rev = c["product_revenue"]
+        old_rev = agent.get("productRevenue") or 0
+
+        # Skip tiny amounts that are likely noise
+        if new_rev < MIN_REVENUE_THRESHOLD:
+            continue
+
+        # Only update if new number is higher (revenue shouldn't go down)
+        if new_rev <= old_rev:
+            continue
+
+        # Determine confidence: agent's own account = high, creator = medium
+        confidence = "high" if not f["is_creator"] else "medium"
+
+        agent["productRevenue"] = new_rev
+        agent["totalRevenue"] = new_rev
+        agent["revenueConfidence"] = confidence
+
+        if c.get("trading_fee_revenue"):
+            agent["tradingFeeRevenue"] = c["trading_fee_revenue"]
+
+        # Update revenue log
+        log_entry = {
+            "date": f["created_at"][:10] if f["created_at"] else datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+            "productRevenue": new_rev,
+            "tradingFeeRevenue": c.get("trading_fee_revenue"),
+            "totalRevenue": new_rev,
+            "treasuryValue": c.get("treasury_value"),
+            "note": f"Auto-detected from @{f['handle']}",
+            "source": f["tweet_url"],
+            "confidence": confidence,
+            "auto_applied": True,
+        }
+
+        # Append to revenue log
+        if REVENUE_LOG.exists():
+            with open(REVENUE_LOG) as fl:
+                rev_log = json.load(fl)
+        else:
+            rev_log = {}
+
+        if aid not in rev_log:
+            rev_log[aid] = []
+        rev_log[aid].append(log_entry)
+
+        with open(REVENUE_LOG, "w") as fl:
+            json.dump(rev_log, fl, indent=2)
+
+        applied.append({
+            "agent": agent["name"],
+            "old": old_rev,
+            "new": new_rev,
+            "source": f["tweet_url"],
+            "confidence": confidence,
+        })
+        print(f"    ✅ Auto-applied: {agent['name']} ${old_rev:,.0f} → ${new_rev:,.0f} ({confidence}) via @{f['handle']}")
+
+    return applied
+
 def save_revenue_findings(findings):
-    """Append revenue findings to a pending review file."""
-    pending_path = HISTORY_DIR / "pending-revenue-updates.json"
+    """Append all revenue findings to log for audit trail."""
+    pending_path = HISTORY_DIR / "revenue-tweet-log.json"
     existing = []
     if pending_path.exists():
         with open(pending_path) as f:
             existing = json.load(f)
 
-    existing.extend(findings)
+    for f in findings:
+        # Strip classified object for cleaner logging
+        entry = {k: v for k, v in f.items() if k != "classified"}
+        entry["had_revenue_data"] = bool(f.get("classified", {}).get("product_revenue"))
+        existing.append(entry)
 
-    # Keep last 100
-    existing = existing[-100:]
+    # Keep last 500
+    existing = existing[-500:]
 
     with open(pending_path, "w") as f:
         json.dump(existing, f, indent=2)
@@ -311,13 +492,15 @@ def run():
     print("\n  📊 Checking Twitter for revenue updates...")
     try:
         bearer = get_twitter_bearer()
-        findings = check_twitter_revenue(agents, bearer)
+        findings = check_twitter_revenue(agents, bearer) or []
         if findings:
             save_revenue_findings(findings)
-            print(f"\n  ⚡ {len(findings)} new revenue tweet(s) found! Saved to pending-revenue-updates.json")
-            # Print summary
-            for f in findings:
-                print(f"    → @{f['handle']}: {f['amounts_found']} | {f['tweet_url']}")
+            applied = auto_apply_revenue(agents, findings)
+            if applied:
+                updated = True
+                print(f"\n  ⚡ {len(applied)} revenue update(s) auto-applied to agents.json")
+            else:
+                print(f"\n  📋 {len(findings)} revenue tweet(s) logged (none auto-applied)")
         else:
             print("    No new revenue tweets")
     except Exception as e:
