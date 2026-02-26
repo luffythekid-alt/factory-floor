@@ -130,7 +130,7 @@ export default function AgentRow({
         {/* Hover chart popover */}
         {showChart && hasChart && (
           <div
-            className="absolute z-50 right-0 top-full mt-2 w-[240px] bg-[#0a0a0a] border border-border rounded-lg p-3 shadow-2xl shadow-black/50"
+            className="absolute z-50 right-0 top-full mt-2 w-[280px] bg-[#0a0a0a] border border-border rounded-lg p-3 shadow-2xl shadow-black/50"
             onClick={(e) => e.preventDefault()}
           >
             <RevenueSparkline

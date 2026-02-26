@@ -8,6 +8,11 @@ interface RevenueSparklineProps {
   className?: string;
 }
 
+function formatK(val: number): string {
+  if (val >= 1000) return `$${(val / 1000).toFixed(1)}k`;
+  return `$${val}`;
+}
+
 export default function RevenueSparkline({
   weeks,
   labels,
@@ -17,73 +22,71 @@ export default function RevenueSparkline({
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   return (
-    <div className={`flex flex-col gap-1.5 ${className}`}>
+    <div className={`flex flex-col gap-2 ${className}`}>
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <span className="text-[10px] font-mono text-txt-tertiary uppercase tracking-wider">
-          Weekly Revenue
-        </span>
-        {hoveredIdx !== null && (
-          <span className="text-[11px] font-mono text-accent-green">
-            {labels[hoveredIdx]}: ${weeks[hoveredIdx].toLocaleString()}
-          </span>
-        )}
+      <div className="text-[10px] font-mono text-txt-tertiary uppercase tracking-wider">
+        Weekly Revenue
       </div>
 
-      {/* Bar chart */}
-      <div className="flex items-end gap-[3px] h-[48px]">
+      {/* Bars with labels */}
+      <div className="space-y-1.5">
         {weeks.map((val, i) => {
-          const height = Math.max((val / max) * 100, 4);
+          const width = Math.max((val / max) * 100, 4);
           const isLast = i === weeks.length - 1;
           const isHovered = hoveredIdx === i;
+          const prev = i > 0 ? weeks[i - 1] : null;
+          const growth = prev && prev > 0 ? ((val - prev) / prev) * 100 : null;
+
           return (
             <div
               key={i}
-              className="flex-1 flex flex-col items-center gap-0.5 cursor-pointer"
+              className="flex items-center gap-2 cursor-pointer"
               onMouseEnter={() => setHoveredIdx(i)}
               onMouseLeave={() => setHoveredIdx(null)}
             >
-              <div
-                className={`w-full rounded-sm transition-all duration-150 ${
-                  isHovered
-                    ? "bg-accent-green"
-                    : isLast
-                    ? "bg-accent-green/70"
-                    : "bg-white/10"
-                }`}
-                style={{ height: `${height}%`, minHeight: "2px" }}
-              />
-              <span
-                className={`text-[8px] font-mono ${
-                  isHovered ? "text-txt" : "text-txt-tertiary"
-                }`}
-              >
+              {/* Week label */}
+              <span className="text-[10px] font-mono text-txt-tertiary w-6 shrink-0">
                 {labels[i]}
               </span>
+
+              {/* Bar */}
+              <div className="flex-1 h-5 relative">
+                <div
+                  className={`h-full rounded-sm transition-all duration-150 ${
+                    isHovered
+                      ? "bg-accent-green"
+                      : isLast
+                      ? "bg-accent-green/60"
+                      : "bg-white/15"
+                  }`}
+                  style={{ width: `${width}%`, minWidth: "4px" }}
+                />
+              </div>
+
+              {/* Amount + growth */}
+              <div className="flex items-center gap-1.5 shrink-0">
+                <span
+                  className={`text-[11px] font-mono font-medium ${
+                    isHovered ? "text-accent-green" : "text-txt-secondary"
+                  }`}
+                >
+                  {formatK(val)}
+                </span>
+                {growth !== null && (
+                  <span
+                    className={`text-[9px] font-mono ${
+                      growth >= 0 ? "text-accent-green" : "text-accent-red"
+                    }`}
+                  >
+                    {growth >= 0 ? "+" : ""}
+                    {growth.toFixed(0)}%
+                  </span>
+                )}
+              </div>
             </div>
           );
         })}
       </div>
-
-      {/* WoW change for last week */}
-      {weeks.length >= 2 && (
-        <div className="text-[10px] font-mono text-txt-tertiary">
-          {(() => {
-            const curr = weeks[weeks.length - 1];
-            const prev = weeks[weeks.length - 2];
-            if (!prev) return null;
-            const pct = ((curr - prev) / prev) * 100;
-            return (
-              <span
-                className={pct >= 0 ? "text-accent-green" : "text-accent-red"}
-              >
-                {pct >= 0 ? "↑" : "↓"} {Math.abs(pct).toFixed(0)}% vs last
-                week
-              </span>
-            );
-          })()}
-        </div>
-      )}
     </div>
   );
 }
