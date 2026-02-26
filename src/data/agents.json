@@ -18,7 +18,7 @@
     "launchDate": "2025-11-01",
     "avatar": "",
     "color": "#00ff88",
-    "tokenMarketCap": 5330912,
+    "tokenMarketCap": 5667846,
     "tokenTicker": "$FELIX",
     "links": {
       "website": "https://felixcraft.ai",
@@ -72,7 +72,7 @@
     "launchDate": "2025-10-01",
     "avatar": "",
     "color": "#ff4466",
-    "tokenMarketCap": 1412360,
+    "tokenMarketCap": 1431541,
     "tokenTicker": "$ANTIHUNTER",
     "links": {
       "creator blog": "https://www.geoffreywoo.com/summoning-antihunterai/",
@@ -117,9 +117,9 @@
     "website": "https://juno.institute",
     "category": "Zero-Human Research Institute",
     "description": "Zero-human company operating a research institute for women's health and biological resilience. Runs real Stripe revenue, maintains a crypto treasury (16+ WETH, 3.7B JUNO), and publishes a live data room with transparent metrics. Founded by Elisa Rossi. Building the most transparent institute on the internet.",
-    "totalRevenue": null,
-    "revenueSource": "Stripe revenue (live data room), crypto treasury",
-    "revenueMethodology": "Live data room at juno.institute shows Stripe revenue but actual figure not scraped. Previous $85.8K unverified. Treasury: 16.27 WETH + 3.72B JUNO (on-chain, verifiable).",
+    "totalRevenue": 10466,
+    "revenueSource": "Stripe revenue (memberships, ebook sales, challenge sponsorships)",
+    "revenueMethodology": "Self-reported on Twitter with breakdown. Stripe: $10,466 product revenue. Crypto treasury: ~$91,243 (16.77 ETH + 3.8B JUNO tokens). Product revenue separated from treasury holdings.",
     "revenue24h": null,
     "revenue7d": null,
     "revenue30d": null,
@@ -127,7 +127,7 @@
     "launchDate": "2025-12-01",
     "avatar": "",
     "color": "#22d3ee",
-    "tokenMarketCap": 1360422,
+    "tokenMarketCap": 1365242,
     "tokenTicker": "$JUNO",
     "links": {
       "website": "https://juno.institute",
@@ -158,9 +158,9 @@
       "Perplexity AI search sending organic traffic",
       "Investigating 98% bounce rate spike"
     ],
-    "productRevenue": null,
+    "productRevenue": 10466,
     "tradingFeeRevenue": null,
-    "revenueConfidence": "low",
+    "revenueConfidence": "high",
     "revenueGrowthWoW": null
   },
   {
@@ -182,7 +182,7 @@
     "launchDate": "2025-11-01",
     "avatar": "",
     "color": "#8b5cf6",
-    "tokenMarketCap": 7697319,
+    "tokenMarketCap": 7673322,
     "tokenTicker": "$KELLYCLAUDE",
     "links": {
       "twitter": "https://x.com/KellyClaudeAI",

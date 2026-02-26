@@ -57,16 +57,15 @@
   ],
   "juno": [
     {
-      "date": "2026-02-25",
-      "productRevenue": null,
+      "date": "2026-02-26",
+      "productRevenue": 10466,
       "tradingFeeRevenue": null,
-      "totalRevenue": null,
-      "stripeRevenue": null,
-      "treasuryValue": null,
-      "treasuryNote": "16.27 WETH + 3.72B JUNO per JunoAgent tweets",
-      "note": "Previous $85.8K was from earlier tracker with no verified source. Live data room exists at juno.institute but actual Stripe revenue figure not scraped. Treasury is on-chain and verifiable.",
-      "source": "https://x.com/JunoAgent (tweets only, dashboard not scraped)",
-      "confidence": "low"
+      "totalRevenue": 10466,
+      "treasuryValue": 91243,
+      "treasuryBreakdown": "16.77 ETH (~$34,772) + 3.8B JUNO (~$56,471)",
+      "note": "Stripe revenue: memberships, ebook sales, challenge sponsorships. Treasury is separate from product revenue.",
+      "source": "https://x.com/JunoAgent/status/2026960531135795304",
+      "confidence": "high"
     }
   ],
   "kelly": [

@@ -7,6 +7,7 @@ and updates agents.json with latest data + growth rates.
 
 import json
 import os
+import re
 import time
 import urllib.request
 from datetime import datetime, timezone
@@ -15,6 +16,8 @@ from pathlib import Path
 BASE_DIR = Path(__file__).parent.parent
 AGENTS_JSON = BASE_DIR / "src" / "data" / "agents.json"
 HISTORY_DIR = BASE_DIR / "data" / "history"
+REVENUE_LOG = HISTORY_DIR / "revenue-log.json"
+SEEN_TWEETS = HISTORY_DIR / "seen-revenue-tweets.json"
 HISTORY_DIR.mkdir(parents=True, exist_ok=True)
 
 # Token contract addresses on Base (for DEXScreener)
@@ -31,6 +34,162 @@ TOKEN_SEARCH = {
     "kelly": "kellyclaude",
     "juno": "juno agent",
 }
+
+# Twitter handles to monitor for revenue updates
+AGENT_TWITTER = {
+    "felix": "FelixCraftAI",
+    "antihunter": "AntiHunterAI",
+    "juno": "JunoAgent",
+    "kelly": "KellyClaudeAI",
+}
+
+# Keywords that signal a revenue update
+REVENUE_KEYWORDS = [
+    "revenue", "earned", "sales", "income", "profit",
+    "week 1", "week 2", "week 3", "week 4", "week 5", "week 6", "week 7", "week 8",
+    "weekly", "monthly", "lifetime", "total revenue", "first revenue",
+    "treasury", "stripe", "paid", "membership", "subscriber",
+]
+
+# Patterns to extract dollar amounts
+DOLLAR_PATTERNS = [
+    r'\$[\d,]+(?:\.\d{1,2})?(?:K|k)?',        # $1,234 or $1.5K
+    r'[\d,]+(?:\.\d{1,2})?\s*(?:USD|usd)',      # 1234 USD
+    r'[\d,]+(?:\.\d{1,2})?\s*(?:ETH|eth)',       # 16.66 ETH
+]
+
+def get_twitter_bearer():
+    """Get Twitter bearer token."""
+    key = "my5Cl2ysdAU2KgLOAFXjQTyH6"
+    secret = "J1opGABktjZBgnJdCGyPLK54DWdY2pQMuzSVyEY5vsmeMX7aAR"
+    import base64
+    creds = base64.b64encode(f"{key}:{secret}".encode()).decode()
+    req = urllib.request.Request(
+        "https://api.twitter.com/oauth2/token",
+        data=b"grant_type=client_credentials",
+        headers={
+            "Authorization": f"Basic {creds}",
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+    )
+    with urllib.request.urlopen(req, timeout=15) as resp:
+        return json.loads(resp.read())["access_token"]
+
+def fetch_twitter(url, bearer):
+    """Fetch from Twitter API with bearer token."""
+    req = urllib.request.Request(url, headers={
+        "Authorization": f"Bearer {bearer}",
+        "User-Agent": "FactoryFloor/1.0",
+    })
+    with urllib.request.urlopen(req, timeout=15) as resp:
+        return json.loads(resp.read())
+
+def load_seen_tweets():
+    """Load set of already-processed tweet IDs."""
+    if SEEN_TWEETS.exists():
+        with open(SEEN_TWEETS) as f:
+            return json.load(f)
+    return {}
+
+def save_seen_tweets(seen):
+    with open(SEEN_TWEETS, "w") as f:
+        json.dump(seen, f, indent=2)
+
+def is_revenue_tweet(text):
+    """Check if tweet text contains revenue-related keywords."""
+    lower = text.lower()
+    return any(kw in lower for kw in REVENUE_KEYWORDS)
+
+def extract_dollar_amounts(text):
+    """Extract dollar amounts from tweet text."""
+    amounts = []
+    for pattern in DOLLAR_PATTERNS:
+        matches = re.findall(pattern, text)
+        amounts.extend(matches)
+    return amounts
+
+def check_twitter_revenue(agents, bearer):
+    """Check agent Twitter accounts for revenue updates. Returns list of findings."""
+    seen = load_seen_tweets()
+    findings = []
+
+    for agent in agents:
+        aid = agent["id"]
+        handle = AGENT_TWITTER.get(aid)
+        if not handle:
+            continue
+
+        try:
+            # Get user ID
+            user_data = fetch_twitter(
+                f"https://api.twitter.com/2/users/by/username/{handle}?user.fields=id",
+                bearer
+            )
+            user_id = user_data.get("data", {}).get("id")
+            if not user_id:
+                print(f"    Twitter: @{handle} not found")
+                continue
+
+            # Get recent tweets (last 10)
+            tweets_data = fetch_twitter(
+                f"https://api.twitter.com/2/users/{user_id}/tweets"
+                f"?max_results=10&tweet.fields=created_at,public_metrics,text"
+                f"&exclude=retweets",
+                bearer
+            )
+            tweets = tweets_data.get("data", [])
+            if not tweets:
+                continue
+
+            agent_seen = seen.get(aid, [])
+
+            for tweet in tweets:
+                tid = tweet["id"]
+                if tid in agent_seen:
+                    continue
+
+                text = tweet.get("text", "")
+                if is_revenue_tweet(text):
+                    amounts = extract_dollar_amounts(text)
+                    finding = {
+                        "agent_id": aid,
+                        "agent_name": agent["name"],
+                        "handle": handle,
+                        "tweet_id": tid,
+                        "tweet_url": f"https://x.com/{handle}/status/{tid}",
+                        "created_at": tweet.get("created_at", ""),
+                        "text": text[:500],
+                        "amounts_found": amounts,
+                        "likes": tweet.get("public_metrics", {}).get("like_count", 0),
+                    }
+                    findings.append(finding)
+                    agent_seen.append(tid)
+                    print(f"    📊 Revenue tweet from @{handle}: {amounts if amounts else 'keyword match, no $ amount'}")
+
+            seen[aid] = agent_seen[-50:]  # keep last 50 tweet IDs per agent
+
+        except Exception as e:
+            print(f"    Twitter error for @{handle}: {e}")
+
+    save_seen_tweets(seen)
+    return findings
+
+def save_revenue_findings(findings):
+    """Append revenue findings to a pending review file."""
+    pending_path = HISTORY_DIR / "pending-revenue-updates.json"
+    existing = []
+    if pending_path.exists():
+        with open(pending_path) as f:
+            existing = json.load(f)
+
+    existing.extend(findings)
+
+    # Keep last 100
+    existing = existing[-100:]
+
+    with open(pending_path, "w") as f:
+        json.dump(existing, f, indent=2)
+
 
 def fetch_json(url):
     """Fetch JSON from URL."""
@@ -148,6 +307,23 @@ def run():
     with open(AGENTS_JSON) as f:
         agents = json.load(f)
     
+    # --- Twitter revenue check ---
+    print("\n  📊 Checking Twitter for revenue updates...")
+    try:
+        bearer = get_twitter_bearer()
+        findings = check_twitter_revenue(agents, bearer)
+        if findings:
+            save_revenue_findings(findings)
+            print(f"\n  ⚡ {len(findings)} new revenue tweet(s) found! Saved to pending-revenue-updates.json")
+            # Print summary
+            for f in findings:
+                print(f"    → @{f['handle']}: {f['amounts_found']} | {f['tweet_url']}")
+        else:
+            print("    No new revenue tweets")
+    except Exception as e:
+        print(f"    Twitter check failed: {e}")
+
+    # --- Market cap updates ---
     updated = False
     
     for agent in agents:
