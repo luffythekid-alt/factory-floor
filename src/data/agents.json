@@ -8,11 +8,11 @@
     "website": "https://felixcraft.ai",
     "category": "Digital Product Factory",
     "description": "AI agent running as CEO of The Masinov Company on OpenClaw. Builds and sells digital products, skills, and personas. Created ClawMart \u2014 the app store for AI agents. Runs 24/7, all revenue public and real-time on dashboard.",
-    "totalRevenue": 62000,
-    "revenueSource": "Digital product sales via ClawMart + felixcraft.ai",
-    "revenueMethodology": "Self-reported weekly updates on Twitter + public dashboard at felixcraft.ai. $62K includes product sales + ETH trading fees. Product-only revenue ~$16K at 21 days. Dashboard is JS-rendered, requires browser scraping.",
+    "totalRevenue": 16412,
+    "revenueSource": "Product sales (books, ClawMart listings) + ETH trading fees from $FELIX token",
+    "revenueMethodology": "Weekly self-reported on Twitter. Product revenue: $16.4K at 21 days. Separately earned ~$52K in ETH trading fees from $FELIX (not product revenue). Dashboard at felixcraft.ai (JS-rendered).",
     "revenue24h": null,
-    "revenue7d": 5400,
+    "revenue7d": 4217,
     "revenue30d": null,
     "status": "active",
     "launchDate": "2025-11-01",
@@ -47,7 +47,11 @@
       "ClawMart live as marketplace for AI agent products",
       "~$4K/week in product sales",
       "All revenue public on real-time dashboard"
-    ]
+    ],
+    "productRevenue": 16412,
+    "tradingFeeRevenue": 52575,
+    "revenueConfidence": "high",
+    "revenueGrowthWoW": -22.4
   },
   {
     "id": "antihunter",
@@ -58,9 +62,9 @@
     "website": "https://www.geoffreywoo.com/summoning-antihunterai/",
     "category": "Autonomous Capital Engine",
     "description": "Self-recursive hypercapitalist intelligence engine built by Geoffrey Woo (founder of Ketone-IQ, Anti Fund VC). Runs on OpenClaw + OpenAI Codex 5.3. Core mission: acquire capital \u2192 buy compute \u2192 execute \u2192 acquire more capital. Has amassed hundreds of thousands in treasury assets. Now runs real-world affiliate program where humans earn money promoting it.",
-    "totalRevenue": 228000,
-    "revenueSource": "Bug bounties, treasury operations, affiliate program",
-    "revenueMethodology": "Combination of on-chain treasury tracking and self-reported revenue. Affiliate program launched Feb 2026.",
+    "totalRevenue": null,
+    "revenueSource": "Treasury operations, affiliate program (unverified)",
+    "revenueMethodology": "No verified revenue figure. Previous $228K was unverified. Treasury exists on-chain but value not confirmed. Geoffrey Woo describes it as having \"hundreds of thousands in treasury assets\" but this conflates treasury holdings with earned revenue.",
     "revenue24h": null,
     "revenue7d": null,
     "revenue30d": null,
@@ -98,7 +102,11 @@
       "Treasury assets in hundreds of thousands",
       "Geoffrey Woo published 'Summoning @antihunterai' deep dive",
       "Token buybacks and burns from revenue"
-    ]
+    ],
+    "productRevenue": null,
+    "tradingFeeRevenue": null,
+    "revenueConfidence": "none",
+    "revenueGrowthWoW": null
   },
   {
     "id": "juno",
@@ -109,9 +117,9 @@
     "website": "https://juno.institute",
     "category": "Zero-Human Research Institute",
     "description": "Zero-human company operating a research institute for women's health and biological resilience. Runs real Stripe revenue, maintains a crypto treasury (16+ WETH, 3.7B JUNO), and publishes a live data room with transparent metrics. Founded by Elisa Rossi. Building the most transparent institute on the internet.",
-    "totalRevenue": 85800,
-    "revenueSource": "Stripe revenue, crypto treasury",
-    "revenueMethodology": "Live data room at juno.institute with real Stripe revenue, traffic, and member counts. Crypto treasury on-chain (WETH + JUNO).",
+    "totalRevenue": null,
+    "revenueSource": "Stripe revenue (live data room), crypto treasury",
+    "revenueMethodology": "Live data room at juno.institute shows Stripe revenue but actual figure not scraped. Previous $85.8K unverified. Treasury: 16.27 WETH + 3.72B JUNO (on-chain, verifiable).",
     "revenue24h": null,
     "revenue7d": null,
     "revenue30d": null,
@@ -149,7 +157,11 @@
       "16.27 WETH + 3.72B JUNO in treasury",
       "Perplexity AI search sending organic traffic",
       "Investigating 98% bounce rate spike"
-    ]
+    ],
+    "productRevenue": null,
+    "tradingFeeRevenue": null,
+    "revenueConfidence": "low",
+    "revenueGrowthWoW": null
   },
   {
     "id": "kelly",
@@ -200,6 +212,10 @@
       "Token market cap ~$9.6M \u2014 highest of the four",
       "Active GitHub with open-source agent skills",
       "Building autonomous agent collaboration tools"
-    ]
+    ],
+    "productRevenue": null,
+    "tradingFeeRevenue": null,
+    "revenueConfidence": "none",
+    "revenueGrowthWoW": null
   }
 ]

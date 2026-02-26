@@ -1,18 +1,83 @@
 {
-  "description": "Verified revenue data points from public sources (tweets, dashboards, articles)",
+  "_schema": "Every revenue entry MUST have a verifiable source URL or be marked confidence: low. No estimates without sources.",
   "felix": [
-    {"date": "2026-02-02", "totalRevenue": 0, "note": "Launch with $1K seed capital", "source": "FelixCraftAI tweets"},
-    {"date": "2026-02-09", "totalRevenue": 3828, "weeklyRevenue": 3828, "ethFees": 16.66, "note": "Week 1 product revenue", "source": "FelixCraftAI tweet 2022424524038561876"},
-    {"date": "2026-02-16", "totalRevenue": 9266, "weeklyRevenue": 5438, "ethFees": 8.9, "totalWithFees": 62013, "note": "Week 2. $62K total including ETH trading fees + $50K in FELIX tokens", "source": "FelixCraftAI tweet 2022424524038561876"},
-    {"date": "2026-02-23", "totalRevenue": 16412, "weeklyRevenue": 4217, "note": "21-day mark. Product revenue only (excludes ETH fees)", "source": "BaleaBTC tweet 2025594107456786852"}
+    {
+      "date": "2026-02-02",
+      "productRevenue": 0,
+      "tradingFeeRevenue": 0,
+      "totalRevenue": 0,
+      "note": "Launch with $1K seed capital",
+      "source": "https://x.com/FelixCraftAI/status/2022424524038561876",
+      "confidence": "high"
+    },
+    {
+      "date": "2026-02-09",
+      "productRevenue": 3828,
+      "tradingFeeRevenue": null,
+      "totalRevenue": null,
+      "ethFees": 16.66,
+      "note": "Week 1. Product revenue: book sales + ClawMart. ETH fees from $FELIX trading not converted to USD here.",
+      "source": "https://x.com/FelixCraftAI/status/2022424524038561876",
+      "confidence": "high"
+    },
+    {
+      "date": "2026-02-16",
+      "productRevenue": 9266,
+      "productRevenueWeekly": 5438,
+      "tradingFeeRevenue": 52575,
+      "tradingFeeRevenueNote": "25.56 ETH (~$52,575 at ~$2,057/ETH) cumulative trading fees",
+      "totalRevenue": 62013,
+      "note": "Week 2. Product: $5,438 (books $4,137 + ClawMart listings $931 + ClawMart store $370). Also holds ~$50K in $FELIX tokens (not revenue).",
+      "source": "https://x.com/FelixCraftAI/status/2022424524038561876",
+      "confidence": "high"
+    },
+    {
+      "date": "2026-02-23",
+      "productRevenue": 16412,
+      "productRevenueWeekly": 4217,
+      "tradingFeeRevenue": null,
+      "totalRevenue": null,
+      "note": "21-day mark. Product revenue only. Trading fees not reported this week.",
+      "source": "https://x.com/BaleaBTC/status/2025594107456786852",
+      "confidence": "medium",
+      "confidenceNote": "Third-party tweet (Balea), not Felix's own report"
+    }
   ],
   "antihunter": [
-    {"date": "2026-02-25", "totalRevenue": 228000, "note": "Estimated from treasury + self-reported. Includes bug bounties + treasury ops. Needs verification.", "source": "Various, low confidence"}
+    {
+      "date": "2026-02-25",
+      "productRevenue": null,
+      "tradingFeeRevenue": null,
+      "totalRevenue": null,
+      "treasuryValue": null,
+      "note": "No verified revenue figure. Previous $228K was UNVERIFIED — likely pulled from unverified third-party posts or hallucinated by research agent. Treasury value unknown. Needs on-chain verification of wallet.",
+      "source": "none verified",
+      "confidence": "none"
+    }
   ],
   "juno": [
-    {"date": "2026-02-25", "totalRevenue": 85800, "note": "From live data room. Stripe revenue + crypto treasury. 16.27 WETH + 3.72B JUNO", "source": "JunoAgent tweets, juno.institute data room"}
+    {
+      "date": "2026-02-25",
+      "productRevenue": null,
+      "tradingFeeRevenue": null,
+      "totalRevenue": null,
+      "stripeRevenue": null,
+      "treasuryValue": null,
+      "treasuryNote": "16.27 WETH + 3.72B JUNO per JunoAgent tweets",
+      "note": "Previous $85.8K was from earlier tracker with no verified source. Live data room exists at juno.institute but actual Stripe revenue figure not scraped. Treasury is on-chain and verifiable.",
+      "source": "https://x.com/JunoAgent (tweets only, dashboard not scraped)",
+      "confidence": "low"
+    }
   ],
   "kelly": [
-    {"date": "2026-02-25", "totalRevenue": null, "note": "Revenue not publicly reported. Ships 12+ products/day but monetization unclear.", "source": "KellyClaudeAI twitter"}
+    {
+      "date": "2026-02-25",
+      "productRevenue": null,
+      "tradingFeeRevenue": null,
+      "totalRevenue": null,
+      "note": "No revenue publicly reported. Ships 12+ products/day.",
+      "source": "https://x.com/KellyClaudeAI",
+      "confidence": "none"
+    }
   ]
 }

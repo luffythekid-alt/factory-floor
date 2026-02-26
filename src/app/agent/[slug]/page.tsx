@@ -83,21 +83,33 @@ export default function AgentPage({ params }: { params: { slug: string } }) {
         {/* Stats Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
           <StatCard
-            label="Total Revenue"
-            value={formatRevenue(agent.totalRevenue)}
+            label="Product Revenue"
+            value={formatRevenue(agent.productRevenue)}
             accent
+            badge={agent.revenueConfidence}
           />
           <StatCard
-            label="Weekly"
-            value={formatRevenue(agent.revenue7d)}
+            label="Trading Fee Revenue"
+            value={formatRevenue(agent.tradingFeeRevenue)}
+          />
+          <StatCard
+            label="WoW Growth"
+            value={
+              agent.revenueGrowthWoW !== null
+                ? `${agent.revenueGrowthWoW >= 0 ? "+" : ""}${agent.revenueGrowthWoW.toFixed(1)}%`
+                : "—"
+            }
+            valueColor={
+              agent.revenueGrowthWoW !== null
+                ? agent.revenueGrowthWoW >= 0
+                  ? "text-accent-green"
+                  : "text-accent-red"
+                : undefined
+            }
           />
           <StatCard
             label="Token Mkt Cap"
             value={formatMarketCap(agent.tokenMarketCap)}
-          />
-          <StatCard
-            label="Since"
-            value={formatDate(agent.launchDate)}
           />
         </div>
 
@@ -192,26 +204,48 @@ export default function AgentPage({ params }: { params: { slug: string } }) {
   );
 }
 
+const confidenceBadgeColors: Record<string, string> = {
+  high: "bg-accent-green/10 text-accent-green border-accent-green/20",
+  medium: "bg-accent-yellow/10 text-accent-yellow border-accent-yellow/20",
+  low: "bg-accent-orange/10 text-accent-orange border-accent-orange/20",
+  none: "bg-white/5 text-txt-tertiary border-white/10",
+};
+
 function StatCard({
   label,
   value,
   accent,
+  badge,
+  valueColor,
 }: {
   label: string;
   value: string;
   accent?: boolean;
+  badge?: string;
+  valueColor?: string;
 }) {
   return (
     <div className="relative overflow-hidden bg-white/[0.02] border border-border rounded-lg p-4">
       {accent && (
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent-green/50 to-transparent" />
       )}
-      <div className="text-[10px] font-mono text-txt-tertiary uppercase tracking-widest">
-        {label}
+      <div className="flex items-center gap-2">
+        <div className="text-[10px] font-mono text-txt-tertiary uppercase tracking-widest">
+          {label}
+        </div>
+        {badge && (
+          <span
+            className={`text-[9px] font-mono px-1.5 py-0.5 rounded border ${
+              confidenceBadgeColors[badge] || confidenceBadgeColors.none
+            }`}
+          >
+            {badge}
+          </span>
+        )}
       </div>
       <div
         className={`text-xl font-bold font-mono mt-1.5 ${
-          accent ? "text-accent-green" : "text-txt"
+          valueColor ? valueColor : accent ? "text-accent-green" : "text-txt"
         }`}
       >
         {value}

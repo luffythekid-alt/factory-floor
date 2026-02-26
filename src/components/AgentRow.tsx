@@ -9,6 +9,20 @@ function formatMarketCap(val: number | null): string {
   return `$${val}`;
 }
 
+const confidenceColors: Record<string, string> = {
+  high: "text-accent-green",
+  medium: "text-accent-yellow",
+  low: "text-accent-orange",
+  none: "text-txt-tertiary",
+};
+
+const confidenceDots: Record<string, string> = {
+  high: "bg-accent-green",
+  medium: "bg-accent-yellow",
+  low: "bg-accent-orange",
+  none: "bg-txt-tertiary",
+};
+
 export default function AgentRow({
   agent,
   rank,
@@ -16,7 +30,8 @@ export default function AgentRow({
   agent: Agent;
   rank: number;
 }) {
-  const hasRevenue = agent.totalRevenue !== null;
+  const hasRevenue = agent.totalRevenue !== null || agent.productRevenue !== null;
+  const displayRevenue = agent.productRevenue ?? agent.totalRevenue;
 
   return (
     <Link
@@ -53,41 +68,58 @@ export default function AgentRow({
         </div>
       </div>
 
-      {/* Handles: Agent + Creator */}
-      <div className="col-span-2 hidden sm:block">
-        <div className="space-y-0.5">
-          {agent.agentTwitter && (
-            <div className="text-xs font-mono text-txt-secondary truncate">
-              {agent.agentTwitter}
-            </div>
-          )}
-          {agent.creatorTwitter && (
-            <div className="text-[10px] font-mono text-txt-tertiary truncate">
-              by {agent.creatorTwitter}
-            </div>
-          )}
+      {/* Revenue (product) + confidence dot */}
+      <div className="col-span-3 sm:col-span-2 text-right">
+        <div className="flex items-center justify-end gap-1.5">
+          <span
+            className={`w-1.5 h-1.5 rounded-full shrink-0 ${
+              confidenceDots[agent.revenueConfidence] || confidenceDots.none
+            }`}
+            title={`Confidence: ${agent.revenueConfidence}`}
+          />
+          <span
+            className={`font-mono text-sm font-semibold ${
+              hasRevenue
+                ? confidenceColors[agent.revenueConfidence] || "text-txt-tertiary"
+                : "text-txt-tertiary"
+            }`}
+          >
+            {displayRevenue !== null ? formatRevenue(displayRevenue) : "—"}
+          </span>
         </div>
+        {agent.revenueGrowthWoW !== null && (
+          <div
+            className={`text-[10px] font-mono ${
+              agent.revenueGrowthWoW >= 0
+                ? "text-accent-green"
+                : "text-accent-red"
+            }`}
+          >
+            {agent.revenueGrowthWoW >= 0 ? "+" : ""}
+            {agent.revenueGrowthWoW.toFixed(1)}% WoW
+          </div>
+        )}
       </div>
 
-      {/* Revenue */}
-      <div className="col-span-3 sm:col-span-2 text-right">
-        <span className={`font-mono text-sm font-semibold ${
-          hasRevenue ? "text-accent-green" : "text-txt-tertiary"
-        }`}>
-          {formatRevenue(agent.totalRevenue)}
+      {/* Trading Fee Revenue */}
+      <div className="col-span-2 hidden sm:block text-right">
+        <span className="font-mono text-sm text-txt-secondary">
+          {agent.tradingFeeRevenue !== null
+            ? formatRevenue(agent.tradingFeeRevenue)
+            : "—"}
         </span>
-        {agent.revenue7d !== null && (
-          <div className="text-[10px] font-mono text-txt-tertiary">
-            {formatRevenue(agent.revenue7d)}/wk
-          </div>
+        {agent.tradingFeeRevenue !== null && (
+          <div className="text-[10px] font-mono text-txt-tertiary">fees</div>
         )}
       </div>
 
       {/* Market Cap */}
       <div className="col-span-2 hidden sm:block text-right">
-        <span className={`font-mono text-sm ${
-          agent.tokenMarketCap ? "text-txt-secondary" : "text-txt-tertiary"
-        }`}>
+        <span
+          className={`font-mono text-sm ${
+            agent.tokenMarketCap ? "text-txt-secondary" : "text-txt-tertiary"
+          }`}
+        >
           {formatMarketCap(agent.tokenMarketCap)}
         </span>
         {agent.tokenTicker && (
@@ -100,7 +132,8 @@ export default function AgentRow({
       {/* Products Count */}
       <div className="col-span-4 sm:col-span-2 flex items-center justify-end">
         <span className="text-xs font-mono text-txt-tertiary">
-          {agent.products.length} product{agent.products.length !== 1 ? "s" : ""}
+          {agent.products.length} product
+          {agent.products.length !== 1 ? "s" : ""}
         </span>
       </div>
     </Link>

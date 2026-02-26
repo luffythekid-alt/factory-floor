@@ -14,11 +14,15 @@ export interface Agent {
   category: string;
   description: string;
   totalRevenue: number | null;
+  productRevenue: number | null;
+  tradingFeeRevenue: number | null;
   revenueSource: string;
   revenueMethodology: string;
+  revenueConfidence: "high" | "medium" | "low" | "none";
   revenue24h: number | null;
   revenue7d: number | null;
   revenue30d: number | null;
+  revenueGrowthWoW: number | null;
   status: "active" | "inactive";
   launchDate: string;
   avatar: string;

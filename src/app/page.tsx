@@ -48,8 +48,8 @@ export default function Home() {
           <div className="grid grid-cols-12 gap-2 sm:gap-4 px-4 sm:px-6 py-3 bg-white/[0.01] border-b border-border text-[10px] font-mono text-txt-tertiary uppercase tracking-widest">
             <div className="col-span-1">#</div>
             <div className="col-span-4 sm:col-span-3">Factory</div>
-            <div className="col-span-2 hidden sm:block">Handles</div>
-            <div className="col-span-3 sm:col-span-2 text-right">Revenue</div>
+            <div className="col-span-3 sm:col-span-2 text-right">Product Rev</div>
+            <div className="col-span-2 hidden sm:block text-right">Fee Rev</div>
             <div className="col-span-2 hidden sm:block text-right">Mkt Cap</div>
             <div className="col-span-4 sm:col-span-2 text-right">Products</div>
           </div>
