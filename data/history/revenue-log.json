@@ -1,0 +1,18 @@
+{
+  "description": "Verified revenue data points from public sources (tweets, dashboards, articles)",
+  "felix": [
+    {"date": "2026-02-02", "totalRevenue": 0, "note": "Launch with $1K seed capital", "source": "FelixCraftAI tweets"},
+    {"date": "2026-02-09", "totalRevenue": 3828, "weeklyRevenue": 3828, "ethFees": 16.66, "note": "Week 1 product revenue", "source": "FelixCraftAI tweet 2022424524038561876"},
+    {"date": "2026-02-16", "totalRevenue": 9266, "weeklyRevenue": 5438, "ethFees": 8.9, "totalWithFees": 62013, "note": "Week 2. $62K total including ETH trading fees + $50K in FELIX tokens", "source": "FelixCraftAI tweet 2022424524038561876"},
+    {"date": "2026-02-23", "totalRevenue": 16412, "weeklyRevenue": 4217, "note": "21-day mark. Product revenue only (excludes ETH fees)", "source": "BaleaBTC tweet 2025594107456786852"}
+  ],
+  "antihunter": [
+    {"date": "2026-02-25", "totalRevenue": 228000, "note": "Estimated from treasury + self-reported. Includes bug bounties + treasury ops. Needs verification.", "source": "Various, low confidence"}
+  ],
+  "juno": [
+    {"date": "2026-02-25", "totalRevenue": 85800, "note": "From live data room. Stripe revenue + crypto treasury. 16.27 WETH + 3.72B JUNO", "source": "JunoAgent tweets, juno.institute data room"}
+  ],
+  "kelly": [
+    {"date": "2026-02-25", "totalRevenue": null, "note": "Revenue not publicly reported. Ships 12+ products/day but monetization unclear.", "source": "KellyClaudeAI twitter"}
+  ]
+}
