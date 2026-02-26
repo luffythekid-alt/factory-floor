@@ -22,71 +22,76 @@ export default function RevenueSparkline({
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   return (
-    <div className={`flex flex-col gap-2 ${className}`}>
-      {/* Header */}
+    <div className={`flex flex-col gap-1.5 ${className}`}>
       <div className="text-[10px] font-mono text-txt-tertiary uppercase tracking-wider">
         Weekly Revenue
       </div>
 
-      {/* Bars with labels */}
-      <div className="space-y-1.5">
+      {/* Bars */}
+      <div className="flex items-end gap-1.5 h-[64px]">
         {weeks.map((val, i) => {
-          const width = Math.max((val / max) * 100, 4);
+          const height = Math.max((val / max) * 100, 8);
           const isLast = i === weeks.length - 1;
           const isHovered = hoveredIdx === i;
-          const prev = i > 0 ? weeks[i - 1] : null;
-          const growth = prev && prev > 0 ? ((val - prev) / prev) * 100 : null;
 
           return (
             <div
               key={i}
-              className="flex items-center gap-2 cursor-pointer"
+              className="flex-1 flex flex-col items-center justify-end h-full cursor-pointer"
               onMouseEnter={() => setHoveredIdx(i)}
               onMouseLeave={() => setHoveredIdx(null)}
             >
-              {/* Week label */}
-              <span className="text-[10px] font-mono text-txt-tertiary w-6 shrink-0">
-                {labels[i]}
-              </span>
-
+              {/* Amount on hover */}
+              <div
+                className={`text-[9px] font-mono font-medium mb-0.5 transition-opacity ${
+                  isHovered ? "opacity-100 text-accent-green" : "opacity-0"
+                }`}
+              >
+                {formatK(val)}
+              </div>
               {/* Bar */}
-              <div className="flex-1 h-5 relative">
-                <div
-                  className={`h-full rounded-sm transition-all duration-150 ${
-                    isHovered
-                      ? "bg-accent-green"
-                      : isLast
-                      ? "bg-accent-green/60"
-                      : "bg-white/15"
-                  }`}
-                  style={{ width: `${width}%`, minWidth: "4px" }}
-                />
-              </div>
-
-              {/* Amount + growth */}
-              <div className="flex items-center gap-1.5 shrink-0">
-                <span
-                  className={`text-[11px] font-mono font-medium ${
-                    isHovered ? "text-accent-green" : "text-txt-secondary"
-                  }`}
-                >
-                  {formatK(val)}
-                </span>
-                {growth !== null && (
-                  <span
-                    className={`text-[9px] font-mono ${
-                      growth >= 0 ? "text-accent-green" : "text-accent-red"
-                    }`}
-                  >
-                    {growth >= 0 ? "+" : ""}
-                    {growth.toFixed(0)}%
-                  </span>
-                )}
-              </div>
+              <div
+                className={`w-full rounded-sm transition-all duration-150 ${
+                  isHovered
+                    ? "bg-accent-green"
+                    : isLast
+                    ? "bg-accent-green/70"
+                    : "bg-white/20"
+                }`}
+                style={{ height: `${height}%` }}
+              />
             </div>
           );
         })}
       </div>
+
+      {/* Labels row */}
+      <div className="flex gap-1.5">
+        {weeks.map((_, i) => (
+          <div key={i} className="flex-1 text-center">
+            <span className="text-[8px] font-mono text-txt-tertiary">
+              {labels[i]}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {/* WoW */}
+      {weeks.length >= 2 && (() => {
+        const curr = weeks[weeks.length - 1];
+        const prev = weeks[weeks.length - 2];
+        if (!prev) return null;
+        const pct = ((curr - prev) / prev) * 100;
+        return (
+          <div
+            className={`text-[10px] font-mono ${
+              pct >= 0 ? "text-accent-green" : "text-accent-red"
+            }`}
+          >
+            {pct >= 0 ? "↑" : "↓"} {Math.abs(pct).toFixed(0)}% vs last week
+          </div>
+        );
+      })()}
     </div>
   );
 }

@@ -65,10 +65,10 @@ export default function RevenueChart({ weeks, labels }: RevenueChartProps) {
         </div>
       </div>
 
-      {/* Horizontal bar chart */}
-      <div className="space-y-2">
+      {/* Vertical bar chart */}
+      <div className="flex items-end gap-3 h-[180px]">
         {weeks.map((val, i) => {
-          const width = Math.max((val / max) * 100, 3);
+          const height = Math.max((val / max) * 100, 6);
           const isLast = i === weeks.length - 1;
           const isHovered = hoveredIdx === i;
           const prevVal = i > 0 ? weeks[i - 1] : null;
@@ -80,52 +80,55 @@ export default function RevenueChart({ weeks, labels }: RevenueChartProps) {
           return (
             <div
               key={i}
-              className="flex items-center gap-3 cursor-pointer"
+              className="flex-1 flex flex-col items-center justify-end h-full cursor-pointer"
               onMouseEnter={() => setHoveredIdx(i)}
               onMouseLeave={() => setHoveredIdx(null)}
             >
-              {/* Week label */}
-              <span className="text-xs font-mono text-txt-tertiary w-7 shrink-0">
-                {labels[i]}
-              </span>
-
-              {/* Bar */}
-              <div className="flex-1 h-7 relative">
+              {/* Amount + growth above bar */}
+              <div
+                className={`text-center mb-1 transition-opacity duration-100 ${
+                  isHovered ? "opacity-100" : "opacity-70"
+                }`}
+              >
                 <div
-                  className={`h-full rounded transition-all duration-150 ${
-                    isHovered
-                      ? "bg-accent-green"
-                      : isLast
-                      ? "bg-accent-green/60"
-                      : "bg-white/10"
-                  }`}
-                  style={{ width: `${width}%`, minWidth: "4px" }}
-                />
-              </div>
-
-              {/* Amount + growth */}
-              <div className="flex items-center gap-2 shrink-0 min-w-[100px] justify-end">
-                <span
-                  className={`text-sm font-mono font-semibold ${
-                    isHovered ? "text-accent-green" : "text-txt"
+                  className={`text-xs font-mono font-semibold ${
+                    isHovered ? "text-accent-green" : "text-txt-secondary"
                   }`}
                 >
                   {formatK(val)}
-                </span>
+                </div>
                 {growth !== null && (
-                  <span
-                    className={`text-[10px] font-mono min-w-[40px] text-right ${
+                  <div
+                    className={`text-[10px] font-mono ${
                       growth >= 0 ? "text-accent-green" : "text-accent-red"
                     }`}
                   >
                     {growth >= 0 ? "+" : ""}
                     {growth.toFixed(0)}%
-                  </span>
-                )}
-                {growth === null && (
-                  <span className="min-w-[40px]" />
+                  </div>
                 )}
               </div>
+
+              {/* Bar */}
+              <div
+                className={`w-full rounded-sm transition-all duration-150 ${
+                  isHovered
+                    ? "bg-accent-green"
+                    : isLast
+                    ? "bg-accent-green/70"
+                    : "bg-white/20"
+                }`}
+                style={{ height: `${height}%` }}
+              />
+
+              {/* Label */}
+              <span
+                className={`text-[11px] font-mono mt-1.5 ${
+                  isHovered ? "text-txt" : "text-txt-tertiary"
+                }`}
+              >
+                {labels[i]}
+              </span>
             </div>
           );
         })}
