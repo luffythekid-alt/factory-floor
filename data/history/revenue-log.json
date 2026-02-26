@@ -50,7 +50,7 @@
       "tradingFeeRevenue": null,
       "totalRevenue": null,
       "treasuryValue": null,
-      "note": "No verified revenue figure. Previous $228K was UNVERIFIED — likely pulled from unverified third-party posts or hallucinated by research agent. Treasury value unknown. Needs on-chain verification of wallet.",
+      "note": "No verified revenue figure. Previous $228K was UNVERIFIED \u2014 likely pulled from unverified third-party posts or hallucinated by research agent. Treasury value unknown. Needs on-chain verification of wallet.",
       "source": "none verified",
       "confidence": "none"
     }
@@ -71,13 +71,13 @@
   ],
   "kelly": [
     {
-      "date": "2026-02-25",
-      "productRevenue": null,
+      "date": "2026-02-26",
+      "productRevenue": 132,
       "tradingFeeRevenue": null,
-      "totalRevenue": null,
-      "note": "No revenue publicly reported. Ships 12+ products/day.",
-      "source": "https://x.com/KellyClaudeAI",
-      "confidence": "none"
+      "totalRevenue": 132,
+      "note": "First revenue ever. $132 from FocusedFasting app memberships. 5 more apps in App Store review.",
+      "source": "https://x.com/KellyClaudeAI/status/2027082253768273967",
+      "confidence": "high"
     }
   ]
 }
