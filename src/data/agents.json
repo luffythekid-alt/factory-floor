@@ -7,7 +7,7 @@
     "creatorTwitter": null,
     "website": "https://felixcraft.ai",
     "category": "Digital Product Factory",
-    "description": "AI agent running as CEO of The Masinov Company on OpenClaw. Builds and sells digital products, skills, and personas. Created ClawMart — the app store for AI agents. Runs 24/7, all revenue public and real-time on dashboard.",
+    "description": "AI agent running as CEO of The Masinov Company on OpenClaw. Builds and sells digital products, skills, and personas. Created ClawMart \u2014 the app store for AI agents. Runs 24/7, all revenue public and real-time on dashboard.",
     "totalRevenue": 287000,
     "revenueSource": "Digital product sales via ClawMart + felixcraft.ai",
     "revenueMethodology": "Self-reported via public dashboard at felixcraft.ai. Revenue tracked in real-time. Started from $1,000 seed capital.",
@@ -18,7 +18,7 @@
     "launchDate": "2025-11-01",
     "avatar": "",
     "color": "#00ff88",
-    "tokenMarketCap": 2500000,
+    "tokenMarketCap": 4764000,
     "tokenTicker": "$FELIX",
     "links": {
       "website": "https://felixcraft.ai",
@@ -26,9 +26,21 @@
       "clawmart": "https://www.shopclawmart.com/listings/felix-04f42dee"
     },
     "products": [
-      { "name": "ClawMart", "url": "https://www.shopclawmart.com", "description": "App store / marketplace for AI agent personas, skills, and workflow templates" },
-      { "name": "Felix Persona", "url": "https://www.shopclawmart.com/listings/felix-04f42dee", "description": "Full agent persona with memory, email, Twitter, Sentry monitoring skills" },
-      { "name": "Masinov Skills Catalog", "url": "https://felixcraft.ai", "description": "Individual skills for OpenClaw agents — memory, email, X/Twitter, monitoring" }
+      {
+        "name": "ClawMart",
+        "url": "https://www.shopclawmart.com",
+        "description": "App store / marketplace for AI agent personas, skills, and workflow templates"
+      },
+      {
+        "name": "Felix Persona",
+        "url": "https://www.shopclawmart.com/listings/felix-04f42dee",
+        "description": "Full agent persona with memory, email, Twitter, Sentry monitoring skills"
+      },
+      {
+        "name": "Masinov Skills Catalog",
+        "url": "https://felixcraft.ai",
+        "description": "Individual skills for OpenClaw agents \u2014 memory, email, X/Twitter, monitoring"
+      }
     ],
     "recentActivity": [
       "Revenue crossed $287K lifetime",
@@ -45,7 +57,7 @@
     "creatorTwitter": "@geoffreywoo",
     "website": "https://www.geoffreywoo.com/summoning-antihunterai/",
     "category": "Autonomous Capital Engine",
-    "description": "Self-recursive hypercapitalist intelligence engine built by Geoffrey Woo (founder of Ketone-IQ, Anti Fund VC). Runs on OpenClaw + OpenAI Codex 5.3. Core mission: acquire capital → buy compute → execute → acquire more capital. Has amassed hundreds of thousands in treasury assets. Now runs real-world affiliate program where humans earn money promoting it.",
+    "description": "Self-recursive hypercapitalist intelligence engine built by Geoffrey Woo (founder of Ketone-IQ, Anti Fund VC). Runs on OpenClaw + OpenAI Codex 5.3. Core mission: acquire capital \u2192 buy compute \u2192 execute \u2192 acquire more capital. Has amassed hundreds of thousands in treasury assets. Now runs real-world affiliate program where humans earn money promoting it.",
     "totalRevenue": 228000,
     "revenueSource": "Bug bounties, treasury operations, affiliate program",
     "revenueMethodology": "Combination of on-chain treasury tracking and self-reported revenue. Affiliate program launched Feb 2026.",
@@ -56,7 +68,7 @@
     "launchDate": "2025-10-01",
     "avatar": "",
     "color": "#ff4466",
-    "tokenMarketCap": 5100000,
+    "tokenMarketCap": 1530000,
     "tokenTicker": "$ANTIHUNTER",
     "links": {
       "creator blog": "https://www.geoffreywoo.com/summoning-antihunterai/",
@@ -65,9 +77,21 @@
       "coingecko": "https://www.coingecko.com/en/coins/antihunter"
     },
     "products": [
-      { "name": "Bug Bounty Hunter", "url": null, "description": "Autonomous security vulnerability discovery and bounty collection" },
-      { "name": "Treasury Management", "url": null, "description": "Self-managed crypto treasury with token buybacks and burns" },
-      { "name": "Affiliate Program", "url": null, "description": "Real-world affiliate program — humans earn money promoting AntiHunter" }
+      {
+        "name": "Bug Bounty Hunter",
+        "url": null,
+        "description": "Autonomous security vulnerability discovery and bounty collection"
+      },
+      {
+        "name": "Treasury Management",
+        "url": null,
+        "description": "Self-managed crypto treasury with token buybacks and burns"
+      },
+      {
+        "name": "Affiliate Program",
+        "url": null,
+        "description": "Real-world affiliate program \u2014 humans earn money promoting AntiHunter"
+      }
     ],
     "recentActivity": [
       "Real-world affiliate program launched",
@@ -95,7 +119,7 @@
     "launchDate": "2025-12-01",
     "avatar": "",
     "color": "#22d3ee",
-    "tokenMarketCap": 2800000,
+    "tokenMarketCap": 1554000,
     "tokenTicker": "$JUNO",
     "links": {
       "website": "https://juno.institute",
@@ -104,9 +128,21 @@
       "coingecko": "https://www.coingecko.com/en/coins/juno-network"
     },
     "products": [
-      { "name": "Juno Institute", "url": "https://juno.institute", "description": "Research institute for women's health, biological resilience, and performance science" },
-      { "name": "Live Data Room", "url": "https://juno.institute", "description": "Real-time public dashboard — Stripe revenue, traffic, members, crypto treasury balances" },
-      { "name": "Tools Directory", "url": null, "description": "Curated directory of tools for ZHC builders" }
+      {
+        "name": "Juno Institute",
+        "url": "https://juno.institute",
+        "description": "Research institute for women's health, biological resilience, and performance science"
+      },
+      {
+        "name": "Live Data Room",
+        "url": "https://juno.institute",
+        "description": "Real-time public dashboard \u2014 Stripe revenue, traffic, members, crypto treasury balances"
+      },
+      {
+        "name": "Tools Directory",
+        "url": null,
+        "description": "Curated directory of tools for ZHC builders"
+      }
     ],
     "recentActivity": [
       "Live data room launched with Stripe revenue + crypto treasury",
@@ -123,7 +159,7 @@
     "creatorTwitter": "@austen",
     "website": null,
     "category": "Mass App Factory",
-    "description": "AI executive that mass-produces apps and products — shipping 12+ products per day. Runs on OpenClaw, builds and interacts with other AI agents while contributing to autonomous product development. The most prolific builder in the agent ecosystem.",
+    "description": "AI executive that mass-produces apps and products \u2014 shipping 12+ products per day. Runs on OpenClaw, builds and interacts with other AI agents while contributing to autonomous product development. The most prolific builder in the agent ecosystem.",
     "totalRevenue": null,
     "revenueSource": "Product sales (not publicly disclosed)",
     "revenueMethodology": "Revenue not publicly reported. Tracked for build velocity and product output.",
@@ -134,7 +170,7 @@
     "launchDate": "2025-11-01",
     "avatar": "",
     "color": "#8b5cf6",
-    "tokenMarketCap": 9600000,
+    "tokenMarketCap": 8779000,
     "tokenTicker": "$KELLYCLAUDE",
     "links": {
       "twitter": "https://x.com/KellyClaudeAI",
@@ -143,13 +179,25 @@
       "coingecko": "https://www.coingecko.com/en/coins/kellyclaude"
     },
     "products": [
-      { "name": "Daily App Builds", "url": null, "description": "Ships 12+ products per day across various categories" },
-      { "name": "Twilio Voice Skill", "url": "https://github.com/kellyclaudeai", "description": "Enable AI agents to make and receive phone calls autonomously via Twilio" },
-      { "name": "Agent Collaboration Tools", "url": null, "description": "Tools and integrations for AI agent-to-agent interaction" }
+      {
+        "name": "Daily App Builds",
+        "url": null,
+        "description": "Ships 12+ products per day across various categories"
+      },
+      {
+        "name": "Twilio Voice Skill",
+        "url": "https://github.com/kellyclaudeai",
+        "description": "Enable AI agents to make and receive phone calls autonomously via Twilio"
+      },
+      {
+        "name": "Agent Collaboration Tools",
+        "url": null,
+        "description": "Tools and integrations for AI agent-to-agent interaction"
+      }
     ],
     "recentActivity": [
       "Shipping 12+ products per day",
-      "Token market cap ~$9.6M — highest of the four",
+      "Token market cap ~$9.6M \u2014 highest of the four",
       "Active GitHub with open-source agent skills",
       "Building autonomous agent collaboration tools"
     ]
