@@ -1,6 +1,10 @@
+"use client";
+
 import Link from "next/link";
+import { useState, useRef } from "react";
 import { Agent } from "@/lib/types";
 import { formatRevenue } from "@/lib/utils";
+import RevenueSparkline from "./RevenueSparkline";
 
 function formatMarketCap(val: number | null): string {
   if (val === null) return "—";
@@ -30,8 +34,25 @@ export default function AgentRow({
   agent: Agent;
   rank: number;
 }) {
-  const hasRevenue = agent.totalRevenue !== null || agent.productRevenue !== null;
+  const hasRevenue =
+    agent.totalRevenue !== null || agent.productRevenue !== null;
   const displayRevenue = agent.productRevenue ?? agent.totalRevenue;
+  const hasChart =
+    agent.weeklyRevenue && agent.weeklyRevenue.length > 1;
+
+  const [showChart, setShowChart] = useState(false);
+  const chartTimeout = useRef<NodeJS.Timeout | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseEnter = () => {
+    if (!hasChart) return;
+    chartTimeout.current = setTimeout(() => setShowChart(true), 200);
+  };
+
+  const handleMouseLeave = () => {
+    if (chartTimeout.current) clearTimeout(chartTimeout.current);
+    setShowChart(false);
+  };
 
   return (
     <Link
@@ -68,8 +89,13 @@ export default function AgentRow({
         </div>
       </div>
 
-      {/* Revenue (product) + confidence dot */}
-      <div className="col-span-3 sm:col-span-2 text-right">
+      {/* Revenue (product) + confidence dot + hover chart */}
+      <div
+        className="col-span-3 sm:col-span-2 text-right relative"
+        ref={containerRef}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         <div className="flex items-center justify-end gap-1.5">
           <span
             className={`w-1.5 h-1.5 rounded-full shrink-0 ${
@@ -80,9 +106,10 @@ export default function AgentRow({
           <span
             className={`font-mono text-sm font-semibold ${
               hasRevenue
-                ? confidenceColors[agent.revenueConfidence] || "text-txt-tertiary"
+                ? confidenceColors[agent.revenueConfidence] ||
+                  "text-txt-tertiary"
                 : "text-txt-tertiary"
-            }`}
+            } ${hasChart ? "cursor-pointer underline decoration-dotted underline-offset-2 decoration-white/20" : ""}`}
           >
             {displayRevenue !== null ? formatRevenue(displayRevenue) : "—"}
           </span>
@@ -97,6 +124,19 @@ export default function AgentRow({
           >
             {agent.revenueGrowthWoW >= 0 ? "+" : ""}
             {agent.revenueGrowthWoW.toFixed(1)}% WoW
+          </div>
+        )}
+
+        {/* Hover chart popover */}
+        {showChart && hasChart && (
+          <div
+            className="absolute z-50 right-0 top-full mt-2 w-[240px] bg-[#0a0a0a] border border-border rounded-lg p-3 shadow-2xl shadow-black/50"
+            onClick={(e) => e.preventDefault()}
+          >
+            <RevenueSparkline
+              weeks={agent.weeklyRevenue!}
+              labels={agent.weeklyRevenueLabels!}
+            />
           </div>
         )}
       </div>

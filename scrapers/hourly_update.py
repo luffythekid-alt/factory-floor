@@ -517,6 +517,17 @@ def run():
                     updated = True
                     print(f"    Felix: ${total_usd:,.0f} product revenue (${last7:,.0f} last 7d)")
 
+                    # Build weekly revenue array from daily data
+                    weeks = []
+                    labels = []
+                    for i in range(0, len(felix_daily), 7):
+                        chunk = felix_daily[i:i+7]
+                        week_total = sum(d["amount"] for d in chunk) / 100
+                        weeks.append(round(week_total))
+                        labels.append(f"W{len(labels)+1}")
+                    felix_agent["weeklyRevenue"] = weeks
+                    felix_agent["weeklyRevenueLabels"] = labels
+
             # Also grab treasury data
             treasury = felix_data.get("treasury", {})
             eth_held = float(treasury.get("eth", 0) or 0)
@@ -545,6 +556,31 @@ def run():
                 avg_week_last_month = last_month / 4
                 if avg_week_last_month > 0:
                     juno_agent["revenueGrowthWoW"] = round(((week_usd - avg_week_last_month) / avg_week_last_month) * 100, 1)
+            # Build weekly estimate from available data
+            last_month_usd = juno_rev.get("lastMonth", 0) / 100
+            this_month_usd = juno_rev.get("thisMonth", 0) / 100
+            if last_month_usd > 0 or week_usd > 0:
+                # Rough weekly breakdown: last month / 4 weeks, then this week
+                weeks = []
+                labels = []
+                if last_month_usd > 0:
+                    avg_week = round(last_month_usd / 4)
+                    for i in range(4):
+                        weeks.append(avg_week)
+                        labels.append(f"W{len(labels)+1}")
+                # This month's weeks (minus current week)
+                remaining = round(this_month_usd - week_usd)
+                prev_weeks_count = max(1, 3)  # ~3 prior weeks this month
+                if remaining > 0:
+                    per_week = round(remaining / prev_weeks_count)
+                    for i in range(prev_weeks_count):
+                        weeks.append(per_week)
+                        labels.append(f"W{len(labels)+1}")
+                weeks.append(round(week_usd))
+                labels.append(f"W{len(labels)+1}")
+                juno_agent["weeklyRevenue"] = weeks
+                juno_agent["weeklyRevenueLabels"] = labels
+
             updated = True
             print(f"    Juno: ${total_usd:,.0f} product revenue (${week_usd:,.0f} this week)")
 

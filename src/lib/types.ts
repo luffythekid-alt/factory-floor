@@ -23,6 +23,8 @@ export interface Agent {
   revenue7d: number | null;
   revenue30d: number | null;
   revenueGrowthWoW: number | null;
+  weeklyRevenue: number[] | null; // last N weeks of revenue, oldest first
+  weeklyRevenueLabels: string[] | null; // labels like "W1", "W2", etc.
   status: "active" | "inactive";
   launchDate: string;
   avatar: string;

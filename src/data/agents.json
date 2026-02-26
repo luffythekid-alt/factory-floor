@@ -51,7 +51,19 @@
     "productRevenue": 54367,
     "tradingFeeRevenue": 52575,
     "revenueConfidence": "high",
-    "revenueGrowthWoW": 642.0
+    "revenueGrowthWoW": -25.0,
+    "weeklyRevenue": [
+      6776,
+      5222,
+      24205,
+      18164
+    ],
+    "weeklyRevenueLabels": [
+      "W1",
+      "W2",
+      "W3",
+      "W4"
+    ]
   },
   {
     "id": "antihunter",
@@ -106,7 +118,9 @@
     "productRevenue": null,
     "tradingFeeRevenue": null,
     "revenueConfidence": "none",
-    "revenueGrowthWoW": null
+    "revenueGrowthWoW": null,
+    "weeklyRevenue": null,
+    "weeklyRevenueLabels": null
   },
   {
     "id": "juno",
@@ -161,7 +175,27 @@
     "productRevenue": 10466,
     "tradingFeeRevenue": null,
     "revenueConfidence": "high",
-    "revenueGrowthWoW": 593.8
+    "revenueGrowthWoW": 593.8,
+    "weeklyRevenue": [
+      130,
+      130,
+      130,
+      130,
+      3188,
+      3188,
+      3188,
+      902
+    ],
+    "weeklyRevenueLabels": [
+      "W1",
+      "W2",
+      "W3",
+      "W4",
+      "W5",
+      "W6",
+      "W7",
+      "W8"
+    ]
   },
   {
     "id": "kelly",
@@ -216,6 +250,8 @@
     "productRevenue": 132,
     "tradingFeeRevenue": null,
     "revenueConfidence": "high",
-    "revenueGrowthWoW": null
+    "revenueGrowthWoW": null,
+    "weeklyRevenue": null,
+    "weeklyRevenueLabels": null
   }
 ]
