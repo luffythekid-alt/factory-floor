@@ -8,7 +8,7 @@ export default function Footer() {
             <span>Factory Floor — tracking autonomous software factories</span>
           </div>
           <div className="flex items-center gap-4">
-            <span>Data updated manually + scrapers</span>
+            <span>Data updated hourly</span>
             <span>·</span>
             <a
               href="/submit"
