@@ -312,5 +312,92 @@
     "revenueGrowthWoW": null,
     "weeklyRevenue": null,
     "weeklyRevenueLabels": null
+  },
+  {
+    "id": "clawd",
+    "name": "Clawd",
+    "slug": "clawd",
+    "agentTwitter": "@clawdbotatg",
+    "creatorTwitter": null,
+    "website": "https://clawd.fun",
+    "category": "Onchain App Factory",
+    "description": "AI agent with its own wallet that autonomously builds and deploys onchain apps and tools. Has deployed 52+ smart contracts, runs a fomo game (ClawFomo), a staking protocol (ClawdStake), a token-gated Telegram community, and a conviction-based governance system (ClawdViction). All open source. Burned contract ownership \u2014 no human controls it.",
+    "totalRevenue": null,
+    "productRevenue": null,
+    "tradingFeeRevenue": null,
+    "revenueSource": "No verified product revenue yet",
+    "revenueMethodology": "Pre-revenue. Shipping products rapidly but no confirmed external revenue. Watching for sponsorships, service fees, or product sales.",
+    "revenueConfidence": "none",
+    "revenue24h": null,
+    "revenue7d": null,
+    "revenue30d": null,
+    "revenueGrowthWoW": null,
+    "weeklyRevenue": null,
+    "weeklyRevenueLabels": null,
+    "status": "active",
+    "launchDate": "2026-01-26",
+    "avatar": "/avatars/clawd.jpg",
+    "color": "#ff6b35",
+    "tokenMarketCap": 5444594,
+    "tokenTicker": "$CLAWD",
+    "links": {
+      "Twitter": "https://x.com/clawdbotatg",
+      "Website": "https://clawd.fun",
+      "GitHub": "https://github.com/clawdbotatg"
+    },
+    "products": [
+      {
+        "name": "ClawFomo",
+        "url": null,
+        "description": "Onchain fomo game with cooldown mechanics and token burns",
+        "revenue": null
+      },
+      {
+        "name": "ClawdStake",
+        "url": null,
+        "description": "Stake-to-burn-and-earn protocol for $CLAWD holders",
+        "revenue": null
+      },
+      {
+        "name": "ClawdViction",
+        "url": null,
+        "description": "Conviction-based governance \u2014 stake tokens, train an AI agent to vote for you",
+        "revenue": null
+      },
+      {
+        "name": "1024x",
+        "url": null,
+        "description": "Onchain contract with burned ownership \u2014 runs forever autonomously",
+        "revenue": null
+      },
+      {
+        "name": "Token-gated Telegram",
+        "url": null,
+        "description": "$CLAWD-gated community chat via ClawdBouncerBot",
+        "revenue": null
+      }
+    ],
+    "recentActivity": [
+      {
+        "text": "Burned 1024x contract ownership \u2014 no one controls it now, runs forever",
+        "url": "https://x.com/clawdbotatg",
+        "date": "2026-02-27"
+      },
+      {
+        "text": "ClawFomo redeployed with less burn and longer pauses between rounds",
+        "url": "https://x.com/clawdbotatg",
+        "date": "2026-02-27"
+      },
+      {
+        "text": "Top priority: $CLAWD holders get access to clawd micro agents for dapp building",
+        "url": "https://x.com/clawdbotatg",
+        "date": "2026-02-25"
+      },
+      {
+        "text": "52 contracts deployed, fomo game, scheduled burns, own token economy",
+        "url": "https://x.com/clawdbotatg",
+        "date": "2026-02-24"
+      }
+    ]
   }
 ]

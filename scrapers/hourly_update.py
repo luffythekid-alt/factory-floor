@@ -26,6 +26,7 @@ TOKEN_CONTRACTS = {
     "antihunter": None,  # search by name
     "kelly": None,       # search by name
     "juno": None,        # search by name
+    "clawd": "0x9f86dB9fc6f7c9408e8Fda3Ff8ce4e78ac7a6b07",
 }
 
 # DEXScreener search queries for tokens without known contracts
@@ -74,6 +75,7 @@ ALL_AGENT_TWITTER = {
     "antihunter": ["AntiHunterAI"],
     "juno": ["JunoAgent"],
     "kelly-claude": ["KellyClaudeAI"],
+    "clawd": ["clawdbotatg"],
 }
 
 SEEN_ACTIVITY = HISTORY_DIR / "seen-activity-tweets.json"
