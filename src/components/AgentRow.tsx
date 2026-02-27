@@ -57,7 +57,7 @@ export default function AgentRow({
   return (
     <Link
       href={`/agent/${agent.slug}`}
-      className="group grid grid-cols-12 gap-2 sm:gap-4 items-center px-4 sm:px-6 py-4 border-b border-border/50 hover:bg-white/[0.02] hover:border-border-hover transition-all"
+      className="group grid grid-cols-12 gap-2 sm:gap-4 items-center px-4 sm:px-6 py-4 border-b border-white/[0.05] hover:bg-white/[0.02] hover:border-border-hover transition-all"
     >
       {/* Rank */}
       <div className="col-span-1 font-mono text-sm">
