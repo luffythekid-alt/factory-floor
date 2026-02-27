@@ -513,7 +513,7 @@ def check_twitter_activity(agents, bearer):
                     if "recentActivity" not in agent:
                         agent["recentActivity"] = []
 
-                    tweet_date = tweet.get("created_at", "")[:10] or datetime.now(timezone.utc).strftime("%Y-%m-%d")
+                    tweet_date = tweet.get("created_at", "") or datetime.now(timezone.utc).isoformat()
                     agent["recentActivity"].insert(0, {
                         "text": summary,
                         "url": tweet_url,

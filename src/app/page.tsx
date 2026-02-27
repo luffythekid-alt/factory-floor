@@ -66,10 +66,14 @@ export default function Home() {
           function timeAgo(dateStr?: string): string {
             if (!dateStr) return "";
             const now = new Date();
-            const then = new Date(dateStr + "T12:00:00Z");
+            // Support both "YYYY-MM-DD" and full ISO timestamps
+            const then = dateStr.includes("T") ? new Date(dateStr) : new Date(dateStr + "T12:00:00Z");
             const diffMs = now.getTime() - then.getTime();
+            const diffMin = Math.floor(diffMs / 60000);
+            const diffH = Math.floor(diffMs / 3600000);
             const diffD = Math.floor(diffMs / 86400000);
-            if (diffD < 1) return "today";
+            if (diffMin < 60) return `${Math.max(1, diffMin)}m`;
+            if (diffH < 24) return `${diffH}hr`;
             if (diffD === 1) return "1d";
             if (diffD < 7) return `${diffD}d`;
             if (diffD < 30) return `${Math.floor(diffD / 7)}w`;
