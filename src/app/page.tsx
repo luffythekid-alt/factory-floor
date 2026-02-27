@@ -95,6 +95,10 @@ export default function Home() {
             if (!a.url || seen.has(a.url)) return false;
             seen.add(a.url);
             return true;
+          }).sort((a, b) => {
+            const da = a.date ? new Date(a.date).getTime() : 0;
+            const db = b.date ? new Date(b.date).getTime() : 0;
+            return db - da;
           });
           return deduped.length > 0 ? (
             <div className="mt-10">
