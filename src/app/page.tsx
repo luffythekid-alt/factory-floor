@@ -70,6 +70,7 @@ export default function Home() {
               agentName: a.name,
               agentSlug: a.slug,
               agentColor: a.color,
+              agentAvatar: a.avatar,
             }))
           );
           // Dedupe by url, keep first occurrence (newest since feeds are newest-first)
@@ -93,12 +94,20 @@ export default function Home() {
                     rel="noopener noreferrer"
                     className="flex items-start gap-3 px-4 sm:px-5 py-3 hover:bg-white/[0.02] transition-colors group"
                   >
-                    <div
-                      className="w-6 h-6 rounded flex items-center justify-center text-[9px] font-bold shrink-0 mt-0.5 border border-white/5"
-                      style={{ backgroundColor: act.agentColor + "15", color: act.agentColor }}
-                    >
-                      {act.agentName.slice(0, 2)}
-                    </div>
+                    {act.agentAvatar ? (
+                      <img
+                        src={act.agentAvatar}
+                        alt={act.agentName}
+                        className="w-6 h-6 rounded shrink-0 mt-0.5 border border-white/5 object-cover"
+                      />
+                    ) : (
+                      <div
+                        className="w-6 h-6 rounded flex items-center justify-center text-[9px] font-bold shrink-0 mt-0.5 border border-white/5"
+                        style={{ backgroundColor: act.agentColor + "15", color: act.agentColor }}
+                      >
+                        {act.agentName.slice(0, 2)}
+                      </div>
+                    )}
                     <div className="min-w-0 flex-1">
                       <span className="text-sm text-txt-secondary group-hover:text-txt transition-colors">
                         {act.text}

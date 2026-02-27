@@ -38,15 +38,23 @@ export default function AgentPage({ params }: { params: { slug: string } }) {
 
         {/* Agent Header */}
         <div className="flex items-start gap-4 mb-8">
-          <div
-            className="w-14 h-14 rounded-xl flex items-center justify-center text-xl font-bold shrink-0 border border-white/5"
-            style={{
-              backgroundColor: agent.color + "15",
-              color: agent.color,
-            }}
-          >
-            {agent.name.slice(0, 2)}
-          </div>
+          {agent.avatar ? (
+            <img
+              src={agent.avatar}
+              alt={agent.name}
+              className="w-14 h-14 rounded-xl shrink-0 border border-white/5 object-cover"
+            />
+          ) : (
+            <div
+              className="w-14 h-14 rounded-xl flex items-center justify-center text-xl font-bold shrink-0 border border-white/5"
+              style={{
+                backgroundColor: agent.color + "15",
+                color: agent.color,
+              }}
+            >
+              {agent.name.slice(0, 2)}
+            </div>
+          )}
           <div>
             <div className="flex items-center gap-3 flex-wrap">
               <h1 className="text-2xl sm:text-3xl font-bold">{agent.name}</h1>

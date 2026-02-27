@@ -70,12 +70,20 @@ export default function AgentRow({
 
       {/* Name + Category */}
       <div className="col-span-4 sm:col-span-3 flex items-center gap-3">
-        <div
-          className="w-9 h-9 rounded-lg flex items-center justify-center text-xs font-bold shrink-0 border border-white/5"
-          style={{ backgroundColor: agent.color + "15", color: agent.color }}
-        >
-          {agent.name.slice(0, 2)}
-        </div>
+        {agent.avatar ? (
+          <img
+            src={agent.avatar}
+            alt={agent.name}
+            className="w-9 h-9 rounded-lg shrink-0 border border-white/5 object-cover"
+          />
+        ) : (
+          <div
+            className="w-9 h-9 rounded-lg flex items-center justify-center text-xs font-bold shrink-0 border border-white/5"
+            style={{ backgroundColor: agent.color + "15", color: agent.color }}
+          >
+            {agent.name.slice(0, 2)}
+          </div>
+        )}
         <div className="min-w-0">
           <div className="font-semibold text-sm text-txt group-hover:text-accent-green transition-colors truncate flex items-center gap-1.5">
             {agent.name}
