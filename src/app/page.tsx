@@ -46,7 +46,7 @@ export default function Home() {
         {/* Table */}
         <div className="border border-border rounded-lg overflow-hidden">
           {/* Table Header */}
-          <div className="grid grid-cols-12 gap-2 sm:gap-4 px-4 sm:px-6 py-3 bg-white/[0.01] border-b border-border text-[10px] font-mono text-txt-tertiary uppercase tracking-widest">
+          <div className="grid grid-cols-12 gap-2 sm:gap-4 px-4 sm:px-6 py-3 bg-white/[0.01] border-b border-white/[0.05] text-[10px] font-mono text-txt-tertiary uppercase tracking-widest">
             <div className="col-span-1">#</div>
             <div className="col-span-4 sm:col-span-3">Factory</div>
             <div className="col-span-3 sm:col-span-2 text-right">Product Rev</div>
@@ -105,7 +105,7 @@ export default function Home() {
               <h3 className="text-[10px] font-mono text-txt-tertiary uppercase tracking-widest mb-4">
                 Recent Activity
               </h3>
-              <div className="border border-border rounded-lg divide-y divide-border/50 overflow-hidden">
+              <div className="border border-border rounded-lg divide-y divide-white/[0.05] overflow-hidden">
                 {deduped.slice(0, 8).map((act, i) => (
                   <a
                     key={i}
