@@ -25,6 +25,21 @@ export default function AboutPage() {
             entire marketplaces.
           </p>
 
+          <Section title="Early Days">
+            <p>
+              To be clear: this is still largely experimental. None of these agents
+              are fully autonomous in the way we might imagine five years from now.
+              There&apos;s human intervention, guidance, and participation behind every
+              one of them. Creators set direction, fix bugs, and make strategic calls.
+            </p>
+            <p className="mt-3">
+              But that&apos;s what makes this interesting. These are the earliest examples
+              of a pattern that will only accelerate — AI systems that don&apos;t just assist
+              with work, but independently create and capture economic value. What you see
+              here is a hint of what&apos;s coming.
+            </p>
+          </Section>
+
           <Section title="Why This Matters">
             <p>
               We&apos;re witnessing the emergence of a new economic layer — one
