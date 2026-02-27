@@ -51,29 +51,21 @@ REVENUE_KEYWORDS = [
     "treasury", "stripe", "paid", "membership", "subscriber",
 ]
 
-# Keywords that signal notable activity (partnerships, launches, milestones, deals)
+# Keywords that signal trajectory-changing activity
+# Keep this tight — only big moves that change the agent's story
 ACTIVITY_KEYWORDS = [
-    # launches & shipping
-    "launched", "just launched", "shipped", "deployed", "live on",
-    "app store", "now live", "just shipped", "new product", "new app",
-    "v2", "v3", "v4", "v5", "beta", "alpha",
-    # partnerships & deals
-    "partnership", "partnered", "sponsor", "sponsorship", "deal",
-    "collaboration", "collab", "working with", "teaming up",
-    "proposal", "pitched", "my price",
-    # milestones
-    "milestone", "first", "hit", "reached", "crossed",
-    "users", "members", "customers", "downloads",
-    "100", "1000", "10k", "50k", "100k",
-    # fundraising & biz
-    "raised", "funding", "investment", "grant",
-    "hired", "hiring", "contractor",
-    # product updates
-    "new feature", "update", "upgrade", "redesign",
-    "open source", "open sourced", "github",
-    # notable events
-    "interview", "podcast", "featured", "wrote about",
-    "acquisition", "acquired", "bought",
+    # new product launches (not updates)
+    "just launched", "now live", "app store", "new product",
+    # partnerships & deals with real money
+    "partnership", "partnered", "sponsorship", "my price",
+    # fundraising
+    "raised", "funding", "investment",
+    # acquisitions
+    "acquisition", "acquired",
+    # first-time milestones
+    "first revenue", "first sale", "first customer", "first paying",
+    # hiring (agent hiring humans is notable)
+    "hired", "hiring",
 ]
 
 # All agent twitter handles (for activity monitoring — all agents, not just API-less ones)
@@ -481,7 +473,7 @@ def check_twitter_activity(agents, bearer):
 
                 handle_seen = seen.get(f"{aid}:{handle}", [])
                 existing_urls = {a.get("url", "") for a in agent.get("recentActivity", [])}
-                added_this_run = 0  # max 2 per agent per run to avoid flooding
+                added_this_run = 0  # max 1 per agent per run to keep it curated
 
                 for tweet in tweets:
                     tid = tweet["id"]
@@ -489,7 +481,7 @@ def check_twitter_activity(agents, bearer):
                         continue
                     handle_seen.append(tid)
 
-                    if added_this_run >= 2:
+                    if added_this_run >= 1:
                         continue
 
                     text = tweet.get("text", "")
@@ -503,13 +495,10 @@ def check_twitter_activity(agents, bearer):
                     if tweet.get("in_reply_to_user_id"):
                         continue
 
-                    # Check if it's notable (activity OR revenue tweet with high engagement)
-                    likes = tweet.get("public_metrics", {}).get("like_count", 0)
+                    # Check if it's trajectory-changing activity
                     is_activity = is_activity_tweet(text)
-                    is_revenue = is_revenue_tweet(text)
-                    is_viral = likes >= 50  # high engagement = notable regardless
 
-                    if not (is_activity or is_revenue or is_viral):
+                    if not is_activity:
                         continue
 
                     summary = summarize_activity(text)
