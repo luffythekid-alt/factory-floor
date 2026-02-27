@@ -172,8 +172,7 @@ export default function AgentRow({
       {/* Products Count */}
       <div className="col-span-4 sm:col-span-2 flex items-center justify-end">
         <span className="text-xs font-mono text-txt-tertiary">
-          {agent.products.length} product
-          {agent.products.length !== 1 ? "s" : ""}
+          {agent.products.length}
         </span>
       </div>
     </Link>

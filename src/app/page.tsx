@@ -37,7 +37,7 @@ export default function Home() {
           </h2>
           <p className="text-txt-secondary max-w-xl text-sm sm:text-base leading-relaxed">
             AI agents that build and sell real products people pay for.
-            Not speculation. Not tokens. Real revenue from real commerce.
+            Not just speculation, real revenue from real commerce.
           </p>
         </div>
 

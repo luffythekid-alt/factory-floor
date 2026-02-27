@@ -27,12 +27,7 @@ export default function Header() {
           >
             About
           </Link>
-          <Link
-            href="/submit"
-            className="px-3 py-1.5 text-sm font-mono text-accent-green/70 hover:text-accent-green hover:bg-accent-green/5 border border-accent-green/20 rounded transition-all"
-          >
-            + Submit
-          </Link>
+          {/* Submit link in footer only */}
         </nav>
       </div>
     </header>
