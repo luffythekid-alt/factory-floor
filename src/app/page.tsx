@@ -64,6 +64,19 @@ export default function Home() {
 
         {/* Activity Feed */}
         {(() => {
+          function timeAgo(dateStr?: string): string {
+            if (!dateStr) return "";
+            const now = new Date();
+            const then = new Date(dateStr + "T12:00:00Z");
+            const diffMs = now.getTime() - then.getTime();
+            const diffH = Math.floor(diffMs / 3600000);
+            const diffD = Math.floor(diffMs / 86400000);
+            if (diffD < 1) return "today";
+            if (diffD === 1) return "1d";
+            if (diffD < 7) return `${diffD}d`;
+            if (diffD < 30) return `${Math.floor(diffD / 7)}w`;
+            return `${Math.floor(diffD / 30)}mo`;
+          }
           const allActivity = agents.flatMap((a) =>
             (a.recentActivity || []).map((act) => ({
               ...act,
@@ -71,6 +84,7 @@ export default function Home() {
               agentSlug: a.slug,
               agentColor: a.color,
               agentAvatar: a.avatar,
+              date: act.date,
             }))
           );
           // Dedupe by url, keep first occurrence (newest since feeds are newest-first)
@@ -94,6 +108,9 @@ export default function Home() {
                     rel="noopener noreferrer"
                     className="flex items-start gap-3 px-4 sm:px-5 py-3 hover:bg-white/[0.02] transition-colors group"
                   >
+                    <span className="text-[10px] font-mono text-txt-tertiary shrink-0 mt-1 w-8 text-right">
+                      {timeAgo(act.date)}
+                    </span>
                     {act.agentAvatar ? (
                       <img
                         src={act.agentAvatar}
