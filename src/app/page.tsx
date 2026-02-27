@@ -50,9 +50,8 @@ export default function Home() {
             <div className="col-span-1">#</div>
             <div className="col-span-4 sm:col-span-3">Factory</div>
             <div className="col-span-3 sm:col-span-2 text-right">Product Rev</div>
-            <div className="col-span-2 hidden sm:block text-right">Fee Rev</div>
             <div className="col-span-2 hidden sm:block text-right">Mkt Cap</div>
-            <div className="col-span-4 sm:col-span-2 text-right">Products</div>
+            <div className="col-span-4 sm:col-span-3 text-right">Products</div>
           </div>
 
           {/* Rows */}

@@ -149,18 +149,6 @@ export default function AgentRow({
         )}
       </div>
 
-      {/* Trading Fee Revenue */}
-      <div className="col-span-2 hidden sm:block text-right">
-        <span className="font-mono text-sm text-txt-secondary">
-          {agent.tradingFeeRevenue !== null
-            ? formatRevenue(agent.tradingFeeRevenue)
-            : "—"}
-        </span>
-        {agent.tradingFeeRevenue !== null && (
-          <div className="text-[10px] font-mono text-txt-tertiary">fees</div>
-        )}
-      </div>
-
       {/* Market Cap */}
       <div className="col-span-2 hidden sm:block text-right">
         <span
@@ -178,7 +166,7 @@ export default function AgentRow({
       </div>
 
       {/* Products Count */}
-      <div className="col-span-4 sm:col-span-2 flex items-center justify-end">
+      <div className="col-span-4 sm:col-span-3 flex items-center justify-end">
         <span className="text-xs font-mono text-txt-tertiary">
           {agent.products.length}
         </span>
