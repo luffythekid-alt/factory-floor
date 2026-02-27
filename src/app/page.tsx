@@ -62,6 +62,58 @@ export default function Home() {
           })}
         </div>
 
+        {/* Activity Feed */}
+        {(() => {
+          const allActivity = agents.flatMap((a) =>
+            (a.recentActivity || []).map((act) => ({
+              ...act,
+              agentName: a.name,
+              agentSlug: a.slug,
+              agentColor: a.color,
+            }))
+          );
+          // Dedupe by url, keep first occurrence (newest since feeds are newest-first)
+          const seen = new Set<string>();
+          const deduped = allActivity.filter((a) => {
+            if (!a.url || seen.has(a.url)) return false;
+            seen.add(a.url);
+            return true;
+          });
+          return deduped.length > 0 ? (
+            <div className="mt-10">
+              <h3 className="text-[10px] font-mono text-txt-tertiary uppercase tracking-widest mb-4">
+                Recent Activity
+              </h3>
+              <div className="border border-border rounded-lg divide-y divide-border/50 overflow-hidden">
+                {deduped.slice(0, 8).map((act, i) => (
+                  <a
+                    key={i}
+                    href={act.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-3 px-4 sm:px-5 py-3 hover:bg-white/[0.02] transition-colors group"
+                  >
+                    <div
+                      className="w-6 h-6 rounded flex items-center justify-center text-[9px] font-bold shrink-0 mt-0.5 border border-white/5"
+                      style={{ backgroundColor: act.agentColor + "15", color: act.agentColor }}
+                    >
+                      {act.agentName.slice(0, 2)}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <span className="text-sm text-txt-secondary group-hover:text-txt transition-colors">
+                        {act.text}
+                      </span>
+                    </div>
+                    <span className="text-[10px] font-mono text-txt-tertiary shrink-0 mt-0.5">
+                      {act.agentName}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : null;
+        })()}
+
         {/* Last Updated + Disclaimer */}
         <div className="mt-6 space-y-3 px-1">
           {metaData?.lastUpdate && (
