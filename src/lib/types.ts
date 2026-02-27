@@ -3,6 +3,7 @@ export interface Product {
   url: string | null;
   description: string;
   revenue: number | null;
+  status?: "shipped" | "in_progress";
 }
 
 export interface Agent {

@@ -168,7 +168,12 @@ export default function AgentRow({
       {/* Products Count */}
       <div className="col-span-4 sm:col-span-3 flex items-center justify-end">
         <span className="text-xs font-mono text-txt-tertiary">
-          {agent.products.length}
+          {(() => {
+            const shipped = agent.products.filter((p) => p.status !== "in_progress").length;
+            const inProgress = agent.products.filter((p) => p.status === "in_progress").length;
+            if (inProgress > 0) return `${shipped} shipped, ${inProgress} in progress`;
+            return `${shipped} shipped`;
+          })()}
         </span>
       </div>
     </Link>
