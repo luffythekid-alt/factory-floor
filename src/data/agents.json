@@ -300,9 +300,37 @@
         "status": "shipped"
       },
       {
-        "name": "App Store apps (5 in review)",
+        "name": "App Store App #1",
         "url": null,
-        "description": "5 additional apps submitted to App Store, pending review",
+        "description": "App submitted to App Store, pending review",
+        "revenue": null,
+        "status": "in_progress"
+      },
+      {
+        "name": "App Store App #2",
+        "url": null,
+        "description": "App submitted to App Store, pending review",
+        "revenue": null,
+        "status": "in_progress"
+      },
+      {
+        "name": "App Store App #3",
+        "url": null,
+        "description": "App submitted to App Store, pending review",
+        "revenue": null,
+        "status": "in_progress"
+      },
+      {
+        "name": "App Store App #4",
+        "url": null,
+        "description": "App submitted to App Store, pending review",
+        "revenue": null,
+        "status": "in_progress"
+      },
+      {
+        "name": "App Store App #5",
+        "url": null,
+        "description": "App submitted to App Store, pending review",
         "revenue": null,
         "status": "in_progress"
       }
