@@ -537,6 +537,74 @@ def check_twitter_activity(agents, bearer):
     return updates
 
 
+def check_product_launches(agents, bearer):
+    """Monitor agent tweets for new product launches / app approvals.
+    Auto-converts in_progress products to shipped and updates names."""
+    print("\n  📦 Checking for product launches...")
+    updates = 0
+
+    launch_keywords = [
+        "approved", "app store approved", "now available", "just went live",
+        "launched on app store", "live on the app store", "available now",
+        "download now", "app is live", "shipped", "released",
+    ]
+
+    for agent in agents:
+        aid = agent["id"]
+        handles = ALL_AGENT_TWITTER.get(aid, [])
+        if not handles:
+            continue
+
+        in_progress = [p for p in agent.get("products", []) if p.get("status") == "in_progress"]
+        if not in_progress:
+            continue
+
+        for handle in handles:
+            try:
+                time.sleep(1.5)
+                user_data = fetch_twitter(
+                    f"https://api.twitter.com/2/users/by/username/{handle}?user.fields=id",
+                    bearer
+                )
+                user_id = user_data.get("data", {}).get("id")
+                if not user_id:
+                    continue
+
+                time.sleep(1.5)
+                tweets_data = fetch_twitter(
+                    f"https://api.twitter.com/2/users/{user_id}/tweets"
+                    f"?max_results=10&tweet.fields=created_at,text"
+                    f"&exclude=retweets,replies",
+                    bearer
+                )
+                tweets = tweets_data.get("data", [])
+
+                for tweet in tweets:
+                    text = tweet.get("text", "")
+                    lower = text.lower()
+
+                    if not any(kw in lower for kw in launch_keywords):
+                        continue
+
+                    # Found a launch tweet — convert first in_progress to shipped
+                    # Try to extract app name from tweet
+                    if in_progress:
+                        p = in_progress.pop(0)
+                        p["status"] = "shipped"
+                        # Try to get a better name from the tweet (first ~40 chars before any URL)
+                        clean = re.sub(r'https?://\S+', '', text).strip()
+                        clean = re.sub(r'^(@\w+\s*)+', '', clean).strip()
+                        if len(clean) > 10 and len(clean) < 60:
+                            p["name"] = clean[:50]
+                        updates += 1
+                        print(f"    📦 {agent['name']}: product launched — {p['name']}")
+
+            except Exception as e:
+                print(f"    Product check error for @{handle}: {e}")
+
+    return updates
+
+
 def fetch_clanker_fees(agents):
     """Fetch trading fee data from Clanker API for all agents with token contracts."""
     print("\n  💰 Checking Clanker trading fees...")
@@ -849,6 +917,17 @@ def run():
             print("    No new notable activity")
     except Exception as e:
         print(f"    Activity check failed: {e}")
+
+    # --- Product launch detection ---
+    try:
+        if not bearer:
+            bearer = get_twitter_bearer()
+        launch_count = check_product_launches(agents, bearer)
+        if launch_count:
+            updated = True
+            print(f"\n  📦 {launch_count} product(s) marked as shipped")
+    except Exception as e:
+        print(f"    Product launch check failed: {e}")
 
     # --- Market cap updates ---
     updated = False
