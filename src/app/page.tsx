@@ -69,7 +69,6 @@ export default function Home() {
             const now = new Date();
             const then = new Date(dateStr + "T12:00:00Z");
             const diffMs = now.getTime() - then.getTime();
-            const diffH = Math.floor(diffMs / 3600000);
             const diffD = Math.floor(diffMs / 86400000);
             if (diffD < 1) return "today";
             if (diffD === 1) return "1d";
