@@ -23,18 +23,20 @@ HISTORY_DIR.mkdir(parents=True, exist_ok=True)
 # Token contract addresses on Base (for DEXScreener)
 TOKEN_CONTRACTS = {
     "felix": "0xf30Bf00edd0C22db54C9274B90D2A4C21FC09b07",
-    "antihunter": None,  # search by name
-    "kelly": None,       # search by name
-    "juno": None,        # search by name
+    "antihunter": "0xe2f3FaE4bc62E21826018364aa30ae45D430bb07",
+    "kelly": "0x50D2280441372486BeecdD328c1854743EBaCb07",
+    "juno": "0x4E6c9f48f73E54EE5F3AB7e2992B2d733D0d0b07",
     "clawd": "0x9f86dB9fc6f7c9408e8Fda3Ff8ce4e78ac7a6b07",
 }
 
-# DEXScreener search queries for tokens without known contracts
-TOKEN_SEARCH = {
-    "antihunter": "antihunter",
-    "kelly": "kellyclaude",
-    "juno": "juno agent",
-}
+# Clanker API key for fee data
+CLANKER_API_KEY = "factory-floor-bdfgut234joinfgmu90-tr6v5e"
+
+# Clanker platform fee recipient (40% of all fees)
+CLANKER_FEE_RECIPIENT = "0xF60633D02690e2A15A54AB919925F3d038Df163e"
+
+# DEXScreener search queries (fallback for tokens without contracts)
+TOKEN_SEARCH = {}
 
 # Twitter handles to monitor for revenue updates (agent + creator)
 # ONLY for agents WITHOUT a live dashboard API
@@ -535,6 +537,75 @@ def check_twitter_activity(agents, bearer):
     return updates
 
 
+def fetch_clanker_fees(agents):
+    """Fetch trading fee data from Clanker API for all agents with token contracts."""
+    print("\n  💰 Checking Clanker trading fees...")
+    updated = False
+
+    # First get ETH price from DEXScreener
+    eth_price = 2000  # fallback
+    try:
+        data = fetch_json("https://api.dexscreener.com/latest/dex/search?q=WETH%20USDC%20base")
+        pairs = [p for p in data.get("pairs", []) if p.get("chainId") == "base"
+                 and p.get("baseToken", {}).get("symbol") == "WETH"]
+        if pairs:
+            eth_price = float(pairs[0]["priceUsd"])
+            print(f"    ETH price: ${eth_price:,.0f}")
+    except Exception as e:
+        print(f"    ETH price fetch failed, using ${eth_price}: {e}")
+
+    for agent in agents:
+        aid = agent["id"]
+        contract = TOKEN_CONTRACTS.get(aid)
+        if not contract:
+            continue
+
+        try:
+            # Get token info to find fee recipients
+            req = urllib.request.Request(
+                f"https://www.clanker.world/api/get-clanker-by-address?address={contract}",
+                headers={"x-api-key": CLANKER_API_KEY, "User-Agent": "FactoryFloor/1.0"})
+            token_data = json.loads(urllib.request.urlopen(req, timeout=15).read())
+            td = token_data.get("data", token_data)
+            recipients = td.get("extensions", {}).get("fees", {}).get("recipients", [])
+
+            total_fee_eth = 0.0
+            total_claims = 0
+
+            for r in recipients:
+                recipient = r.get("recipient", "")
+                if not recipient:
+                    continue
+                try:
+                    time.sleep(0.5)
+                    req2 = urllib.request.Request(
+                        f"https://www.clanker.world/api/get-claimed-fees/{contract}/{recipient}",
+                        headers={"x-api-key": CLANKER_API_KEY, "User-Agent": "FactoryFloor/1.0"})
+                    fee_data = json.loads(urllib.request.urlopen(req2, timeout=15).read())
+                    claimed_wei = int(fee_data.get("totalClaimed", 0))
+                    claimed_eth = claimed_wei / 1e18
+                    claims = fee_data.get("claimCount", 0)
+                    total_fee_eth += claimed_eth
+                    total_claims += claims
+                except Exception:
+                    pass  # timeout on some recipients is normal
+
+            if total_fee_eth > 0:
+                fee_usd = round(total_fee_eth * eth_price)
+                old_fee = agent.get("tradingFeeRevenue") or 0
+                if fee_usd > old_fee:
+                    agent["tradingFeeRevenue"] = fee_usd
+                    updated = True
+                print(f"    {agent['name']}: {total_fee_eth:.4f} ETH (${fee_usd:,}) from {total_claims} fee claims")
+            else:
+                print(f"    {agent['name']}: no fee data")
+
+        except Exception as e:
+            print(f"    {agent['name']} clanker error: {e}")
+
+    return updated
+
+
 def fetch_json(url):
     """Fetch JSON from URL."""
     req = urllib.request.Request(url, headers={"User-Agent": "FactoryFloor/1.0"})
@@ -781,7 +852,14 @@ def run():
 
     # --- Market cap updates ---
     updated = False
-    
+
+    # --- Clanker trading fee revenue ---
+    try:
+        if fetch_clanker_fees(agents):
+            updated = True
+    except Exception as e:
+        print(f"    Clanker fee check failed: {e}")
+
     for agent in agents:
         aid = agent["id"]
         print(f"\n  Processing {agent['name']}...")
