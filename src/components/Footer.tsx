@@ -11,12 +11,10 @@ export default function Footer() {
             <span>Data updated manually + scrapers</span>
             <span>·</span>
             <a
-              href="https://x.com/luffy_____luffy"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/submit"
               className="hover:text-accent-green transition-colors"
             >
-              Submit an agent →
+              Submit a factory →
             </a>
           </div>
         </div>

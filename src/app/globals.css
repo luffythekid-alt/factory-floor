@@ -61,3 +61,24 @@ body > * {
   background: rgba(0, 255, 136, 0.15);
   color: #e8e8ed;
 }
+
+/* Form inputs */
+.input-field {
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 0.5rem;
+  color: #e8e8ed;
+  font-size: 0.875rem;
+  font-family: var(--font-geist-mono), monospace;
+  transition: border-color 0.15s, background 0.15s;
+}
+.input-field:focus {
+  outline: none;
+  border-color: rgba(0,255,136,0.4);
+  background: rgba(255,255,255,0.05);
+}
+.input-field::placeholder {
+  color: rgba(255,255,255,0.2);
+}

@@ -14,6 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://factory-floor.vercel.app"),
   title: "Factory Floor — Tracking Autonomous Software Factories",
   description:
     "Leaderboard tracking AI agents that autonomously build and sell real products and services for revenue. Not speculation. Real commerce.",
@@ -21,11 +22,13 @@ export const metadata: Metadata = {
     title: "Factory Floor",
     description: "Tracking autonomous software factories — AI agents that build and sell real products",
     type: "website",
+    images: [{ url: "/api/og", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Factory Floor",
     description: "Tracking autonomous software factories — AI agents that build and sell real products",
+    images: ["/api/og"],
   },
 };
 

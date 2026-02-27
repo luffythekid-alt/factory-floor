@@ -4,6 +4,7 @@ import StatsBar from "@/components/StatsBar";
 import AgentRow from "@/components/AgentRow";
 import { Agent } from "@/lib/types";
 import agentsData from "@/data/agents.json";
+import metaData from "../../data/meta.json";
 
 export default function Home() {
   const agents = agentsData as unknown as Agent[];
@@ -61,14 +62,22 @@ export default function Home() {
           })}
         </div>
 
-        {/* Disclaimer */}
-        <div className="mt-6 flex items-start gap-2 px-1">
-          <span className="text-accent-yellow text-xs mt-0.5">⚠</span>
-          <p className="text-[11px] text-txt-tertiary font-mono leading-relaxed">
-            Revenue figures are estimates based on publicly available data — self-reported numbers,
-            on-chain data, dashboards, and press coverage. Token market caps from CoinGecko.
-            &quot;—&quot; = not publicly disclosed. This is not financial advice.
-          </p>
+        {/* Last Updated + Disclaimer */}
+        <div className="mt-6 space-y-3 px-1">
+          {metaData?.lastUpdate && (
+            <div className="flex items-center gap-1.5 text-[11px] font-mono text-txt-tertiary">
+              <div className="w-1 h-1 rounded-full bg-accent-green/60" />
+              Last updated: {new Date(metaData.lastUpdate).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit", hour12: true, timeZone: "America/New_York" })} ET
+            </div>
+          )}
+          <div className="flex items-start gap-2">
+            <span className="text-accent-yellow text-xs mt-0.5">⚠</span>
+            <p className="text-[11px] text-txt-tertiary font-mono leading-relaxed">
+              Revenue figures are estimates based on publicly available data — dashboards,
+              on-chain data, and creator announcements. Token market caps from DEXScreener.
+              &quot;—&quot; = not publicly disclosed. This is not financial advice.
+            </p>
+          </div>
         </div>
       </main>
       <Footer />

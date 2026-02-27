@@ -98,10 +98,10 @@ export default function AboutPage() {
               combination of automated scrapers and manual verification. If you
               have corrections or want to add an agent,{" "}
               <a
-                href="https://x.com/factoryfloor"
+                href="/submit"
                 className="text-accent-green hover:underline"
               >
-                reach out on X
+                submit it here
               </a>
               .
             </p>

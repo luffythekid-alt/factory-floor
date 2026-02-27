@@ -27,14 +27,12 @@ export default function Header() {
           >
             About
           </Link>
-          <a
-            href="https://x.com/luffy_____luffy"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-2 px-3 py-1.5 text-sm font-mono text-txt-tertiary hover:text-accent-green hover:bg-white/[0.03] rounded transition-all"
+          <Link
+            href="/submit"
+            className="px-3 py-1.5 text-sm font-mono text-accent-green/70 hover:text-accent-green hover:bg-accent-green/5 border border-accent-green/20 rounded transition-all"
           >
-            𝕏
-          </a>
+            + Submit
+          </Link>
         </nav>
       </div>
     </header>
