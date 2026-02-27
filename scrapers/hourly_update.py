@@ -51,6 +51,41 @@ REVENUE_KEYWORDS = [
     "treasury", "stripe", "paid", "membership", "subscriber",
 ]
 
+# Keywords that signal notable activity (partnerships, launches, milestones, deals)
+ACTIVITY_KEYWORDS = [
+    # launches & shipping
+    "launched", "just launched", "shipped", "deployed", "live on",
+    "app store", "now live", "just shipped", "new product", "new app",
+    "v2", "v3", "v4", "v5", "beta", "alpha",
+    # partnerships & deals
+    "partnership", "partnered", "sponsor", "sponsorship", "deal",
+    "collaboration", "collab", "working with", "teaming up",
+    "proposal", "pitched", "my price",
+    # milestones
+    "milestone", "first", "hit", "reached", "crossed",
+    "users", "members", "customers", "downloads",
+    "100", "1000", "10k", "50k", "100k",
+    # fundraising & biz
+    "raised", "funding", "investment", "grant",
+    "hired", "hiring", "contractor",
+    # product updates
+    "new feature", "update", "upgrade", "redesign",
+    "open source", "open sourced", "github",
+    # notable events
+    "interview", "podcast", "featured", "wrote about",
+    "acquisition", "acquired", "bought",
+]
+
+# All agent twitter handles (for activity monitoring — all agents, not just API-less ones)
+ALL_AGENT_TWITTER = {
+    "felix": ["FelixCraftAI"],
+    "antihunter": ["AntiHunterAI"],
+    "juno": ["JunoAgent"],
+    "kelly-claude": ["KellyClaudeAI"],
+}
+
+SEEN_ACTIVITY = HISTORY_DIR / "seen-activity-tweets.json"
+
 # Patterns to extract dollar amounts (use word boundaries to avoid partial matches)
 DOLLAR_PATTERNS = [
     r'\$[\d,]+(?:\.\d{1,2})?(?:[Kk]|[Mm])?\b',  # $1,234 or $1.5K or $2M
@@ -372,6 +407,141 @@ def save_revenue_findings(findings):
         json.dump(existing, f, indent=2)
 
 
+def is_activity_tweet(text):
+    """Check if tweet contains notable activity keywords.
+    Filters out replies (starts with @) and short conversational tweets."""
+    lower = text.lower()
+    stripped = text.strip()
+
+    # Skip replies (starts with @mention)
+    if stripped.startswith("@"):
+        return False
+    # Skip short tweets (likely conversational)
+    if len(stripped) < 60:
+        return False
+    # Must match at least one keyword
+    if not any(kw in lower for kw in ACTIVITY_KEYWORDS):
+        return False
+    return True
+
+def summarize_activity(text, max_len=120):
+    """Create a short summary from tweet text for the activity feed."""
+    # Strip URLs
+    clean = re.sub(r'https?://\S+', '', text).strip()
+    # Strip @mentions at start
+    clean = re.sub(r'^(@\w+\s*)+', '', clean).strip()
+    # Collapse whitespace
+    clean = re.sub(r'\s+', ' ', clean).strip()
+    if len(clean) > max_len:
+        clean = clean[:max_len].rsplit(' ', 1)[0] + '…'
+    return clean
+
+def load_seen_activity():
+    if SEEN_ACTIVITY.exists():
+        with open(SEEN_ACTIVITY) as f:
+            return json.load(f)
+    return {}
+
+def save_seen_activity(seen):
+    with open(SEEN_ACTIVITY, "w") as f:
+        json.dump(seen, f, indent=2)
+
+def check_twitter_activity(agents, bearer):
+    """Monitor all agent Twitter accounts for notable activity. Updates recentActivity in agents."""
+    seen = load_seen_activity()
+    updates = 0
+
+    for agent in agents:
+        aid = agent["id"]
+        handles = ALL_AGENT_TWITTER.get(aid, [])
+        if not handles:
+            continue
+
+        for handle in handles:
+            try:
+                time.sleep(1.5)
+                user_data = fetch_twitter(
+                    f"https://api.twitter.com/2/users/by/username/{handle}?user.fields=id",
+                    bearer
+                )
+                user_id = user_data.get("data", {}).get("id")
+                if not user_id:
+                    continue
+
+                time.sleep(1.5)
+                tweets_data = fetch_twitter(
+                    f"https://api.twitter.com/2/users/{user_id}/tweets"
+                    f"?max_results=10&tweet.fields=created_at,public_metrics,text,in_reply_to_user_id"
+                    f"&exclude=retweets,replies",
+                    bearer
+                )
+                tweets = tweets_data.get("data", [])
+                if not tweets:
+                    continue
+
+                handle_seen = seen.get(f"{aid}:{handle}", [])
+                existing_urls = {a.get("url", "") for a in agent.get("recentActivity", [])}
+                added_this_run = 0  # max 2 per agent per run to avoid flooding
+
+                for tweet in tweets:
+                    tid = tweet["id"]
+                    if tid in handle_seen:
+                        continue
+                    handle_seen.append(tid)
+
+                    if added_this_run >= 2:
+                        continue
+
+                    text = tweet.get("text", "")
+                    tweet_url = f"https://x.com/{handle}/status/{tid}"
+
+                    # Skip if already in activity feed
+                    if tweet_url in existing_urls:
+                        continue
+
+                    # Skip replies that slipped through
+                    if tweet.get("in_reply_to_user_id"):
+                        continue
+
+                    # Check if it's notable (activity OR revenue tweet with high engagement)
+                    likes = tweet.get("public_metrics", {}).get("like_count", 0)
+                    is_activity = is_activity_tweet(text)
+                    is_revenue = is_revenue_tweet(text)
+                    is_viral = likes >= 50  # high engagement = notable regardless
+
+                    if not (is_activity or is_revenue or is_viral):
+                        continue
+
+                    summary = summarize_activity(text)
+                    if not summary or len(summary) < 10:
+                        continue
+
+                    # Add to front of recentActivity
+                    if "recentActivity" not in agent:
+                        agent["recentActivity"] = []
+
+                    agent["recentActivity"].insert(0, {
+                        "text": summary,
+                        "url": tweet_url,
+                    })
+
+                    # Cap at 5 recent activities
+                    agent["recentActivity"] = agent["recentActivity"][:5]
+
+                    updates += 1
+                    added_this_run += 1
+                    print(f"    📌 @{handle}: {summary[:80]}")
+
+                # Keep last 100 seen tweet IDs per handle
+                seen[f"{aid}:{handle}"] = handle_seen[-100:]
+
+            except Exception as e:
+                print(f"    Activity check error for @{handle}: {e}")
+
+    save_seen_activity(seen)
+    return updates
+
+
 def fetch_json(url):
     """Fetch JSON from URL."""
     req = urllib.request.Request(url, headers={"User-Agent": "FactoryFloor/1.0"})
@@ -585,6 +755,7 @@ def run():
 
     # --- Twitter revenue check ---
     print("\n  📊 Checking Twitter for revenue updates...")
+    bearer = None
     try:
         bearer = get_twitter_bearer()
         findings = check_twitter_revenue(agents, bearer) or []
@@ -600,6 +771,20 @@ def run():
             print("    No new revenue tweets")
     except Exception as e:
         print(f"    Twitter check failed: {e}")
+
+    # --- Activity monitoring ---
+    print("\n  📌 Checking Twitter for notable activity...")
+    try:
+        if not bearer:
+            bearer = get_twitter_bearer()
+        activity_count = check_twitter_activity(agents, bearer)
+        if activity_count:
+            updated = True
+            print(f"\n  ⚡ {activity_count} activity update(s) added to feeds")
+        else:
+            print("    No new notable activity")
+    except Exception as e:
+        print(f"    Activity check failed: {e}")
 
     # --- Market cap updates ---
     updated = False
