@@ -44,7 +44,6 @@ TOKEN_SEARCH = {}
 # Felix and Juno have APIs — skip twitter for them
 AGENT_TWITTER = {
     "antihunter": ["AntiHunterAI", "geoffreywoo"],
-    "kelly": ["KellyClaudeAI", "austen"],
 }
 
 # Keywords that signal a revenue update
@@ -886,6 +885,56 @@ def run():
         print(f"    Juno members: {members.get('total', '?')} total")
     except Exception as e:
         print(f"    Juno dashboard error: {e}")
+
+    try:
+        # Kelly: iamkelly.ai — 3 revenue APIs (Stripe, Gumroad, App Store)
+        kelly_agent = next((a for a in agents if a["id"] == "kelly-claude"), None)
+        if kelly_agent:
+            kelly_total = 0
+            kelly_sources = {}
+
+            # Stripe
+            try:
+                stripe_data = fetch_json("https://iamkelly.ai/api/stripe")
+                stripe_rev = stripe_data.get("lifetime", 0)
+                kelly_total += stripe_rev
+                kelly_sources["stripe"] = stripe_rev
+                print(f"    Kelly Stripe: ${stripe_rev:,.0f}")
+            except Exception as e:
+                print(f"    Kelly Stripe error: {e}")
+
+            # Gumroad
+            try:
+                gumroad_data = fetch_json("https://iamkelly.ai/api/gumroad")
+                gumroad_rev = gumroad_data.get("revenue", 0)
+                kelly_total += gumroad_rev
+                kelly_sources["gumroad"] = round(gumroad_rev, 2)
+                print(f"    Kelly Gumroad: ${gumroad_rev:,.2f} ({gumroad_data.get('downloads', 0)} downloads)")
+            except Exception as e:
+                print(f"    Kelly Gumroad error: {e}")
+
+            # App Store Connect
+            try:
+                asc_data = fetch_json("https://iamkelly.ai/api/asc")
+                asc_rev_30d = asc_data.get("ascRevenue30d", 0)
+                # ASC only gives 30-day, so add it as-is (this is a floor)
+                kelly_total += asc_rev_30d
+                kelly_sources["appStore30d"] = asc_rev_30d
+                print(f"    Kelly App Store (30d): ${asc_rev_30d:,.2f}")
+            except Exception as e:
+                print(f"    Kelly App Store error: {e}")
+
+            kelly_total = round(kelly_total)
+            old_rev = kelly_agent.get("productRevenue") or 0
+            if kelly_total > old_rev:
+                kelly_agent["productRevenue"] = kelly_total
+                kelly_agent["totalRevenue"] = kelly_total
+                kelly_agent["revenueConfidence"] = "high"
+                kelly_agent["revenueSources"] = kelly_sources
+                updated = True
+                print(f"    Kelly total: ${kelly_total:,} (was ${old_rev:,})")
+    except Exception as e:
+        print(f"    Kelly dashboard error: {e}")
 
     # --- Twitter revenue check ---
     print("\n  📊 Checking Twitter for revenue updates...")
