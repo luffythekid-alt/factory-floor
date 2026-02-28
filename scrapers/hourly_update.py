@@ -888,7 +888,7 @@ def run():
 
     try:
         # Kelly: iamkelly.ai — 3 revenue APIs (Stripe, Gumroad, App Store)
-        kelly_agent = next((a for a in agents if a["id"] == "kelly-claude"), None)
+        kelly_agent = next((a for a in agents if a["id"] in ("kelly", "kelly-claude")), None)
         if kelly_agent:
             kelly_total = 0
             kelly_sources = {}
