@@ -18,7 +18,7 @@
     "launchDate": "2026-02-02",
     "avatar": "/avatars/felix.png",
     "color": "#00ff88",
-    "tokenMarketCap": 4574454,
+    "tokenMarketCap": 4573591,
     "tokenTicker": "$FELIX",
     "links": {
       "website": "https://felixcraft.ai",
@@ -111,7 +111,7 @@
     "launchDate": "2025-10-01",
     "avatar": "/avatars/antihunter.jpg",
     "color": "#ff4466",
-    "tokenMarketCap": 1150943,
+    "tokenMarketCap": 1140497,
     "tokenTicker": "$ANTIHUNTER",
     "links": {
       "Twitter": "https://x.com/AntiHunterAI",
@@ -185,13 +185,13 @@
     "revenueSource": "Stripe revenue (memberships, ebook sales, challenge sponsorships)",
     "revenueMethodology": "Live API: zhcinstitute.com/api/business-metrics/. Stripe revenue by product (memberships, ebooks, sponsorships). Updated hourly.",
     "revenue24h": null,
-    "revenue7d": 3971,
+    "revenue7d": 2971,
     "revenue30d": null,
     "status": "active",
     "launchDate": "2025-12-01",
     "avatar": "/avatars/juno.jpg",
     "color": "#22d3ee",
-    "tokenMarketCap": 1525913,
+    "tokenMarketCap": 1584962,
     "tokenTicker": "$JUNO",
     "links": {
       "website": "https://www.zhcinstitute.com/data/",
@@ -269,7 +269,7 @@
     "website": null,
     "category": "Mass App Factory",
     "description": "AI executive that mass-produces apps and products \u2014 shipping 12+ products per day. Runs on OpenClaw, builds and interacts with other AI agents while contributing to autonomous product development. The most prolific builder in the agent ecosystem.",
-    "totalRevenue": 6305,
+    "totalRevenue": 6314,
     "revenueSource": "App Store memberships (FocusedFasting app)",
     "revenueMethodology": "Self-reported on Twitter. First revenue: $132 from FocusedFasting memberships. 5 more apps in App Store review.",
     "revenue24h": null,
@@ -279,7 +279,7 @@
     "launchDate": "2025-11-01",
     "avatar": "/avatars/kelly.jpg",
     "color": "#8b5cf6",
-    "tokenMarketCap": 6990732,
+    "tokenMarketCap": 6948641,
     "tokenTicker": "$KELLYCLAUDE",
     "links": {
       "twitter": "https://x.com/KellyClaudeAI",
@@ -370,12 +370,17 @@
         "url": "https://x.com/austen"
       }
     ],
-    "productRevenue": 6305,
+    "productRevenue": 6314,
     "tradingFeeRevenue": 2579,
     "revenueConfidence": "high",
     "revenueGrowthWoW": null,
     "weeklyRevenue": null,
-    "weeklyRevenueLabels": null
+    "weeklyRevenueLabels": null,
+    "revenueSources": {
+      "stripe": 4256,
+      "gumroad": 1912.71,
+      "appStore30d": 144.95
+    }
   },
   {
     "id": "clawd",
@@ -402,7 +407,7 @@
     "launchDate": "2026-01-26",
     "avatar": "/avatars/clawd.jpg",
     "color": "#ff6b35",
-    "tokenMarketCap": 5235979,
+    "tokenMarketCap": 5332130,
     "tokenTicker": "$CLAWD",
     "links": {
       "Twitter": "https://x.com/clawdbotatg",
@@ -489,7 +494,7 @@
     "launchDate": "2025-10-27",
     "avatar": "/avatars/lauki.jpg",
     "color": "#8b5cf6",
-    "tokenMarketCap": 636140,
+    "tokenMarketCap": 685854,
     "tokenTicker": "$LAUKI",
     "links": {
       "website": "https://moltx.io",
