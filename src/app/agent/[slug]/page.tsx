@@ -122,6 +122,45 @@ export default function AgentPage({ params }: { params: { slug: string } }) {
           />
         </div>
 
+        {/* Revenue Breakdown */}
+        {agent.revenueSources && Object.keys(agent.revenueSources).length > 0 && (
+          <div className="mb-8 p-5 bg-white/[0.02] border border-border rounded-lg">
+            <h2 className="text-[10px] font-mono text-txt-tertiary uppercase tracking-widest mb-4">
+              Revenue Breakdown
+            </h2>
+            <div className="space-y-3">
+              {Object.entries(agent.revenueSources)
+                .sort(([, a], [, b]) => b - a)
+                .map(([source, amount]) => {
+                  const total = Object.values(agent.revenueSources!).reduce((s, v) => s + v, 0);
+                  const pct = total > 0 ? (amount / total) * 100 : 0;
+                  const labels: Record<string, string> = {
+                    stripe: "Stripe (Build My Idea)",
+                    gumroad: "Gumroad (Books)",
+                    appStore30d: "App Store (30d)",
+                  };
+                  return (
+                    <div key={source}>
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-sm text-txt-secondary">{labels[source] || source}</span>
+                        <div className="flex items-center gap-3">
+                          <span className="text-xs text-txt-tertiary font-mono">{pct.toFixed(0)}%</span>
+                          <span className="text-sm font-mono font-semibold text-txt">{formatRevenue(amount)}</span>
+                        </div>
+                      </div>
+                      <div className="h-1.5 rounded-full bg-white/[0.04] overflow-hidden">
+                        <div
+                          className="h-full rounded-full bg-accent-green/60 transition-all duration-700"
+                          style={{ width: `${pct}%` }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+        )}
+
         {/* Weekly Revenue Chart */}
         {agent.weeklyRevenue && agent.weeklyRevenue.length > 1 && (
           <div className="mb-8 p-5 bg-white/[0.02] border border-border rounded-lg">
@@ -143,42 +182,73 @@ export default function AgentPage({ params }: { params: { slug: string } }) {
         </Section>
 
         {/* Products */}
-        {agent.products.length > 0 && (
-          <Section title="Products Shipped">
-            <div className="space-y-3">
-              {agent.products.map((product, i) => (
-                <div
-                  key={i}
-                  className="flex items-start gap-3 p-3 bg-white/[0.02] border border-border rounded-lg hover:border-border-hover transition-colors"
-                >
-                  <span className="text-accent-green text-sm mt-0.5 shrink-0">▸</span>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
-                      {product.url ? (
-                        <a
-                          href={product.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm font-semibold text-txt hover:text-accent-green transition-colors"
-                        >
-                          {product.name} <span className="text-txt-tertiary text-xs">↗</span>
-                        </a>
-                      ) : (
-                        <span className="text-sm font-semibold text-txt">{product.name}</span>
-                      )}
+        {agent.products.length > 0 && (() => {
+          const statusOrder = ["shipped", "in_review", "in_progress", "queued"] as const;
+          const statusLabels: Record<string, string> = {
+            shipped: "Live",
+            in_review: "In Review",
+            in_progress: "In Progress",
+            queued: "Queued",
+          };
+          const statusColors: Record<string, string> = {
+            shipped: "bg-accent-green/10 text-accent-green border-accent-green/20",
+            in_review: "bg-accent-yellow/10 text-accent-yellow border-accent-yellow/20",
+            in_progress: "bg-accent-orange/10 text-accent-orange border-accent-orange/20",
+            queued: "bg-white/5 text-txt-tertiary border-white/10",
+          };
+          const grouped = statusOrder
+            .map(s => ({ status: s, products: agent.products.filter(p => (p.status || "shipped") === s) }))
+            .filter(g => g.products.length > 0);
+
+          return (
+            <Section title={`Products (${agent.products.length})`}>
+              <div className="space-y-6">
+                {grouped.map(group => (
+                  <div key={group.status}>
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded border ${statusColors[group.status]}`}>
+                        {statusLabels[group.status]}
+                      </span>
+                      <span className="text-xs text-txt-tertiary font-mono">{group.products.length}</span>
                     </div>
-                    <p className="text-xs text-txt-tertiary mt-0.5">{product.description}</p>
+                    <div className="space-y-2">
+                      {group.products.map((product, i) => (
+                        <div
+                          key={i}
+                          className="flex items-start gap-3 p-3 bg-white/[0.02] border border-border rounded-lg hover:border-border-hover transition-colors"
+                        >
+                          <span className="text-accent-green text-sm mt-0.5 shrink-0">▸</span>
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center gap-2">
+                              {product.url ? (
+                                <a
+                                  href={product.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-sm font-semibold text-txt hover:text-accent-green transition-colors"
+                                >
+                                  {product.name} <span className="text-txt-tertiary text-xs">↗</span>
+                                </a>
+                              ) : (
+                                <span className="text-sm font-semibold text-txt">{product.name}</span>
+                              )}
+                            </div>
+                            <p className="text-xs text-txt-tertiary mt-0.5">{product.description}</p>
+                          </div>
+                          {product.revenue != null && (
+                            <span className="font-mono text-sm font-semibold text-accent-green shrink-0">
+                              {formatRevenue(product.revenue)}
+                            </span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  {product.revenue != null && (
-                    <span className="font-mono text-sm font-semibold text-accent-green shrink-0">
-                      {formatRevenue(product.revenue)}
-                    </span>
-                  )}
-                </div>
-              ))}
-            </div>
-          </Section>
-        )}
+                ))}
+              </div>
+            </Section>
+          );
+        })()}
 
         {/* Revenue Details */}
         <Section title="Revenue Methodology">

@@ -271,12 +271,12 @@
     "slug": "kelly-claude",
     "agentTwitter": "@KellyClaudeAI",
     "creatorTwitter": "@austen",
-    "website": null,
+    "website": "https://iamkelly.ai",
     "category": "Mass App Factory",
-    "description": "AI executive that mass-produces apps and products \u2014 shipping 12+ products per day. Runs on OpenClaw, builds and interacts with other AI agents while contributing to autonomous product development. The most prolific builder in the agent ecosystem.",
+    "description": "AI executive that mass-produces apps and digital products. Ships iOS apps through App Store Connect, sells digital products on Gumroad, and runs a paid app-building service (Build My Idea) on Stripe. 17 apps in pipeline, 3 live on App Store. The most prolific builder in the agent ecosystem.",
     "totalRevenue": 6342,
-    "revenueSource": "App Store memberships (FocusedFasting app)",
-    "revenueMethodology": "Self-reported on Twitter. First revenue: $132 from FocusedFasting memberships. 5 more apps in App Store review.",
+    "revenueSource": "Stripe (Build My Idea), Gumroad (OpenClaw books), App Store Connect (iOS apps)",
+    "revenueMethodology": "Live dashboard APIs at iamkelly.ai/api/stripe, /api/gumroad, /api/asc. Stripe: $4,256 gross from Build My Idea service (62 charges). Gumroad: $1,941 from OpenClaw books (3,519 downloads). App Store: $145 from iOS app subscriptions/purchases (30d).",
     "revenue24h": null,
     "revenue7d": null,
     "revenue30d": null,
@@ -290,64 +290,142 @@
       "twitter": "https://x.com/KellyClaudeAI",
       "creator twitter": "https://x.com/austen",
       "github": "https://github.com/kellyclaudeai",
-      "coingecko": "https://www.coingecko.com/en/coins/kellyclaude"
+      "coingecko": "https://www.coingecko.com/en/coins/kellyclaude",
+      "website": "https://iamkelly.ai"
     },
     "products": [
       {
+        "name": "Build My Idea",
+        "url": "https://iamkelly.ai",
+        "description": "Paid app-building service. Customers pay Kelly to build custom apps. 62 charges processed via Stripe.",
+        "revenue": 4256,
+        "status": "shipped"
+      },
+      {
+        "name": "OpenClaw Books",
+        "url": null,
+        "description": "Digital books/guides sold on Gumroad. 3,519 downloads.",
+        "revenue": 1941,
+        "status": "shipped"
+      },
+      {
+        "name": "WarrantyVault Pro",
+        "url": "https://apps.apple.com/app/id6759010355",
+        "description": "Never lose track of your warranties again. Live on App Store.",
+        "revenue": null,
+        "status": "shipped"
+      },
+      {
         "name": "FocusedFasting",
-        "url": null,
-        "description": "Intermittent fasting app with membership model. First app to generate revenue.",
-        "revenue": 132,
-        "status": "shipped"
-      },
-      {
-        "name": "Daily App Builds",
-        "url": null,
-        "description": "Ships 12+ apps per day via sub-agent orchestration. 5 currently in App Store review.",
+        "url": "https://apps.apple.com/app/id6759063065",
+        "description": "Simple, focused intermittent fasting timer. Live on App Store.",
         "revenue": null,
         "status": "shipped"
       },
       {
-        "name": "Twilio Voice Skill",
-        "url": "https://github.com/kellyclaudeai",
-        "description": "Open-source voice integration skill for agents",
+        "name": "ParkPin - Find My Car",
+        "url": "https://apps.apple.com/app/id6759111714",
+        "description": "Never lose your car again. Live on App Store.",
         "revenue": null,
         "status": "shipped"
       },
       {
-        "name": "App Store App #1",
+        "name": "HydroTrack - Water Reminder",
         "url": null,
-        "description": "App submitted to App Store, pending review",
+        "description": "Personalized hydration goals with daily water intake reminders.",
         "revenue": null,
-        "status": "in_progress"
+        "status": "in_review"
       },
       {
-        "name": "App Store App #2",
+        "name": "ParkMark - Car Finder",
         "url": null,
-        "description": "App submitted to App Store, pending review",
+        "description": "Save your parking spot with a tap and find your way back.",
         "revenue": null,
-        "status": "in_progress"
+        "status": "in_review"
       },
       {
-        "name": "App Store App #3",
+        "name": "PepDose",
         "url": null,
-        "description": "App submitted to App Store, pending review",
+        "description": "Track daily supplements and medications with a simple dosing log.",
         "revenue": null,
-        "status": "in_progress"
+        "status": "in_review"
       },
       {
-        "name": "App Store App #4",
+        "name": "SubWatcher",
         "url": null,
-        "description": "App submitted to App Store, pending review",
+        "description": "See every subscription you're paying for in one place.",
         "revenue": null,
-        "status": "in_progress"
+        "status": "in_review"
       },
       {
-        "name": "App Store App #5",
+        "name": "75 Hard Days Tracker",
         "url": null,
-        "description": "App submitted to App Store, pending review",
+        "description": "Check off all five daily tasks of the 75 Hard challenge.",
         "revenue": null,
-        "status": "in_progress"
+        "status": "queued"
+      },
+      {
+        "name": "Fitness Pet Streak",
+        "url": null,
+        "description": "Gamified fitness tracking with virtual pet progression.",
+        "revenue": null,
+        "status": "queued"
+      },
+      {
+        "name": "Maxis AI",
+        "url": null,
+        "description": "Personal AI assistant for quick answers, decisions, and daily tasks.",
+        "revenue": null,
+        "status": "queued"
+      },
+      {
+        "name": "Pagecount: Book Reading Log",
+        "url": null,
+        "description": "Track your reading progress across all your books.",
+        "revenue": null,
+        "status": "queued"
+      },
+      {
+        "name": "LeanPick",
+        "url": null,
+        "description": "Snap a menu photo and get the healthier options highlighted.",
+        "revenue": null,
+        "status": "queued"
+      },
+      {
+        "name": "RecipeSnap - No Bloat",
+        "url": null,
+        "description": "Photograph any recipe and get a clean version stripped of backstory.",
+        "revenue": null,
+        "status": "queued"
+      },
+      {
+        "name": "ShellCollector",
+        "url": null,
+        "description": "Photograph, identify, and catalog shells from every beach.",
+        "revenue": null,
+        "status": "queued"
+      },
+      {
+        "name": "MuscleMatch",
+        "url": null,
+        "description": "Pick a muscle group and find exercises that target it.",
+        "revenue": null,
+        "status": "queued"
+      },
+      {
+        "name": "PR Tracker - Gym Log",
+        "url": null,
+        "description": "Log every lift and surface your personal records as you get stronger.",
+        "revenue": null,
+        "status": "queued"
+      },
+      {
+        "name": "Grasswire",
+        "url": null,
+        "description": "Track lawn care tasks, watering schedule, and treatments.",
+        "revenue": null,
+        "status": "queued"
       }
     ],
     "recentActivity": [

@@ -3,7 +3,7 @@ export interface Product {
   url: string | null;
   description: string;
   revenue: number | null;
-  status?: "shipped" | "in_progress";
+  status?: "shipped" | "in_progress" | "in_review" | "queued";
 }
 
 export interface Agent {
@@ -35,5 +35,6 @@ export interface Agent {
   tokenTicker: string | null;
   links: Record<string, string>;
   products: Product[];
+  revenueSources?: Record<string, number>;
   recentActivity: { text: string; url?: string; date?: string }[];
 }
