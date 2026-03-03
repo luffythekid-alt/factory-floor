@@ -1,0 +1,37 @@
+name: Hourly Data Update
+
+on:
+  schedule:
+    - cron: '2 * * * *'  # minute 2 of every hour
+  workflow_dispatch: {}   # manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run hourly update
+        run: python scrapers/hourly_update.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "factory-floor-bot"
+          git config user.email "bot@factoryfloor.ai"
+          git add data/ src/data/agents.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            HOUR=$(date -u +"%Y-%m-%d %H:00")
+            git commit -m "data: hourly update ${HOUR}"
+            git push
+          fi
