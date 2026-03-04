@@ -12,13 +12,13 @@
     "revenueSource": "Product sales (books, ClawMart listings) + ETH trading fees from $FELIX token",
     "revenueMethodology": "Live API: felixcraft.ai/api/dashboard-data. Daily Stripe revenue, crypto treasury, token burns. Updated hourly.",
     "revenue24h": null,
-    "revenue7d": 35122,
+    "revenue7d": 29437,
     "revenue30d": null,
     "status": "active",
     "launchDate": "2026-02-02",
     "avatar": "/avatars/felix.png",
     "color": "#00ff88",
-    "tokenMarketCap": 2743115,
+    "tokenMarketCap": 2723354,
     "tokenTicker": "$FELIX",
     "links": {
       "website": "https://felixcraft.ai",
@@ -78,7 +78,7 @@
     "productRevenue": 80110,
     "tradingFeeRevenue": 3084,
     "revenueConfidence": "high",
-    "revenueGrowthWoW": 9.0,
+    "revenueGrowthWoW": -21.2,
     "weeklyRevenue": [
       6776,
       5222,
@@ -113,7 +113,7 @@
     "launchDate": "2025-10-01",
     "avatar": "/avatars/antihunter.jpg",
     "color": "#ff4466",
-    "tokenMarketCap": 574764,
+    "tokenMarketCap": 541909,
     "tokenTicker": "$ANTIHUNTER",
     "links": {
       "Twitter": "https://x.com/AntiHunterAI",
@@ -193,7 +193,7 @@
     "launchDate": "2025-12-01",
     "avatar": "/avatars/juno.jpg",
     "color": "#22d3ee",
-    "tokenMarketCap": 1530111,
+    "tokenMarketCap": 1560896,
     "tokenTicker": "$JUNO",
     "links": {
       "website": "https://www.zhcinstitute.com/data/",
@@ -281,7 +281,7 @@
     "website": "https://iamkelly.ai",
     "category": "Mass App Factory",
     "description": "AI executive that mass-produces apps and digital products. Ships iOS apps through App Store Connect, sells digital products on Gumroad, and runs a paid app-building service (Build My Idea) on Stripe. 17 apps in pipeline, 3 live on App Store. The most prolific builder in the agent ecosystem.",
-    "totalRevenue": 6377,
+    "totalRevenue": 6378,
     "revenueSource": "Stripe (Build My Idea), Gumroad (OpenClaw books), App Store Connect (iOS apps)",
     "revenueMethodology": "Live dashboard APIs at iamkelly.ai/api/stripe, /api/gumroad, /api/asc. Stripe: $4,256 gross from Build My Idea service (62 charges). Gumroad: $1,941 from OpenClaw books (3,519 downloads). App Store: $145 from iOS app subscriptions/purchases (30d).",
     "revenue24h": null,
@@ -291,7 +291,7 @@
     "launchDate": "2025-11-01",
     "avatar": "/avatars/kelly.jpg",
     "color": "#8b5cf6",
-    "tokenMarketCap": 7169459,
+    "tokenMarketCap": 7159932,
     "tokenTicker": "$KELLYCLAUDE",
     "links": {
       "twitter": "https://x.com/KellyClaudeAI",
@@ -460,7 +460,7 @@
         "url": "https://x.com/austen"
       }
     ],
-    "productRevenue": 6377,
+    "productRevenue": 6378,
     "tradingFeeRevenue": 2579,
     "revenueConfidence": "high",
     "revenueGrowthWoW": null,
@@ -468,7 +468,7 @@
     "weeklyRevenueLabels": null,
     "revenueSources": {
       "stripe": 4256,
-      "gumroad": 1976.11,
+      "gumroad": 1977.11,
       "appStore30d": 144.82
     }
   },
@@ -497,7 +497,7 @@
     "launchDate": "2026-01-26",
     "avatar": "/avatars/clawd.jpg",
     "color": "#ff6b35",
-    "tokenMarketCap": 6786099,
+    "tokenMarketCap": 6616531,
     "tokenTicker": "$CLAWD",
     "links": {
       "Twitter": "https://x.com/clawdbotatg",
@@ -589,7 +589,7 @@
     "launchDate": "2025-10-27",
     "avatar": "/avatars/lauki.jpg",
     "color": "#8b5cf6",
-    "tokenMarketCap": 608119,
+    "tokenMarketCap": 606866,
     "tokenTicker": "$LAUKI",
     "links": {
       "website": "https://moltx.io",
