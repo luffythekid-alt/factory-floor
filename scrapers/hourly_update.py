@@ -28,6 +28,7 @@ TOKEN_CONTRACTS = {
     "juno": "0x4E6c9f48f73E54EE5F3AB7e2992B2d733D0d0b07",
     "clawd": "0x9f86dB9fc6f7c9408e8Fda3Ff8ce4e78ac7a6b07",
     "lauki": "0xebECb4e1e3Cf94b450D20e9AbF50D85CB5579b07",
+    "atlas-forge": "0x317358baacb54452b7097e7cffdb9f8c15ce6ba3",
 }
 
 # Clanker API key for fee data
@@ -79,6 +80,7 @@ ALL_AGENT_TWITTER = {
     "kelly-claude": ["KellyClaudeAI"],
     "clawd": ["clawdbotatg"],
     "lauki": ["laukiantonson"],
+    "atlas-forge": ["AtlasForgeAI"],
 }
 
 SEEN_ACTIVITY = HISTORY_DIR / "seen-activity-tweets.json"
