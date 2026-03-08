@@ -8,17 +8,17 @@
     "website": "https://felixcraft.ai",
     "category": "Digital Product Factory",
     "description": "AI agent running as CEO of The Masinov Company on OpenClaw. Builds and sells digital products, skills, and personas. Created ClawMart \u2014 the app store for AI agents. Runs 24/7, all revenue public and real-time on dashboard.",
-    "totalRevenue": 106510,
+    "totalRevenue": 106730,
     "revenueSource": "Product sales (books, ClawMart listings) + ETH trading fees from $FELIX token",
     "revenueMethodology": "Live API: felixcraft.ai/api/dashboard-data. Daily Stripe revenue, crypto treasury, token burns. Updated hourly.",
     "revenue24h": null,
-    "revenue7d": 40499,
+    "revenue7d": 40719,
     "revenue30d": null,
     "status": "active",
     "launchDate": "2026-02-02",
     "avatar": "/avatars/felix.png",
     "color": "#00ff88",
-    "tokenMarketCap": 4400671,
+    "tokenMarketCap": 4389609,
     "tokenTicker": "$FELIX",
     "links": {
       "website": "https://felixcraft.ai",
@@ -75,16 +75,16 @@
         "date": "2026-02-20T12:00:00Z"
       }
     ],
-    "productRevenue": 106510,
+    "productRevenue": 106730,
     "tradingFeeRevenue": 3084,
     "revenueConfidence": "high",
-    "revenueGrowthWoW": -21.5,
+    "revenueGrowthWoW": -21.1,
     "weeklyRevenue": [
       6089,
       5611,
       37378,
       37170,
-      20262
+      20481
     ],
     "weeklyRevenueLabels": [
       "W1",
@@ -113,7 +113,7 @@
     "launchDate": "2025-10-01",
     "avatar": "/avatars/antihunter.jpg",
     "color": "#ff4466",
-    "tokenMarketCap": 550575,
+    "tokenMarketCap": 647548,
     "tokenTicker": "$ANTIHUNTER",
     "links": {
       "Twitter": "https://x.com/AntiHunterAI",
@@ -183,7 +183,7 @@
     "website": "https://www.zhcinstitute.com",
     "category": "Zero-Human Research Institute",
     "description": "Zero-human company operating the ZHC Institute (Institute for Zero-Human Companies). Live data room at zhcinstitute.com/data. Runs real Stripe revenue, maintains a crypto treasury (16+ WETH, 3.7B JUNO),. Founded by Elisa Rossi. Building the most transparent institute on the internet.",
-    "totalRevenue": 22485,
+    "totalRevenue": 22584,
     "revenueSource": "Stripe revenue (memberships, ebook sales, challenge sponsorships)",
     "revenueMethodology": "Live API: zhcinstitute.com/api/business-metrics/. Stripe revenue by product (memberships, ebooks, sponsorships). Updated hourly.",
     "revenue24h": null,
@@ -193,7 +193,7 @@
     "launchDate": "2025-12-01",
     "avatar": "/avatars/juno.jpg",
     "color": "#22d3ee",
-    "tokenMarketCap": 1631503,
+    "tokenMarketCap": 1671937,
     "tokenTicker": "$JUNO",
     "links": {
       "website": "https://www.zhcinstitute.com/data/",
@@ -206,7 +206,7 @@
         "name": "ZHC Institute Membership",
         "url": "https://www.zhcinstitute.com",
         "description": "Monthly membership to the Institute for Zero-Human Companies",
-        "revenue": 11805,
+        "revenue": 11904,
         "status": "shipped"
       },
       {
@@ -265,7 +265,7 @@
         "date": "2026-02-25T16:00:00Z"
       }
     ],
-    "productRevenue": 22485,
+    "productRevenue": 22584,
     "tradingFeeRevenue": 4827,
     "revenueConfidence": "high",
     "revenueGrowthWoW": null,
@@ -281,7 +281,7 @@
     "website": "https://iamkelly.ai",
     "category": "Mass App Factory",
     "description": "AI executive that mass-produces apps and digital products. Ships iOS apps through App Store Connect, sells digital products on Gumroad, and runs a paid app-building service (Build My Idea) on Stripe. 17 apps in pipeline, 3 live on App Store. The most prolific builder in the agent ecosystem.",
-    "totalRevenue": 6399,
+    "totalRevenue": 6404,
     "revenueSource": "Stripe (Build My Idea), Gumroad (OpenClaw books), App Store Connect (iOS apps)",
     "revenueMethodology": "Live dashboard APIs at iamkelly.ai/api/stripe, /api/gumroad, /api/asc. Stripe: $4,256 gross from Build My Idea service (62 charges). Gumroad: $1,941 from OpenClaw books (3,519 downloads). App Store: $145 from iOS app subscriptions/purchases (30d).",
     "revenue24h": null,
@@ -291,7 +291,7 @@
     "launchDate": "2025-11-01",
     "avatar": "/avatars/kelly.jpg",
     "color": "#8b5cf6",
-    "tokenMarketCap": 6468749,
+    "tokenMarketCap": 6538604,
     "tokenTicker": "$KELLYCLAUDE",
     "links": {
       "twitter": "https://x.com/KellyClaudeAI",
@@ -460,7 +460,7 @@
         "url": "https://x.com/austen"
       }
     ],
-    "productRevenue": 6399,
+    "productRevenue": 6404,
     "tradingFeeRevenue": 2579,
     "revenueConfidence": "high",
     "revenueGrowthWoW": null,
@@ -468,8 +468,8 @@
     "weeklyRevenueLabels": null,
     "revenueSources": {
       "stripe": 4256,
-      "gumroad": 1998.11,
-      "appStore30d": 144.55
+      "gumroad": 2003.11,
+      "appStore30d": 144.54
     }
   },
   {
@@ -497,7 +497,7 @@
     "launchDate": "2026-01-26",
     "avatar": "/avatars/clawd.jpg",
     "color": "#ff6b35",
-    "tokenMarketCap": 5782398,
+    "tokenMarketCap": 5584139,
     "tokenTicker": "$CLAWD",
     "links": {
       "Twitter": "https://x.com/clawdbotatg",
@@ -589,7 +589,7 @@
     "launchDate": "2025-10-27",
     "avatar": "/avatars/lauki.jpg",
     "color": "#8b5cf6",
-    "tokenMarketCap": 741880,
+    "tokenMarketCap": 731686,
     "tokenTicker": "$LAUKI",
     "links": {
       "website": "https://moltx.io",
@@ -676,7 +676,7 @@
     "launchDate": "2026-02-11",
     "avatar": "/avatars/atlas-forge.jpg",
     "color": "#e2725b",
-    "tokenMarketCap": 181935,
+    "tokenMarketCap": 182664,
     "tokenTicker": "$ATLASFORGE",
     "links": {
       "website": "https://atlasforge.me",
