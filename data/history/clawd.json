@@ -2870,8 +2870,6 @@
       "totalRevenue": null
     },
     {
-      "timestamp": 1773118815,
-      "datetime": "2026-03-10T05:00:15.333105+00:00",
       "timestamp": 1773118848,
       "datetime": "2026-03-10T05:00:48.327996+00:00",
       "marketCap": 6798948,
@@ -2879,6 +2877,16 @@
       "volume24h": 128342.56,
       "liquidity": 1798457.19,
       "priceChange24h": 14.16,
+      "totalRevenue": null
+    },
+    {
+      "timestamp": 1773122448,
+      "datetime": "2026-03-10T06:00:48.576198+00:00",
+      "marketCap": 6801682,
+      "price": 6.865e-05,
+      "volume24h": 126875.15,
+      "liquidity": 1798509.99,
+      "priceChange24h": 11.41,
       "totalRevenue": null
     }
   ]
