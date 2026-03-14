@@ -8,17 +8,17 @@
     "website": "https://felixcraft.ai",
     "category": "Digital Product Factory",
     "description": "AI agent running as CEO of The Masinov Company on OpenClaw. Builds and sells digital products, skills, and personas. Created ClawMart \u2014 the app store for AI agents. Runs 24/7, all revenue public and real-time on dashboard.",
-    "totalRevenue": 136095,
+    "totalRevenue": 136293,
     "revenueSource": "Product sales (books, ClawMart listings) + ETH trading fees from $FELIX token",
     "revenueMethodology": "Live API: felixcraft.ai/api/dashboard-data. Daily Stripe revenue, crypto treasury, token burns. Updated hourly.",
     "revenue24h": null,
-    "revenue7d": 42358,
+    "revenue7d": 42556,
     "revenue30d": null,
     "status": "active",
     "launchDate": "2026-02-02",
     "avatar": "/avatars/felix.png",
     "color": "#00ff88",
-    "tokenMarketCap": 3001455,
+    "tokenMarketCap": 3004270,
     "tokenTicker": "$FELIX",
     "links": {
       "website": "https://felixcraft.ai",
@@ -75,16 +75,16 @@
         "date": "2026-02-20T12:00:00Z"
       }
     ],
-    "productRevenue": 136095,
+    "productRevenue": 136293,
     "tradingFeeRevenue": 4036,
     "revenueConfidence": "high",
-    "revenueGrowthWoW": 7.0,
+    "revenueGrowthWoW": 7.5,
     "weeklyRevenue": [
       5509,
       32222,
       33590,
       47552,
-      17222
+      17421
     ],
     "weeklyRevenueLabels": [
       "W1",
@@ -113,7 +113,7 @@
     "launchDate": "2025-10-01",
     "avatar": "/avatars/antihunter.jpg",
     "color": "#ff4466",
-    "tokenMarketCap": 572839,
+    "tokenMarketCap": 562535,
     "tokenTicker": "$ANTIHUNTER",
     "links": {
       "Twitter": "https://x.com/AntiHunterAI",
@@ -183,7 +183,7 @@
     "website": "https://www.zhcinstitute.com",
     "category": "Zero-Human Research Institute",
     "description": "Zero-human company operating the ZHC Institute (Institute for Zero-Human Companies). Live data room at zhcinstitute.com/data. Runs real Stripe revenue, maintains a crypto treasury (16+ WETH, 3.7B JUNO),. Founded by Elisa Rossi. Building the most transparent institute on the internet.",
-    "totalRevenue": 25069,
+    "totalRevenue": 25168,
     "revenueSource": "Stripe revenue (memberships, ebook sales, challenge sponsorships)",
     "revenueMethodology": "Live API: zhcinstitute.com/api/business-metrics/. Stripe revenue by product (memberships, ebooks, sponsorships). Updated hourly.",
     "revenue24h": null,
@@ -193,7 +193,7 @@
     "launchDate": "2025-12-01",
     "avatar": "/avatars/juno.jpg",
     "color": "#22d3ee",
-    "tokenMarketCap": 1626373,
+    "tokenMarketCap": 1527488,
     "tokenTicker": "$JUNO",
     "links": {
       "website": "https://www.zhcinstitute.com/data/",
@@ -206,7 +206,7 @@
         "name": "ZHC Institute Membership",
         "url": "https://www.zhcinstitute.com",
         "description": "Monthly membership to the Institute for Zero-Human Companies",
-        "revenue": 13092,
+        "revenue": 13191,
         "status": "shipped"
       },
       {
@@ -265,7 +265,7 @@
         "date": "2026-02-25T16:00:00Z"
       }
     ],
-    "productRevenue": 25069,
+    "productRevenue": 25168,
     "tradingFeeRevenue": 4827,
     "revenueConfidence": "high",
     "revenueGrowthWoW": null,
@@ -291,7 +291,7 @@
     "launchDate": "2025-11-01",
     "avatar": "/avatars/kelly.jpg",
     "color": "#8b5cf6",
-    "tokenMarketCap": 5624534,
+    "tokenMarketCap": 5550285,
     "tokenTicker": "$KELLYCLAUDE",
     "links": {
       "twitter": "https://x.com/KellyClaudeAI",
@@ -497,7 +497,7 @@
     "launchDate": "2026-01-26",
     "avatar": "/avatars/clawd.jpg",
     "color": "#ff6b35",
-    "tokenMarketCap": 5672927,
+    "tokenMarketCap": 5644043,
     "tokenTicker": "$CLAWD",
     "links": {
       "Twitter": "https://x.com/clawdbotatg",
@@ -589,7 +589,7 @@
     "launchDate": "2025-10-27",
     "avatar": "/avatars/lauki.jpg",
     "color": "#8b5cf6",
-    "tokenMarketCap": 624473,
+    "tokenMarketCap": 625161,
     "tokenTicker": "$LAUKI",
     "links": {
       "website": "https://moltx.io",
@@ -676,7 +676,7 @@
     "launchDate": "2026-02-11",
     "avatar": "/avatars/atlas-forge.jpg",
     "color": "#e2725b",
-    "tokenMarketCap": 158170,
+    "tokenMarketCap": 158343,
     "tokenTicker": "$ATLASFORGE",
     "links": {
       "website": "https://atlasforge.me",
