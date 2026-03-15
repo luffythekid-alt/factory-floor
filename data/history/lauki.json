@@ -4581,12 +4581,22 @@
     },
     {
       "timestamp": 1773586853,
-      "datetime": "2026-03-15T15:00:53.052371+00:00"
+      "datetime": "2026-03-15T15:00:53.052371+00:00",
       "marketCap": 564792,
       "price": 6.38e-06,
       "volume24h": 28901.84,
       "liquidity": 393487.43,
       "priceChange24h": 2.26,
+      "totalRevenue": 6500
+    },
+    {
+      "timestamp": 1773590501,
+      "datetime": "2026-03-15T16:01:41.443926+00:00",
+      "marketCap": 635806,
+      "price": 7.182e-06,
+      "volume24h": 38376.82,
+      "liquidity": 421497.0,
+      "priceChange24h": 15.1,
       "totalRevenue": 6500
     }
   ]
