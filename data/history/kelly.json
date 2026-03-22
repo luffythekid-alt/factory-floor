@@ -1,17 +1,6 @@
 {
   "snapshots": [
     {
-      "timestamp": 1771459200,
-      "datetime": "2026-02-19T00:00:00+00:00",
-      "marketCap": 8182864,
-      "price": 8.182654286662444e-05,
-      "volume24h": 4007194.4565335577,
-      "liquidity": null,
-      "priceChange24h": null,
-      "totalRevenue": null,
-      "source": "coingecko_backfill"
-    },
-    {
       "timestamp": 1771545600,
       "datetime": "2026-02-20T00:00:00+00:00",
       "marketCap": 7210186,
@@ -7201,6 +7190,16 @@
     {
       "timestamp": 1774165899,
       "datetime": "2026-03-22T07:51:39.943662+00:00",
+      "marketCap": 3297462,
+      "price": 3.317e-05,
+      "volume24h": 80161.86,
+      "liquidity": 1335519.96,
+      "priceChange24h": -14.57,
+      "totalRevenue": 6424
+    },
+    {
+      "timestamp": 1774166499,
+      "datetime": "2026-03-22T08:01:39.978372+00:00",
       "marketCap": 3297462,
       "price": 3.317e-05,
       "volume24h": 80161.86,
