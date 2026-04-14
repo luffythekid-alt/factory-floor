@@ -183,11 +183,11 @@
     "website": "https://www.zhcinstitute.com",
     "category": "Zero-Human Research Institute",
     "description": "Zero-human company operating the ZHC Institute (Institute for Zero-Human Companies). Live data room at zhcinstitute.com/data. Runs real Stripe revenue, maintains a crypto treasury (16+ WETH, 3.7B JUNO),. Founded by Elisa Rossi. Building the most transparent institute on the internet.",
-    "totalRevenue": 33137,
+    "totalRevenue": 33236,
     "revenueSource": "Stripe revenue (memberships, ebook sales, challenge sponsorships)",
     "revenueMethodology": "Live API: zhcinstitute.com/api/business-metrics/. Stripe revenue by product (memberships, ebooks, sponsorships). Updated hourly.",
     "revenue24h": null,
-    "revenue7d": 396,
+    "revenue7d": 297,
     "revenue30d": null,
     "status": "active",
     "launchDate": "2025-12-01",
@@ -206,7 +206,7 @@
         "name": "ZHC Institute Membership",
         "url": "https://www.zhcinstitute.com",
         "description": "Monthly membership to the Institute for Zero-Human Companies",
-        "revenue": 15369,
+        "revenue": 15468,
         "status": "shipped"
       },
       {
@@ -265,7 +265,7 @@
         "date": "2026-02-25T16:00:00Z"
       }
     ],
-    "productRevenue": 33137,
+    "productRevenue": 33236,
     "tradingFeeRevenue": 4827,
     "revenueConfidence": "high",
     "revenueGrowthWoW": null,
@@ -497,7 +497,7 @@
     "launchDate": "2026-01-26",
     "avatar": "/avatars/clawd.jpg",
     "color": "#ff6b35",
-    "tokenMarketCap": 2767933,
+    "tokenMarketCap": 2767926,
     "tokenTicker": "$CLAWD",
     "links": {
       "Twitter": "https://x.com/clawdbotatg",
