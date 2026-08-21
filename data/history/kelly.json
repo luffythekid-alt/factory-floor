@@ -1,16 +1,6 @@
 {
   "snapshots": [
     {
-      "timestamp": 1783468411,
-      "datetime": "2026-07-07T23:53:31.130801+00:00",
-      "marketCap": 459602,
-      "price": 4.625e-06,
-      "volume24h": 16197.86,
-      "liquidity": 602493.46,
-      "priceChange24h": -16.82,
-      "totalRevenue": 6424
-    },
-    {
       "timestamp": 1783468874,
       "datetime": "2026-07-08T00:01:14.052532+00:00",
       "marketCap": 459214,
@@ -7198,6 +7188,16 @@
       "volume24h": 5969.25,
       "liquidity": 236688.47,
       "priceChange24h": 0.12,
+      "totalRevenue": 6424
+    },
+    {
+      "timestamp": 1787273902,
+      "datetime": "2026-08-21T00:58:22.443175+00:00",
+      "marketCap": 754570,
+      "price": 7.594e-06,
+      "volume24h": 4747.57,
+      "liquidity": 240136.57,
+      "priceChange24h": 2.8,
       "totalRevenue": 6424
     }
   ]
